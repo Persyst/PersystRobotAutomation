@@ -40,7 +40,7 @@ ${Show_Connection_Speed_Bullet}     css=mdl-tabs > mdl-tab-panel.mdl-tabs__panel
 ${High_Resolution_EEG_Switch}       id=EEG-high-resolution
 ${High_Resolution_EEG_Bullet}       css=mdl-switch[id='EEG-high-resolution'] div:nth-child(4)
 ${Escape}                           \\35
-
+${Reset_User_Interface}             css=app-user-settings > div > mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(2) > mdl-button
 *** Keywords ***
 Logging out
     Click On Settings Button
@@ -296,3 +296,20 @@ Change 'EEG High Resolution' Status
                 no operation
             END
     END
+
+Click on 'Reset User Interface'
+    click element       ${Reset_User_Interface}
+    click element    css=mdl-dialog-component > div.mdl-dialog__actions > button:nth-child(1)
+    click element    css=mdl-dialog-host-component > mdl-dialog-component > div.mdl-dialog__actions > button
+
+Click 'User Guide' Link
+    click link    User Guide
+
+Switch to User Guide Tab and Verify The URL
+    ${open_tabs}=   get window handles
+    switch window    ${open_tabs}[1]
+    ${url}=     get location
+    should be equal    ${url}       https://www.persyst.com/PersystMobile/WebUserGuide.pdf
+
+
+

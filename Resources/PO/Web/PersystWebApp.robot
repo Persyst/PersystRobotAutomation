@@ -338,3 +338,12 @@ Verify If Patient Record Exist in Patient View
     [Arguments]    ${PATIENT_ID}
     ${Visibility}       PatientView.Check If Patient Record Exist        ${PATIENT_ID}
     [Return]     ${Visibility}
+
+Reset User Interface Settings From User Settings
+    Go To Settings Page
+    Settings.Click on 'Reset User Interface'
+
+Open 'User Guid' PDF From User Settings
+    Go To Settings Page
+    Settings.Click 'User Guide' Link
+    Settings.Switch to User Guide Tab and Verify The URL
