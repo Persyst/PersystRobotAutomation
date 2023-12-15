@@ -28,8 +28,7 @@ ${Page_Duration_Menu}       id=duration-settings
 ${Artifacts_Reduction_On}   name=AR On
 ${Artifacts_Reduction_Off}  name=AR Off
 ${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
-${Panel_menu}               css=app-trends-settings > div > div:nth-child(2) > div.settingsText
-&{Panel_Options}            Asymmetry=panel-Asymmetry    Comprehensive=panel-Comprehensive    SpikeDetails=panel-SpikeDetails
+${Panel_menu}               id=panel-settings
 
 *** Keywords ***
 
@@ -122,11 +121,12 @@ Change Artifact Reduction Status
 Open Panel Menu From Trends Setting
     Navigate Back to Main Setting Menu
     click element    ${Panel_menu}
-    wait until page contains element    id=${Panel_Options}[SpikeDetails]
 
 Select an Option From Trends Panel Setting
     [Arguments]    ${PANEL_OPTION}
-    click element  id=${Panel_Options}[${PANEL_OPTION}]
+    ${Panel_Options}     set variable    panel-${PANEL_OPTION}
+    wait until page contains element    id=${Panel_Options}
+    click element       id=${Panel_Options}
 
 
 

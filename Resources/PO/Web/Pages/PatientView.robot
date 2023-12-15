@@ -1,5 +1,5 @@
 *** Settings ***
-Library          SeleniumLibrary    timeout=0:00:15
+Library          SeleniumLibrary    timeout=0:00:30
 
 *** Variables ***
 ${Patient_Filter_Textfield}     body  mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > app-patient-list > div > div:nth-child(1) > mdl-textfield > div > input
@@ -7,9 +7,11 @@ ${First_Row_Patient}            body app-patient-list > div > div:nth-child(1) m
 ${Comment_List}                 css=body > app-root > div:nth-child(1) > app-patient-views div > app-record-comments > div > mdl-list > mdl-list-item:nth-child(1)
 ${Beginning_Of_Recording}       id=Beginning\ of\ Record
 ${Setting_Button}               css=body  app-patient-views  div.view-header button[title="Settings"]
+${Filter_List_Icon}             xpath=//mdl-icon[text()="filter_list"]
+${Patient_View_Page_URL}        http://192.168.156.119/PersystMobile/record-views
 *** Keywords ***
 Verify Patient View Page Loaded
-    wait until page contains    Patient Views
+    wait until page contains    Patient Views       40s
 
 Enter Patient Name In The Patient Name Textfield
     [Arguments]   ${PATIENT_NAME}
@@ -22,22 +24,24 @@ Click On First Patient In The List After Filtering
 
 Click on Patient Record By ID
     [Arguments]    ${PATIENT_ID}
-    ${Patient_Record_Visibility}    get element count    id=${PATIENT_ID}
-    IF  ${Patient_Record_Visibility} == 0
-        Click on Monitoring tab
-        Click on 'Patient List' tab
-        wait until element is visible    id=${PATIENT_ID}
-        click element                    id=${PATIENT_ID}
+    ${current_url}      get location
+    IF      $current_url == $Patient_View_Page_URL
+            no operation
     ELSE
-        click element                    id=${PATIENT_ID}
+            go to    ${Patient_View_Page_URL}
+            verify patient view page loaded
+
     END
+    wait until element is visible    id=${PATIENT_ID}       50s
+        click element                    id=${PATIENT_ID}
     verify patient comments appear
-    sleep   2s
 
 Verify Patient Comments Appear
-    wait until page contains element    ${Beginning_Of_Recording}
+    wait until page contains element    ${Beginning_Of_Recording}       50s
 
 Click on Patient Beginning of Record
+    wait until page contains    Beginning of Record
+    wait until page contains element    ${Beginning_Of_Recording}
     click element    ${Beginning_Of_Recording}
 
 Click on Monitoring tab
@@ -51,3 +55,6 @@ Check If Patient Record Exist
     ${Patient_Record_Visibility}   Get Element Count    id=${PATIENT_ID}
     ${result}=    Run Keyword If    ${Patient_Record_Visibility} != 0    Set Variable    True    ELSE    Set Variable    False
     Return From Keyword    ${result}
+
+Click on Filter List Icon
+    click element    ${Filter_List_Icon}

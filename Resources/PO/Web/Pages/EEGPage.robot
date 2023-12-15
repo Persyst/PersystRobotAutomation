@@ -1,5 +1,5 @@
 *** Settings ***
-Library          SeleniumLibrary    timeout=0:00:20
+Library          SeleniumLibrary    timeout=0:00:30
 
 *** Variables ***
 ${Circle_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__left > div
@@ -10,18 +10,19 @@ ${Comment_List_Button}      css=body > app-root button[title="Comment List"]
 ${Comment_Name_Textfield}   css=#comment-filter-input:nth-child(1)
 ${First_Comment_Row}        css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(2) > div
 ${First_Row_In_Comments}    css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(1) > div
-${Trends_Link}              css=body > app-root app-eeg-view div.view-header > div:nth-child(1) > div > span
+${Trends_Link}              xpath=//span[text()='Trends']
 ${EEG_PAGE_URL}             http://192.168.156.119/PersystMobile/record-views/eeg/325/0?readOnly=false
 ${Play_Button}              css=body button[title='Start Playing']
 ${Pause_Button}             css=body button[title='Pause Playing']
 ${Quick_Comment_modal}      css=div[mapname="QuickComment"]
-${Patient_Name_Header}      css=div.view-header-title > div > div > div:nth-child(2)
+${Patient_Name_Header}      xpath=//div[text()='EEG for']/following-sibling::div
+${Comment_Filter_Button}    id=comment-filter-button
 #==================================================EEG Setting===============================================================
 ${EEG_Setting_Button}       id=eeg-settings-button
 ${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
 ${EEG_Setting_Box}          css=body app-patient-views app-eeg-settings
 ${EEG_Font_Size_Setting}    body app-eeg-settings div.settingsText > input
-${EEG_Channel_Per_Page_Select}      css=body app-eeg-view > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2) > div.eegSettings > app-eeg-settings > div > mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(3) > div:nth-child(2) > select
+${EEG_Channel_Per_Page_Select}      id=eeg-channel-per-page
 ${EEG_Calibration_On}       name=Calibration On
 ${EEG_Calibration_Off}      name=Calibration Off
 ${EEG_Major_Grid_On}        name=MajorGrid On
@@ -34,21 +35,15 @@ ${EEG_Show_Comment_On}      name=ShowComments On
 ${EEG_Show_Comment_Off}     name=ShowComments Off
 ${EEG_Restrict_Pen_On}      name=RestrictPenDeflection On
 ${EEG_Restrict_Pen_Off}     name=RestrictPenDeflection Off
-${EEG_Montage_Setting}      css=body div.eegSettings > app-eeg-settings > div > mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(1) > div.settingsText
-&{EEG_Montage_Options}      ACNSNeoBP2=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(3)   ReferencialTransverse=body div:nth-child(2) > div > div:nth-child(2) > div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(21)  Bipolar-longA=body div:nth-child(2) > div > div:nth-child(2) > div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(7)
-&{EEG_Montage_Options}      NeonatalBipolar=body div:nth-child(2) > div > div:nth-child(2) > div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(12)
+${EEG_Montage_Setting}      css=div[title='Select Montage']
 ${EEG_Duration_Setting}     css=div.eegSettings > app-eeg-settings div [title="Select Duration"]
-${EEG_Duration_Menu}        css= div.eegSettings > app-eeg-settings > div > div:nth-child(2)
-&{EEG_Duration_Options}     10Seconds=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(8)    20Seconds=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(8)
+${EEG_Duration_Menu}        id=eeg-duration-setting
 ${EEG_Sensitivity_Setting}  css=div.eegSettings > app-eeg-settings div [title="Select Sensitivity"]
 ${EEG_Sensitivity_Menu}     css= div.eegSettings > app-eeg-settings > div > div:nth-child(2)
-&{EEG_Sensitivity_Options}  7=app-eeg-settings > div > div:nth-child(2) > div:nth-child(5)  30=app-eeg-settings > div > div:nth-child(2) > div:nth-child(9)
 ${Artifacts_Reduction_On}   name=AR On
 ${Artifacts_Reduction_Off}  name=AR Off
 ${LFF_Setting}              css=div.eegSettings > app-eeg-settings div [title="Select LFF"]
-&{LFF_Options}              0.16=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(4)     0.533=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(2)
 ${HFF_Setting}              css=div.eegSettings > app-eeg-settings div [title="Select HFF"]
-&{HFF_Options}              70Hz=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(5)     1Hz=div.eegSettings > app-eeg-settings > div > div:nth-child(2) > div:nth-child(15)
 &{Notch_Filter_Options}     60Hz=60       50Hz=50       OFF=Off
 *** Keywords ***
 Verify EEG Page Loaded Successfully
@@ -59,7 +54,9 @@ Verify EEG Page Loaded Successfully
 Launch Comment List If Not Launched Already
     ${comment_list_visibility}  get element count    ${Comment_List_box}
     IF    ${comment_list_visibility} == 0
+        wait until page contains element    ${Comment_List_Button}
         click element    ${Comment_List_Button}
+        wait until page contains element    ${Comment_List_box}         40s
     END
 
 Close Comment List If Launched Already
@@ -114,7 +111,7 @@ Click the EEG Page Setting Button
     ${eeg_setting_button_visibility}    get element count       ${EEG_Setting_Box}
     IF      ${eeg_setting_button_visibility} == 0
             click element                       ${EEG_Setting_Button}
-            wait until page contains element    ${EEG_Setting_Box}
+            wait until page contains element    ${EEG_Setting_Box}          40s
     END
 Navigate Back to Main Setting Menu
     ${Back_Arrow_visibility}   get element count    ${Back_Arrow}
@@ -127,7 +124,8 @@ Click on Display Setting Link
 
 Change the EEG Page Font Size
     [Arguments]           ${FONT_SIZE}
-    Execute JavaScript    document.querySelector('${EEG_Font_Size_Setting}').value = ${FONT_SIZE}
+    input text    id:eeg-font-setting    ${FONT_SIZE}
+
 
 Change Channel Per Page Setting
     [Arguments]    ${NUMBER_OF_CHANNELS}
@@ -195,7 +193,7 @@ Click on Montage Setting
 
 Select Montage Option
     [Arguments]         ${MONTAGE_NAME}
-    click element       css=${EEG_Montage_Options}[${MONTAGE_NAME}]
+    click element       id=${MONTAGE_NAME}
 
 Click on EEG Page Duration Setting
     Navigate back to main setting menu
@@ -203,8 +201,10 @@ Click on EEG Page Duration Setting
     wait until page contains element    ${EEG_Duration_Menu}
 
 Select EEG Page Duration
+    [Documentation]    The options are just numbers which are all in seconds like 10 or 20
     [Arguments]    ${DURATION}
-    click element    css=${EEG_Duration_Options}[${DURATION}]
+    ${EEG_Duration_Options}     set variable    eeg-duration-${DURATION}
+    click element       id=${EEG_Duration_Options}
 
 Click on EEG Sensitivity Menu
     Navigate Back to Main Setting Menu
@@ -213,7 +213,8 @@ Click on EEG Sensitivity Menu
 
 Select EEG Page Sensitivity
     [Arguments]    ${SENSITIVITY_OPTION}
-    click element    css=${EEG_Sensitivity_Options}[${SENSITIVITY_OPTION}]
+    ${EEG_Sensitivity_Options}      set variable    sensitivity${SENSITIVITY_OPTION}
+    click element    id=${EEG_Sensitivity_Options}
 
 Change Artifact Reduction Status
     [Arguments]    ${ON/OFF}
@@ -231,16 +232,20 @@ Click on LFF Setting Menu
     click element    ${LFF_Setting}
 
 Select LFF Setting
+    [Documentation]    The LFF options arguments sent should be only the numbers like 0.16
     [Arguments]    ${LFF}
-    click element    css=${LFF_Options}[${LFF}]
+    ${LFF_Options}    set variable      lff-${LFF}
+    click element    id=${LFF_Options}
 
 Click on HFF Setting Menu
     navigate back to main setting menu
     click element    ${HFF_Setting}
 
 Select HFF Setting
+    [Documentation]    The HFF options arguments sent should be only the numbers like 0.16
     [Arguments]    ${HFF}
-    click element    css=${HFF_Options}[${HFF}]
+    ${HFF_Options}    set variable      lff-${HFF}
+    click element    id=${HFF_Options}
 
 Select Notch Filter Option
     [Arguments]    ${NOTCH_OPTION}
@@ -262,11 +267,14 @@ Close Quick Comment Modal On EEG
     END
     page should not contain element    ${Quick_Comment_modal}
 
+Click On Comment Filter Button
+    wait until page contains element    ${comment_list_box}
+    wait until page contains element    ${Comment_Filter_Button}
+    click element    ${Comment_Filter_Button}
+    wait until page contains    Comment Filters
 
-
-
-
-
-
+Select a Comment Filter
+    [Arguments]    ${FILTER_NAME}
+    click element    xpath=//div[text()=" ${FILTER_NAME} "]
 
 

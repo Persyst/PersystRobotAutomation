@@ -61,13 +61,13 @@ Test EEG Pen Restriction Switch
 Test EEG Montage Setting
     PersystWebApp.Change EEG Montage Setting    ACNSNeoBP2
     sleep    1s
-    PersystWebApp.Change EEG Montage Setting    Bipolar-longA
+    PersystWebApp.Change EEG Montage Setting    Bipolar longitudinal A
     sleep    1s
 
 Test EEG Page Duration Setting
-    PersystWebApp.Change EEG Page Duration Time     20Seconds
+    PersystWebApp.Change EEG Page Duration Time     20
     sleep    1s
-    PersystWebApp.Change EEG Page Duration Time     10Seconds
+    PersystWebApp.Change EEG Page Duration Time     10
     sleep    1s
 
 Test EEG Sensitivity Setting
@@ -89,9 +89,9 @@ Test EEG LFF Setting
     sleep    1s
 
 Test EEG HFF Setting
-    PersystWebApp.Change EEG HFF Setting        1Hz
+    PersystWebApp.Change EEG HFF Setting        1
     sleep    1s
-    PersystWebApp.Change EEG HFF Setting        70Hz
+    PersystWebApp.Change EEG HFF Setting        70
     sleep    1s
 
 Test Notch Filter Setting
