@@ -11,6 +11,7 @@ ${COMPARISON_IMAGES_PATH}       C:\\Users\\mojgan.dadashi\\pycharmProjects\\Pers
 @{Browser}                      chrome      Edge        Firefox
 &{Login_Credentials}            Username=mojgan     Password=mojgan
 ${ICU-SUBTLE_SZ_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/2980/0?readOnly=false
+${FnRC7NWB07-Gstlmn2_LEEG_URL}      http://192.168.156.119/PersystMobile/record-views/eeg/36437/0?readOnly=false
 &{colors}       yellow=#dfca74       white=#ffffff
 *** Keywords ***
 
@@ -58,13 +59,13 @@ Reset the Trends Setting
     Close Setting Menu
 
 Reset EEG Setting
-    GO TO EEG PAGE BY URL                   ${ICU-SUBTLE_SZ_EEG_URL}
-    Change EEG Montage Setting              Bipolar-longA
-    Change EEG Page Duration Time           10Seconds
+    GO TO EEG PAGE BY URL                   ${FnRC7NWB07-Gstlmn2_LEEG_URL}
+    Change EEG Montage Setting              Bipolar longitudinal A
+    Change EEG Page Duration Time           10
     Change EEG Sensitivity Option           7
     Change EEG Artifact Reduction Status    ON
     Change EEG LFF Setting                  0.16
-    Change EEG HFF Setting                  70Hz
+    Change EEG HFF Setting                  70
     Change Notch Filter Setting             60Hz
     Change EEG Page Font Size               2
     Change Channel Per Page Setting         All
@@ -76,24 +77,9 @@ Reset EEG Setting
     Change Restricted Pen Status            OFF
 
 Reset the User Basic Settings
-    persystwebapp.select comment sort order in user settings                ASC
-    PersystWebApp.Select Dispaly Options From User Settings                 Trends
-    PersystWebApp.Change "Add Quick Comments" Setting From User Setting     Disable
-    PersystWebApp.Change "Show Patient Name" setting                        Enable
-    PERSYSTWEBAPP.CHANGE 'LFF TYPE' SETTING                                 Frequency
-    PersystWebApp.Change 'Date Formats' for EEG and Trends                  mm-dd-yyyy
-    PersystWebApp.Change 'Time Format' From User Setting                    Clock-Time
-    PersystWebApp.Change 'Maximum Record Age' Setting                       0
-    PersystWebApp.Change 'Maximum Record Duration' Setting                  0
-    PersystWebApp.Change 'Segment By Day' Status From User Setting          Disable
-    PersystWebApp.Enter "Refresh Interval" Time in Minues                   5
-    PersystWebApp.Change 'Inactivity Timeout' Status From User Setting      Enable
-    PersystWebApp.Enter "Inactivity Timeout" Time in Minues                 15
-    PersystWebApp.Change 'Show Connection' Status From User Setting         Disable
-    PersystWebApp.Change 'EEG High Resolution' Status From User Setting     Enable
-    PersystWebApp.Set EEG Background Color From User Settings               ${colors}[white]
-    PersystWebApp.Set Grid Background Color From User Settings              ${colors}[white]
-    PersystWebApp.Navigate From Setting to Patient View
+    PersystWebApp.Go To Settings Page
+    PersystWebApp.Reset All User Settings
+
 
 Set Range Input
     [Arguments]    ${locator}    ${value}

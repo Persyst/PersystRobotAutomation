@@ -16,6 +16,13 @@ Login Into Persyst Web With Valid Credentials
     LoginPage.Login With Valid Credentials  ${USERNAME}         ${PASSWORD}
     PatientView.Verify Patient View Page Loaded
 
+Navigate to Login Page and Login
+    [Arguments]        ${USERNAME}         ${PASSWORD}
+    LoginPage.Navigate To Login Page
+    LoginPage.Verify "Login" Page Loaded
+    LoginPage.Login With Valid Credentials  ${USERNAME}         ${PASSWORD}
+    PatientView.Verify Patient View Page Loaded
+
 Logging Out From Persyst Web
     Settings.Logging out
 
@@ -102,6 +109,10 @@ Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
     Settings.Click on Patient Link
     PatientView.Verify Patient View Page Loaded
     PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
+
+Navigate From Patient View To Settings
+    Settings.Click On Settings Button
+    Settings.Verify "Setting" page loaded
 
 Verify EEG Page Loaded Successfully
     EEGPage.Verify EEG Page Loaded Successfully
@@ -347,3 +358,94 @@ Open 'User Guid' PDF From User Settings
     Go To Settings Page
     Settings.Click 'User Guide' Link
     Settings.Switch to User Guide Tab and Verify The URL
+
+Add New Montage From User Settings
+    Go To Settings Page
+    Click On Montage Editor
+    Settings.Create New Montage
+
+Reset All User Settings
+    Settings.Reset User Settings
+
+Delete a Montage From Montage Editor
+    Go To Settings Page
+    Settings.Click On Montage Editor
+    Settings.Click on Montage List Dropdown
+    Settings.Select First Montage On Dropdown
+    Settings.Select Delete Montage
+
+Edit Montage From Montage Editor
+    Go To Settings Page
+    Settings.Click On Montage Editor
+    Settings.Click on Montage List Dropdown
+    Settings.Select First Montage On Dropdown
+    Settings.Edit Created Montage
+
+Add More Channels to Montage
+    [Arguments]    ${CHANNEL_NAME}
+    Settings.Add Channels to Montage    ${CHANNEL_NAME}
+
+Delete Channels From a Montage
+    Settings.Delete Channels From Created Montage
+
+Change 'Show All' Montage Status In Favorite Montage Setting
+    [Arguments]    ${ON/OFF}
+    Go To Settings Page
+    Settings.Click On 'Favorite Montage' Link
+    Settings.Change Show All Favorite Montage Settings    ${ON/OFF}
+    Settings.Click On User Settings From Inside Settings Pages
+
+Change List of Favorite Montages From Settings
+    [Arguments]    ${MONTAGE_NAME}
+    Go To Settings Page
+    Settings.Click On 'Favorite Montage' Link
+    Settings.Select Montage From List Of Favorite Montages    ${MONTAGE_NAME}
+    Settings.Click On User Settings From Inside Settings Pages
+
+Create a New Comment Filter In Settings
+    Go To Settings Page
+    Settings.Click On 'Comment Filter' Button
+    Settings.Delete Comment Filters Unil None Exist
+    Settings.Create New Comment Filter
+    Settings.Click On User Settings From Inside Settings Pages
+
+Select a Comment Filter On EEG Page
+    [Arguments]    ${FILTER_NAME}
+    EEGPage.Launch Comment List If Not Launched Already
+    EEGPage.Click On Comment Filter Button
+    EEGPage.Select a Comment Filter    ${FILTER_NAME}
+
+Delete a Comment Filter
+    Go To Settings Page
+    Settings.Click On 'Comment Filter' Button
+    Settings.Delete Comment Filter
+
+Navigate to EEG Using Keyboard Shortcut
+    press keys    None      e
+    EEGPage.Verify EEG Page Loaded Successfully
+
+Navigate to Trends Using Keyboard Shortcut
+    press keys    None      t
+    TrendsPage.Verify Trends Page Loads Successfully
+
+Change Keyboard Shortcut Setting
+    [Arguments]    ${ACTION}    ${KEY}
+    Go To Settings Page
+    Settings.Click on Keyboard Shortcut Settings
+    Settings.Change Keyboard Shortcut Settings    ${ACTION}    ${KEY}
+    Settings.Click On User Settings From Inside Settings Pages
+
+Reset Keyboard Shortcut Settings
+    Go To Settings Page
+    Settings.Click on Keyboard Shortcut Settings
+    Settings.Click On Reset Keyboard Shortcut Button
+
+Change User Password From User Settings
+    [Arguments]    ${OLD_PASSWORD}          ${NEW_PASSWORD}
+    Settings.Click Change Password On Settings
+    Settings.Enter Old and New Password         ${OLD_PASSWORD}          ${NEW_PASSWORD}
+
+Navigate Back to Main Setting Menu From Setting Pages
+    Settings.Click On User Settings From Inside Settings Pages
+    Settings.Verify "Setting" page loaded
+
