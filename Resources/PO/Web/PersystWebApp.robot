@@ -92,6 +92,7 @@ Go To EEG Page By URL   # URL variable comes from the test file depending on whi
     [Arguments]    ${URL}
     EEGPage.Go To EEG Page Through URL  ${URL}
     EEGPage.Verify EEG Page Loaded Successfully
+    sleep    2s
 
 Navigate to EEG Page From Setting
     [Arguments]    ${PATIENT_ID}

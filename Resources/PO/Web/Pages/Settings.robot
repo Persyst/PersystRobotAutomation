@@ -75,7 +75,7 @@ ${New_Comment_Done_Button}          xpath=//div[text()=" Done "]
 ${Delete_Button}                    xpath=//button[@class='btn btn-xs btn-danger']
 *** Keywords ***
 Reset User Settings
-    click element    ${Reset_All_User_Settings_Button}
+    Wait And Click Element    ${Reset_All_User_Settings_Button}
     wait until page contains element    ${Reset_Modal_Title}
     click button     Reset
     wait until page does not contain element    ${Reset_Modal_Title}
@@ -95,20 +95,20 @@ Click On Settings Button
             no operation
     ELSE
             wait until page contains element    ${Setting_Button_Locator}
-            click element                       ${Setting_Button_Locator}
+            Wait And Click Element                       ${Setting_Button_Locator}
             Verify "Setting" page loaded
     END
 
 Click On "Logout"
     wait until page contains element    ${Logout_Button_Locator}
-    click element                               ${Logout_Button_Locator}
+    Wait And Click Element                               ${Logout_Button_Locator}
     sleep    3s
 
 Verify "Setting" page loaded
     wait until page contains element            ${Setting_Page_Last_Element}
 
 Click on Patient Link
-    click element    ${PATIENT_LINK}
+    Wait And Click Element    ${PATIENT_LINK}
 
 Verify User Successfully Logged Out
     wait until page contains     Welcome To Persyst Mobile
@@ -123,11 +123,11 @@ Change "Include Spikes In Comment" checkbox
     END
     IF      '${STATUS}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Include_Spike_Checkbox_Bullet}
+                Wait And Click Element    ${Include_Spike_Checkbox_Bullet}
             END
     ELSE IF    '${STATUS}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Include_Spike_Checkbox_Bullet}
+                  Wait And Click Element   ${Include_Spike_Checkbox_Bullet}
             ELSE
                 no operation
             END
@@ -143,12 +143,12 @@ Go To Settings Page
 
 Select Comment Sort Order
     [Arguments]    ${ASC/DES}
-    click element                       ${comment_sort_dropdown}
+    Wait And Click Element                       ${comment_sort_dropdown}
     wait until page contains element    css=${Comment_Sort_Options}[${ASC/DES}]
     IF            '${ASC/DES}' == 'ASC'
-        click element               css=${Comment_Sort_Options}[${ASC/DES}]
+        Wait And Click Element               css=${Comment_Sort_Options}[${ASC/DES}]
     ELSE
-        click element               css=${Comment_Sort_Options}[${ASC/DES}]
+        Wait And Click Element               css=${Comment_Sort_Options}[${ASC/DES}]
     END
 
 Change "Add Quick Comments" checkbox
@@ -161,11 +161,11 @@ Change "Add Quick Comments" checkbox
     END
     IF      '${STATUS}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Quick_Comment_Bullet}
+                Wait And Click Element    ${Quick_Comment_Bullet}
             END
     ELSE IF    '${STATUS}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Quick_Comment_Bullet}
+                  Wait And Click Element   ${Quick_Comment_Bullet}
             ELSE
                 no operation
             END
@@ -173,7 +173,7 @@ Change "Add Quick Comments" checkbox
 
 Select Display Options
     [Arguments]    ${TRENDS/EEG/EEGONLY}
-    click element    id=${Display_options}[${TRENDS/EEG/EEGONLY}]
+    Wait And Click Element    id=${Display_options}[${TRENDS/EEG/EEGONLY}]
 
 Change "Show Patient Name" setting
     [Arguments]      ${STATUS}
@@ -185,11 +185,11 @@ Change "Show Patient Name" setting
     END
     IF      '${STATUS}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Patient_NAme_Bullet}
+                Wait And Click Element    ${Patient_NAme_Bullet}
             END
     ELSE IF    '${STATUS}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Patient_NAme_Bullet}
+                  Wait And Click Element   ${Patient_NAme_Bullet}
             ELSE
                 no operation
             END
@@ -197,12 +197,12 @@ Change "Show Patient Name" setting
 
 Enter EEG Background Color
     [Arguments]      ${COLOR-CODE}
-    click element    ${EEG_BackgroundColor_Button}
+    Wait And Click Element    ${EEG_BackgroundColor_Button}
     input text       ${EEG_BackColor_Input}     ${COLOR-CODE}
 
 Enter Grid Background Color
     [Arguments]      ${COLOR-CODE}
-    click element    ${Grid_BackColor_Button}
+    Wait And Click Element    ${Grid_BackColor_Button}
     input text       ${Grid_BackColor_Input}    ${COLOR-CODE}
     Press Keys       None        ESC
 
@@ -210,17 +210,17 @@ Change LFF Type Setting
     [Documentation]             The options are 'Time-Constant' and 'Frequency'
     [Arguments]                 ${TIME/FREQUENCY}
     scroll element into view    id=${LFF_Type}[${TIME/FREQUENCY}]
-    click element               id=${LFF_Type}[${TIME/FREQUENCY}]
+    Wait And Click Element               id=${LFF_Type}[${TIME/FREQUENCY}]
 
 Change Date Formats for EEG and Trends
     [Documentation]             The Options are 'mm-dd-yyyy', 'D1D2' and 'None'
     [Arguments]                 ${MM-DD-YYY/D1D2/NONE}
-    click element               id=${Date_Format_Options}[${MM-DD-YYY/D1D2/NONE}]
+    Wait And Click Element               id=${Date_Format_Options}[${MM-DD-YYY/D1D2/NONE}]
 
 Change Time Format Setting
     [Documentation]             The options are 'Clock-Time', 'Elapsed-Time', 'Seconds-Recorded'
     [Arguments]                 ${CLOCK/ELAPSED/SECONDS}
-    click element               id=${Time_Formats}[${CLOCK/ELAPSED/SECONDS}]
+    Wait And Click Element               id=${Time_Formats}[${CLOCK/ELAPSED/SECONDS}]
 
 Change Time Decimal Numbers
     [Documentation]             There is no predefined numbers, user can enter any number
@@ -247,11 +247,11 @@ Change Segment By Day Switch Status
     END
     IF      '${ON/OFF}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Segment_Record_Day_Bullet}
+                Wait And Click Element    ${Segment_Record_Day_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Segment_Record_Day_Bullet}
+                  Wait And Click Element   ${Segment_Record_Day_Bullet}
             ELSE
                 no operation
             END
@@ -267,11 +267,11 @@ Change Segment By Specific Time Switch Status
     END
     IF      '${ON/OFF}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Segment_Specific_Time_Bullet}
+                Wait And Click Element    ${Segment_Specific_Time_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Segment_Specific_Time_Bullet}
+                  Wait And Click Element   ${Segment_Specific_Time_Bullet}
             ELSE
                 no operation
             END
@@ -297,11 +297,11 @@ Change 'Inactivity Timeout' Status
     END
     IF      '${ON/OFF}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element   ${Turnoff_On_Inactivity_Bullet}
+                Wait And Click Element      ${Turnoff_On_Inactivity_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Turnoff_On_Inactivity_Bullet}
+                  Wait And Click Element    ${Turnoff_On_Inactivity_Bullet}
             ELSE
                   no operation
             END
@@ -317,11 +317,11 @@ Change 'Show Connection Speed' Status
     END
     IF      '${ON/OFF}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${Show_Connection_Speed_Bullet}
+                Wait And Click Element      ${Show_Connection_Speed_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${Show_Connection_Speed_Bullet}
+                  Wait And Click Element    ${Show_Connection_Speed_Bullet}
             ELSE
                 no operation
             END
@@ -337,21 +337,21 @@ Change 'EEG High Resolution' Status
     END
     IF      '${ON/OFF}' == 'Enable'
             IF  '${checkbox_status}' == 'False'
-                click element    ${High_Resolution_EEG_Bullet}
+                Wait And Click Element      ${High_Resolution_EEG_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
             IF    '${checkbox_status}' == 'True'
-                  click element   ${High_Resolution_EEG_Bullet}
+                  Wait And Click Element    ${High_Resolution_EEG_Bullet}
             ELSE
                 no operation
             END
     END
 
 Click on 'Reset User Interface'
-    click element       ${Reset_User_Interface}
+    Wait And Click Element                 ${Reset_User_Interface}
     click button         Reset
     wait until page contains                User interface settings have been reset.
-    click button        Ok
+    click button         Ok
     wait until page does not contain        User interface settings have been reset.
 
 Click 'User Guide' Link
@@ -368,10 +368,10 @@ Click On Montage Editor
     wait until page contains    Other Channels
 
 Create New Montage
-    click element    ${Montage_Editor_New_Button}
+    Wait And Click Element    ${Montage_Editor_New_Button}
     wait until page contains element    ${New_Montage_Modal}
-    input text    ${New_Montage_Name_Textfield}         Moji Montage
-    click element    ${New_Montage_Modal_Ok_Button}
+    input text                ${New_Montage_Name_Textfield}         Moji Montage
+    Wait And Click Element    ${New_Montage_Modal_Ok_Button}
     sleep    5s
     Add Channels to Montage    F7
     Add Channels to Montage    F3
@@ -385,23 +385,23 @@ Add Channels to Montage
     click button    ${CHANNEL_NAME}
 
 Click 'Save' Montage Button
-    click element    ${Save_New_Montage_Button}
+    Wait And Click Element      ${Save_New_Montage_Button}
 
 Click on Montage List Dropdown
-    click element       ${Select_Montage_Dropdown}
+    click element      ${Select_Montage_Dropdown}
 
 Select First Montage On Dropdown
-    click element    ${First_Montage_In_Dropdown}
+    Click Element      ${First_Montage_In_Dropdown}
 
 Select Delete Montage
-    click button     ${Montage_Editor_More_Actins_Button}
-    click element    ${Delete_Montage_Option}
+    click button                ${Montage_Editor_More_Actins_Button}
+    click element      ${Delete_Montage_Option}
     click button     OK
 
 Edit Created Montage
     click button     Edit
     wait until element is visible  ${Edit_Montage_Channel_Modal}
-    click element    ${Edit_Mtg_Modal_Cancel}
+    Wait And Click Element         ${Edit_Mtg_Modal_Cancel}
     wait until page does not contain element    ${Edit_Montage_Channel_Modal}
 
 Delete Channels From Created Montage
@@ -434,52 +434,52 @@ Change Show All Favorite Montage Settings
 Select Montage From List Of Favorite Montages
     [Arguments]      ${MONTAGE_NAME}
     wait until page contains element     xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
-    click element    xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
+    Wait And Click Element               xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
 
 Click On User Settings From Inside Settings Pages
-    click element       ${User_Settings_Link}
+    Wait And Click Element       ${User_Settings_Link}
 
 Click On 'Comment Filter' Button
-    click link    Comment Filters
+    click link                   Comment Filters
     wait until page contains     User Comment Filters
 
 click on 'Add' New Comment Filter
-    click element    ${Add_Comment_Record_Filter}
-    wait until page contains    Include Notifications
+    Wait And Click Element               ${Add_Comment_Record_Filter}
+    wait until page contains             Include Notifications
 
 Create New Comment Filter
     click on 'Add' New Comment Filter
     input text    ${New_Comment_Filter_Name_Input}      Moji Filter
     input text    ${New_Comment_Filter_String_Input}    Moji Comment
-    click element    ${Regular_String_Bullet}
-    click element    ${Ignore_String_Bullet}
-    click element    ${Include_Notification_Bullet}
-    click element    ${New_Comment_Done_Button}
+    Wait And Click Element    ${Regular_String_Bullet}
+    Wait And Click Element    ${Ignore_String_Bullet}
+    Wait And Click Element    ${Include_Notification_Bullet}
+    Wait And Click Element    ${New_Comment_Done_Button}
     page should contain    Moji Filter
 
 Delete Comment Filter
-    click element    xpath=//button[text()="- "]
+    Wait And Click Element                     xpath=//button[text()="- "]
 
 Click on Keyboard Shortcut Settings
-    click link    Keyboard Settings
+    click link                  Keyboard Settings
     wait until page contains    To change a key binding click on the command and then press the key combination you want to use.
 
 Change Keyboard Shortcut Settings
     [Arguments]    ${ACTION}        ${KEY}
-    ${Action_Row}   set variable    //div[text()=' ${ACTION} ']
-    click element    ${Action_Row}
+    ${Action_Row}               set variable    //div[text()=' ${ACTION} ']
+    click element                               ${Action_Row}
     press keys    None      ${KEY}
 
 Click On Reset Keyboard Shortcut Button
-    ${Reset_Default}    set variable    xpath=//mdl-button[text()='Reset to Defaults']
-    click element        ${Reset_Default}
-    ${Reset_Modal_Text}     set variable    xpath=//div[text()='Are you sure you want to reset to the default values?']
-    wait until page contains element        ${Reset_Modal_Text}
+    ${Reset_Default}            set variable    xpath=//mdl-button[text()='Reset to Defaults']
+    click element                               ${Reset_Default}
+    ${Reset_Modal_Text}         set variable    xpath=//div[text()='Are you sure you want to reset to the default values?']
+    wait until page contains element            ${Reset_Modal_Text}
     click button     Reset
     wait until page does not contain element    ${Reset_Modal_RESET_Button}
 
 Click Change Password On Settings
-    click link    Change Password
+    click link                  Change Password
     wait until page contains    Passwords must match.
 
 
@@ -511,12 +511,11 @@ Delete Comment Filters Until None Exist
         Click Element    ${Delete_Button}
         Sleep    2s
         Log    Clicked the button
-
     END
     Log    Button does not exist anymore
 
 Click on Shared Setting Link
-    click link    Shared Settings
+    click link                  Shared Settings
     wait until page contains    Standard Comments
 
 Click on Unit Definition
@@ -525,52 +524,54 @@ Click on Unit Definition
     sleep    2s
 
 Add a New Unit
-    [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
-    ${Add_Unit_Button}      set variable    xpath=//div[text()=' Add Unit ']
-    Base.Wait And Click Element    ${Add_Unit_Button}
-    ${Unit_Name_Input}      set variable    xpath=//mdl-textfield[@label="Unit Name"]/div/input
-    input text    ${Unit_Name_Input}            ${UNIT_NAME}
-    ${Unit_Description_Input}      set variable     xpath=//mdl-textfield[@label="Unit Description"]/div/input
-    input text    ${Unit_Description_Input}            ${UNIT_DESCRIPTION}
-    ${Done_Button}                  set variable    xpath=//div[text()=' Done ']
-    Wait And Click Element    ${Done_Button}
-    wait until page contains element    xpath=//div[text()=' ${UNIT_DESCRIPTION} ']
+    [Arguments]                    ${UNIT_NAME}    ${UNIT_DESCRIPTION}
+    ${Add_Unit_Button}             set variable    xpath=//div[text()=' Add Unit ']
+    Base.Wait And Click Element                    ${Add_Unit_Button}
+    ${Unit_Name_Input}             set variable    xpath=//mdl-textfield[@label="Unit Name"]/div/input
+    input text    ${Unit_Name_Input}               ${UNIT_NAME}
+    ${Unit_Description_Input}      set variable    xpath=//mdl-textfield[@label="Unit Description"]/div/input
+    input text    ${Unit_Description_Input}        ${UNIT_DESCRIPTION}
+    ${Done_Button}                 set variable    xpath=//div[text()=' Done ']
+    Wait And Click Element                         ${Done_Button}
+    ${Created_Unit}                set variable    xpath=//div[text()=' ${UNIT_DESCRIPTION} ']
+    wait until page contains element               ${Created_Unit}
 
 Delete Previously Created Units
-    Delete Items Until None Exist    ${Delete_Button}
+    Delete Items Until None Exist                  ${Delete_Button}
 
 Click on Patient Unit Assignments Link
-    click link    Patient Unit Assignments
-    wait until page contains    Only Show Unassigned Patients
+    click link                                     Patient Unit Assignments
+    wait until page contains                       Only Show Unassigned Patients
 
 Assign a Patient to a Unit
-    [Arguments]         ${UNIT_NAME}                ${PATIENT_NAME}
-    ${Search_Input}     set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
-    input text          ${Search_Input}             ${PATIENT_NAME}
-    ${Unit_Dropdown}    set variable    xpath=//mdl-select[@placeholder='Unit']/div
-    wait until page contains element    ${Unit_Dropdown}
+    [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
+    ${Search_Input}                 set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
+    input text                      ${Search_Input}             ${PATIENT_NAME}
+    ${Unit_Dropdown}                set variable    xpath=//mdl-select[@placeholder='Unit']/div
+    wait until page contains element                            ${Unit_Dropdown}
     sleep    3s
-    click element           ${Unit_Dropdown}
-    click element           xpath=//div[text()='${UNIT_NAME}']
+    Wait And Click Element                                      ${Unit_Dropdown}
+    ${Unit_Option}                  set variable    xpath=//div[text()='${UNIT_NAME}']
+    Wait And Click Element                                      ${Unit_Option}
 
 Click on Standard Comments Link
-    click link    Standard Comments
-    wait until page contains     Rhythmic Delta
+    click link                                      Standard Comments
+    wait until page contains                        Rhythmic Delta
 
 Add a New Standard Comment
-    ${Add_Button}       set variable    xpath=//mdl-button/mdl-icon[text()='add']
-    click element       ${Add_Button}
-    ${Done_Button}      set variable    xpath=//mdl-button[text()=' Done ']
-    wait until page contains element    ${Done_Button}
-    ${Comment_Text_Input}       set variable    xpath=//mdl-textfield[@label="Comment Text"]/div/input
-    input text    ${Comment_Text_Input}         New Moji Comment
-    click element       ${Done_Button}
+    ${Add_Button}                   set variable    xpath=//mdl-button/mdl-icon[text()='add']
+    click element                                                 ${Add_Button}
+    ${Done_Button}                  set variable    xpath=//mdl-button[text()=' Done ']
+    wait until page contains element                              ${Done_Button}
+    ${Comment_Text_Input}           set variable    xpath=//mdl-textfield[@label="Comment Text"]/div/input
+    input text                      ${Comment_Text_Input}         New Moji Comment
+    click element                   ${Done_Button}
 
 Click on Shared Comment Filters on Shared Settings
-    click link    Shared Comment Filters
-    wait until page contains    Shared Comment Filters
+    click link                                      Shared Comment Filters
+    wait until page contains                        Shared Comment Filters
 
 Delete Created Standard Comment
     [Arguments]     ${COMMENT_NAME}
-    ${Delete_Button}    set variable        xpath=//div[text()=' ${COMMENT_NAME} ']/../button
-    Base.Delete Items Until None Exist      ${Delete_Button}
+    ${Delete_Button}                set variable        xpath=//div[text()=' ${COMMENT_NAME} ']/../button
+    Base.Delete Items Until None Exist                             ${Delete_Button}

@@ -5,6 +5,8 @@ Resource         ../../Resources/PO/Web/PersystWebApp.robot
 Suite Setup      Run Keywords       Begin Web Suit                         Reset the User Basic Settings
 Suite Teardown   Run Keywords       Reset the User Basic Settings          End Web Suit
 
+# Command line to run this test: robot -d results Tests/Web/User_Basic_Settings.robot
+
 *** Variables ***
 ${PATIENT_ID}       37508
 ${Patient_Name}
