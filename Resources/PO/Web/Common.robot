@@ -84,3 +84,13 @@ Reset the User Basic Settings
 Set Range Input
     [Arguments]    ${locator}    ${value}
     Execute JavaScript    document.querySelector('${locator}').value = ${value}
+
+Reset Shared Settings
+    PersystWebApp.Go To Settings Page
+    PersystWebApp.Navigate to Shared Settings
+    PersystWebApp.Navigate to Unit Definitions in Shared Settings
+    PersystWebApp.Delete Previously Created Units From Shared Settings
+    PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
+    PersystWebApp.Navigate to 'Standard Comments Editor' in Shared Settings
+    PersystWebApp.Delete Created Standard Comment From Shared Settings      New Moji Comment
+    PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages

@@ -15,7 +15,7 @@ Test 'Reset User Interface'
     PersystWebApp.Reset User Interface Settings From User Settings
 
 Test Opening User Guide
-    PersystWebApp.Open 'User Guid' PDF From User Settings
+    PersystWebApp.Open 'User Guide' PDF From User Settings
 
 Test Create a New Montage
     PersystWebApp.Add New Montage From User Settings

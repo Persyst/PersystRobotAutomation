@@ -58,3 +58,9 @@ Check If Patient Record Exist
 
 Click on Filter List Icon
     click element    ${Filter_List_Icon}
+
+Minimize Unit By Name
+    [Arguments]    ${UNIT_NAME}
+    ${Minimize_icon}        set variable    //div[text()=' ${UNIT_NAME} ']/../div/button
+    scroll element into view    ${Minimize_icon}
+    click element    ${Minimize_icon}
