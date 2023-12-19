@@ -1,12 +1,11 @@
 *** Settings ***
-Documentation    This test is going to test Basic User Settings
+Documentation    This test is going to test User Shared Settings
 Resource         ../../Resources/PO/Web/Common.robot
 Resource         ../../Resources/PO/Web/PersystWebApp.robot
 Suite Setup      Run Keywords       Begin Web Suit              AND         Reset Shared Settings
 Suite Teardown   Run Keywords       Reset Shared Settings       AND         End Web Suit
 
 *** Variables ***
-${PATIENT_ID}              37508
 ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/37508/0?readOnly=false
 ${Patient_Name}         LnP14D3Nw10ICU
 ${Patient_Record_Name}          xpath=//div[text()=' Moji Unit ']/../../following-sibling::div
