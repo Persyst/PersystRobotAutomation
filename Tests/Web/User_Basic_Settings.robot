@@ -37,7 +37,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color
 #    PersystWebApp.compare the images      user-setting-second-test.png
     ${Returned_Patient_Name}    PersystWebApp.Get Patient Name on EEG Page
     should contain    ${Returned_Patient_Name}     LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
-    PersystWebApp.Add Quick Comment on EEG
+    PersystWebApp.Open Quick Comment Modal on EEG
     PersystWebApp.Quit Quick Comment Modal
 
 Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other-settings)
@@ -49,7 +49,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other
     PersystWebApp.Verify Trends Page Loaded Successfully
 #    PersystWebApp.compare the images      user-setting-third-test.png
     page should not contain element       ${Trends_Patient_Name}
-    run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PersystWebApp.Add Quick Comment on EEG
+    run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PersystWebApp.Open Quick Comment Modal on EEG
 
 Test Date Format-Time Format
     PersystWebApp.Change 'Date Formats' for EEG and Trends                  mm-dd-yyyy

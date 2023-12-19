@@ -331,11 +331,15 @@ Change 'EEG High Resolution' Status From User Setting
     Go To Settings Page
     Settings.Change 'EEG High Resolution' Status              ${ON/OFF}
 
-Add Quick Comment on EEG
+Open Quick Comment Modal on EEG
     EEGPage.Open Quick Comment Modal on EEG
 
 Quit Quick Comment Modal
     EEGPage.Close Quick Comment Modal On EEG
+
+Reset Quick Comment Modal
+    Quit Quick Comment Modal
+    Open Quick Comment Modal on EEG
 
 Compare the Images
     [Arguments]    ${SCREENSHOT_NAME}
@@ -354,7 +358,7 @@ Reset User Interface Settings From User Settings
     Go To Settings Page
     Settings.Click on 'Reset User Interface'
 
-Open 'User Guid' PDF From User Settings
+Open 'User Guide' PDF From User Settings
     Go To Settings Page
     Settings.Click 'User Guide' Link
     Settings.Switch to User Guide Tab and Verify The URL
@@ -405,7 +409,7 @@ Change List of Favorite Montages From Settings
 Create a New Comment Filter In Settings
     Go To Settings Page
     Settings.Click On 'Comment Filter' Button
-    Settings.Delete Comment Filters Unil None Exist
+    Settings.Delete Comment Filters Until None Exist
     Settings.Create New Comment Filter
     Settings.Click On User Settings From Inside Settings Pages
 
@@ -447,5 +451,47 @@ Change User Password From User Settings
 
 Navigate Back to Main Setting Menu From Setting Pages
     Settings.Click On User Settings From Inside Settings Pages
-    Settings.Verify "Setting" page loaded
+    wait until page contains    EEG Settings
+
+Navigate to Shared Settings
+    Settings.Click on Shared Setting Link
+
+Navigate to Unit Definitions in Shared Settings
+    Settings.Click on Unit Definition
+
+Add a New Unit in Shared Settings
+    [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    Add a New Unit    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    Navigate Back to Main Setting Menu From Setting Pages
+
+Delete Previously Created Units From Shared Settings
+    Settings.Delete Previously Created Units
+
+Assign a Patient to a Unit from Shared Setting
+    [Arguments]    ${UNIT_NAME}                ${PATIENT_NAME}
+    Settings.Click on Patient Unit Assignments Link
+    Settings.Assign a Patient to a Unit     ${UNIT_NAME}                ${PATIENT_NAME}
+    Navigate Back to Main Setting Menu From Setting Pages
+
+Search For Petient Name in Patient View Page
+    [Arguments]         ${PATIENT_NAME}
+    PatientView.Enter Patient Name In The Patient Name Textfield    ${PATIENT_NAME}
+
+Navigate to 'Standard Comments Editor' in Shared Settings
+    Settings.Click on Standard Comments Link
+
+
+Add a New Standard Comment From Shared Setting
+    Navigate to Shared Settings
+    Navigate to 'Standard Comments Editor' in Shared Settings
+    Settings.Add a New Standard Comment
+    Navigate Back to Main Setting Menu From Setting Pages
+
+Navigate to 'Shared Comment Filters' Settings Under Shared Setting
+    Settings.Click on Shared Comment Filters on Shared Settings
+
+Delete Created Standard Comment From Shared Settings
+    [Arguments]    ${COMMENT_NAME}
+    Settings.Delete Created Standard Comment          ${COMMENT_NAME}
+
 

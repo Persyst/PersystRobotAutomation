@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary  timeout=0:00:15
+Resource    Base.robot
 
 *** Variables ***
 ${Setting_Button_Locator}           css=button[title="Settings"]
@@ -81,7 +82,6 @@ Reset User Settings
     wait until page contains element       ${Reset-Modal_OK_Button}
     click button    Ok
     wait until page does not contain element    ${Reset-Modal_OK_Button}
-
 
 Logging out
     Click On Settings Button
@@ -504,13 +504,73 @@ Delete Filter If Exist
             delete comment filter
      END
 
-Delete Comment Filters Unil None Exist
+Delete Comment Filters Until None Exist
     FOR    ${index}    IN RANGE    10    # a limit to avoid an infinite loop
         ${element_exists}=    Run Keyword And Return Status    Element Should Be Visible    ${Delete_Button}
         Exit For Loop If    not ${element_exists}
         Click Element    ${Delete_Button}
         Sleep    2s
         Log    Clicked the button
+
     END
     Log    Button does not exist anymore
 
+Click on Shared Setting Link
+    click link    Shared Settings
+    wait until page contains    Standard Comments
+
+Click on Unit Definition
+    click link    Unit Definitions
+    wait until page contains    Edit Unit Definitions
+    sleep    2s
+
+Add a New Unit
+    [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    ${Add_Unit_Button}      set variable    xpath=//div[text()=' Add Unit ']
+    Base.Wait And Click Element    ${Add_Unit_Button}
+    ${Unit_Name_Input}      set variable    xpath=//mdl-textfield[@label="Unit Name"]/div/input
+    input text    ${Unit_Name_Input}            ${UNIT_NAME}
+    ${Unit_Description_Input}      set variable     xpath=//mdl-textfield[@label="Unit Description"]/div/input
+    input text    ${Unit_Description_Input}            ${UNIT_DESCRIPTION}
+    ${Done_Button}                  set variable    xpath=//div[text()=' Done ']
+    Wait And Click Element    ${Done_Button}
+    wait until page contains element    xpath=//div[text()=' ${UNIT_DESCRIPTION} ']
+
+Delete Previously Created Units
+    Delete Items Until None Exist    ${Delete_Button}
+
+Click on Patient Unit Assignments Link
+    click link    Patient Unit Assignments
+    wait until page contains    Only Show Unassigned Patients
+
+Assign a Patient to a Unit
+    [Arguments]         ${UNIT_NAME}                ${PATIENT_NAME}
+    ${Search_Input}     set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
+    input text          ${Search_Input}             ${PATIENT_NAME}
+    ${Unit_Dropdown}    set variable    xpath=//mdl-select[@placeholder='Unit']/div
+    wait until page contains element    ${Unit_Dropdown}
+    sleep    3s
+    click element           ${Unit_Dropdown}
+    click element           xpath=//div[text()='${UNIT_NAME}']
+
+Click on Standard Comments Link
+    click link    Standard Comments
+    wait until page contains     Rhythmic Delta
+
+Add a New Standard Comment
+    ${Add_Button}       set variable    xpath=//mdl-button/mdl-icon[text()='add']
+    click element       ${Add_Button}
+    ${Done_Button}      set variable    xpath=//mdl-button[text()=' Done ']
+    wait until page contains element    ${Done_Button}
+    ${Comment_Text_Input}       set variable    xpath=//mdl-textfield[@label="Comment Text"]/div/input
+    input text    ${Comment_Text_Input}         New Moji Comment
+    click element       ${Done_Button}
+
+Click on Shared Comment Filters on Shared Settings
+    click link    Shared Comment Filters
+    wait until page contains    Shared Comment Filters
+
+Delete Created Standard Comment
+    [Arguments]     ${COMMENT_NAME}
+    ${Delete_Button}    set variable        xpath=//div[text()=' ${COMMENT_NAME} ']/../button
+    Base.Delete Items Until None Exist      ${Delete_Button}
