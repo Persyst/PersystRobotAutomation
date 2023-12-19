@@ -10,6 +10,10 @@ ${PATIENT_ID}              37508
 ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/37508/0?readOnly=false
 ${Montage_Name}            Moji Montage (User)
 ${Go_To_EEG_Shortcut_value}       xpath=//div[text()=' Go to EEG ']/following-sibling::div
+${Patient_Name}         LnP14D3Nw10ICU
+
+# Command line to run this test: robot -d results Tests/Web/Other_User_Settings.robot
+
 *** Test Cases ***
 Test 'Reset User Interface'
     PersystWebApp.Reset User Interface Settings From User Settings
@@ -20,7 +24,10 @@ Test Opening User Guide
 Test Create a New Montage
     PersystWebApp.Add New Montage From User Settings
     sleep    5s
-    PersystWebApp.Go To EEG Page By URL         ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}
+    PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
+    PersystWebApp.Navigate From Setting to Patient View
+    PersystWebApp.Search For Petient in Patient List With Patient Name    ${Patient_Name}
+    PersystWebApp.Navigate to EEG Page
     sleep    3s
     PersystWebApp.Change EEG Montage Setting    ${Montage_Name}
     sleep   5s
@@ -34,7 +41,10 @@ Test Editing a Created Montage
     PersystWebApp.Add More Channels to Montage      Cz
     PersystWebApp.Add More Channels to Montage      O1
     Settings.Click 'Save' Montage Button
-    PersystWebApp.Go To EEG Page By URL             ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}
+    PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
+    PersystWebApp.Navigate From Setting to Patient View
+    PersystWebApp.Search For Petient in Patient List With Patient Name    ${Patient_Name}
+    PersystWebApp.Navigate to EEG Page
     sleep    3s
     PersystWebApp.Change EEG Montage Setting        ${Montage_Name}
     sleep   5s

@@ -10,6 +10,8 @@ ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}   http://192.168.156.119/PersystMobi
 ${Patient_Name}         LnP14D3Nw10ICU
 ${Patient_Record_Name}          xpath=//div[text()=' Moji Unit ']/../../following-sibling::div
 
+# Command line to run this test: robot -d results Tests/Web/Shared_Settings.robot
+
 *** Test Cases ***
 Test Create Unit and Assignment
     Navigate to Unit Definitions in Shared Settings

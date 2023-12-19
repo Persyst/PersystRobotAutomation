@@ -10,12 +10,13 @@ ${Timeout_Message}      Element not clickable within timeout
 
 Wait And Click Element
     [Arguments]    ${LOCATOR}
-    Wait Until Element Is Visible    ${locator}    timeout=${Wait_Time}   error=${Timeout_Message}
+    Wait Until Element Is Visible    ${LOCATOR}    timeout=${Wait_Time}   error=${Timeout_Message}
     ${element_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${LOCATOR}
-    Run Keyword If    not ${element_enabled}    Log    Element is not enabled
-    ...    AND    ${LOCATOR}
-    ...    AND    ${Wait_Time}    AND    ${Timeout_Message}
-    ...    ELSE    Click Element    ${LOCATOR}
+    IF      $element_enabled
+          Click Element    ${LOCATOR}
+    ELSE
+          Log    Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}
+    END
 
 Delete Items Until None Exist
     [Arguments]    ${LOCATOR}
