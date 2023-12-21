@@ -7,6 +7,79 @@ Resource         Pages/EEGPage.robot
 Resource         Common.robot
 
 *** Keywords ***
+#==================================================NAVIGATIONS=========================================================
+Navigate to Trends Page From EEG Page
+    EEGPage.Click on "Trends" link
+    TrendsPage.Verify Trends Page Loads Successfully
+
+Navigate to EEG Page From Trends
+    TrendsPage.Click On EEG
+    EEGPage.Verify EEG Page Loaded Successfully
+    sleep    2s
+
+Navigate to EEG Page From Setting
+    [Arguments]    ${PATIENT_ID}
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+    PersystWebApp.Select Patient Record By Patient ID    ${PATIENT_ID}
+    Navigate to EEG Page From Trends
+
+Navigate From Setting to Patient View
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+
+Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
+    [Arguments]    ${PATIENT_ID}
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+    PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
+
+Navigate to Settings From Patient View
+    Settings.Click On Settings Button
+    Settings.Verify "Setting" page loaded
+
+Navigate to Trends Page By URL
+    [Arguments]    ${URL}
+    TrendsPage.Navigate to Trends Page Using URL        ${URL}
+
+Navigate to EEG Using Keyboard Shortcut
+    press keys    None      e
+    EEGPage.Verify EEG Page Loaded Successfully
+
+Navigate to Trends Using Keyboard Shortcut
+    press keys    None      t
+    TrendsPage.Verify Trends Page Loads Successfully
+
+Navigate to Patient View Using Keyboard Shortcut
+    press keys    None      p
+    PatientView.Verify Patient View Page Loaded
+
+Navigate Back to Main Setting Menu From Setting Pages
+    Settings.Click On User Settings From Inside Settings Pages
+    wait until page contains    EEG Settings
+
+Navigate to Shared Settings
+    Settings.Click on Shared Setting Link
+
+Navigate to Unit Definitions in Shared Settings
+    Settings.Click on Unit Definition
+
+Navigate to Patient View From Trends
+    TrendsPage.Click on Patient To Go Back To Patient View
+    PatientView.Verify Patient View Page Loaded
+
+Navigate to Trends Default Settings
+    Settings.Click on Trends Default Settings
+
+Navigate to EEG Default Settings
+    Settings.Click on EEG Default Settings
+
+Navigate to 'Shared Comment Filters' Settings Under Shared Setting
+    Settings.Click on Shared Comment Filters on Shared Settings
+
+Navigate to 'Standard Comments Editor' in Shared Settings
+    Settings.Click on Standard Comments Link
+#====================================================================================================================
 Go to "Login" page
     LoginPage.Navigate To Login Page
     LoginPage.Verify "Login" Page Loaded
@@ -56,11 +129,6 @@ Delete A Comment On Trends
     TrendsPage.Click On Created Comment On Trends
     TrendsPage.Click On "Delete" Button
 
-Navigate to EEG Page
-    TrendsPage.Click On EEG
-    EEGPage.Verify EEG Page Loaded Successfully
-    sleep    2s
-
 Open Comment List from EEG Page
     EEGPage.Launch Comment List If Not Launched Already
 
@@ -73,10 +141,6 @@ Search For The Comment/Spike/Seizure In The EEG Comment Box
     EEGPage.Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter    ${COMMENT_NAME}
     ${Comment_name}    EEGPage.Get First Row's Text When Searched For Comment
     [Return]    ${Comment_name}
-
-Navigate to Trends Page From EEG Page
-    EEGPage.Click on "Trends" link
-    TrendsPage.Verify Trends Page Loads Successfully
 
 Go To Settings Page
     Settings.Go To Settings Page
@@ -93,31 +157,6 @@ Go To EEG Page By URL   # URL variable comes from the test file depending on whi
     EEGPage.Go To EEG Page Through URL  ${URL}
     EEGPage.Verify EEG Page Loaded Successfully
     sleep    2s
-
-Navigate to EEG Page From Setting
-    [Arguments]    ${PATIENT_ID}
-    Settings.Click on Patient Link
-    PatientView.Verify Patient View Page Loaded
-    PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
-    Navigate to EEG Page
-
-Navigate From Setting to Patient View
-    Settings.Click on Patient Link
-    PatientView.Verify Patient View Page Loaded
-
-Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
-    [Arguments]    ${PATIENT_ID}
-    Settings.Click on Patient Link
-    PatientView.Verify Patient View Page Loaded
-    PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
-
-Navigate to Settings From Patient View
-    Settings.Click On Settings Button
-    Settings.Verify "Setting" page loaded
-
-Navigate to Trends Page By URL
-    [Arguments]    ${URL}
-    TrendsPage.Navigate to Trends Page Using URL        ${URL}
 
 Verify EEG Page Loaded Successfully
     EEGPage.Verify EEG Page Loaded Successfully
@@ -429,18 +468,6 @@ Delete a Comment Filter
     Settings.Click On 'Comment Filter' Button
     Settings.Delete Comment Filter
 
-Navigate to EEG Using Keyboard Shortcut
-    press keys    None      e
-    EEGPage.Verify EEG Page Loaded Successfully
-
-Navigate to Trends Using Keyboard Shortcut
-    press keys    None      t
-    TrendsPage.Verify Trends Page Loads Successfully
-
-Navigate to Patient View Using Keyboard Shortcut
-    press keys    None      p
-    PatientView.Verify Patient View Page Loaded
-
 Change Keyboard Shortcut Setting
     [Arguments]    ${ACTION}    ${KEY}
     Go To Settings Page
@@ -457,16 +484,6 @@ Change User Password From User Settings
     [Arguments]    ${OLD_PASSWORD}          ${NEW_PASSWORD}
     Settings.Click Change Password On Settings
     Settings.Enter Old and New Password         ${OLD_PASSWORD}          ${NEW_PASSWORD}
-
-Navigate Back to Main Setting Menu From Setting Pages
-    Settings.Click On User Settings From Inside Settings Pages
-    wait until page contains    EEG Settings
-
-Navigate to Shared Settings
-    Settings.Click on Shared Setting Link
-
-Navigate to Unit Definitions in Shared Settings
-    Settings.Click on Unit Definition
 
 Add a New Unit in Shared Settings
     [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
@@ -486,34 +503,17 @@ Search For Petient Name in Patient View Page
     [Arguments]         ${PATIENT_NAME}
     PatientView.Enter Patient Name In The Patient Name Textfield    ${PATIENT_NAME}
 
-Navigate to 'Standard Comments Editor' in Shared Settings
-    Settings.Click on Standard Comments Link
-
-
 Add a New Standard Comment From Shared Setting
     Navigate to Shared Settings
     Navigate to 'Standard Comments Editor' in Shared Settings
     Settings.Add a New Standard Comment
     Navigate Back to Main Setting Menu From Setting Pages
 
-Navigate to 'Shared Comment Filters' Settings Under Shared Setting
-    Settings.Click on Shared Comment Filters on Shared Settings
-
 Delete Created Standard Comment From Shared Settings
     [Arguments]    ${COMMENT_NAME}
     Settings.Delete Created Standard Comment          ${COMMENT_NAME}
-
-Navigate to Trends Default Settings
-    Settings.Click on Trends Default Settings
-
-Navigate to EEG Default Settings
-    Settings.Click on EEG Default Settings
 
 Change Trends Default Panel and Duration From Settings
     [Arguments]    ${PANEL}         ${DURATION}
     Settings.Select a Panel From Trends Default Panel Dropdown    ${PANEL}
     Settings.Select a Duration From Trends Default Duration Dropdown    ${DURATION}
-
-Navigate to Patient View From Trends
-    TrendsPage.Click on Patient To Go Back To Patient View
-    PatientView.Verify Patient View Page Loaded

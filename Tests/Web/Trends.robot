@@ -18,7 +18,7 @@ Add Comment On Trends and Verify the comment on Trends Page and List of Comments
     PersystWebApp.Create A Comment On Trends
     ${Comment_text}    PersystWebApp.Click on Created Comment On Trends and Get Comment Name
     should contain     ${Comment_text}      ${COMMENT_NAME}
-    PersystWebApp.Navigate to EEG Page
+    PersystWebApp.Navigate to EEG Page From Trends
     ${Comment_name}     PersystWebApp.Search For The Comment/Spike/Seizure In The EEG Comment Box   ${COMMENT_NAME}
     should contain     ${Comment_name}      ${COMMENT_NAME}
     Navigate to Trends Page From EEG Page

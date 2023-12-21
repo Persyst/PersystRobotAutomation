@@ -27,7 +27,7 @@ Test Create a New Montage
     PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
     PersystWebApp.Navigate From Setting to Patient View
     PersystWebApp.Search For Petient in Patient List With Patient Name    ${Patient_Name}
-    PersystWebApp.Navigate to EEG Page
+    PersystWebApp.Navigate to EEG Page From Trends
     sleep    3s
     PersystWebApp.Change EEG Montage Setting    ${Montage_Name}
     sleep   5s
@@ -44,7 +44,7 @@ Test Editing a Created Montage
     PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
     PersystWebApp.Navigate From Setting to Patient View
     PersystWebApp.Search For Petient in Patient List With Patient Name    ${Patient_Name}
-    PersystWebApp.Navigate to EEG Page
+    PersystWebApp.Navigate to EEG Page From Trends
     sleep    3s
     PersystWebApp.Change EEG Montage Setting        ${Montage_Name}
     sleep   5s
