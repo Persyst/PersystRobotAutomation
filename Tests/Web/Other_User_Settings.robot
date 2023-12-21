@@ -91,11 +91,11 @@ Test Keyboard Setting
 
 Test Update Password
     persystwebapp.Navigate to Login Page and Login     mojgan      mojgan
-    persystwebapp.Navigate From Patient View To Settings
+    persystwebapp.Navigate to Settings From Patient View
     PersystWebApp.Change User Password From User Settings           mojgan      Behrad
     PersystWebApp.Logging Out From Persyst Web
     PersystWebApp.Login Into Persyst Web With Valid Credentials     mojgan      Behrad
-    PersystWebApp.Navigate From Patient View To Settings
+    PersystWebApp.Navigate to Settings From Patient View
     PersystWebApp.Change User Password From User Settings           Behrad      mojgan
 
 

@@ -111,9 +111,13 @@ Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
     PatientView.Verify Patient View Page Loaded
     PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
 
-Navigate From Patient View To Settings
+Navigate to Settings From Patient View
     Settings.Click On Settings Button
     Settings.Verify "Setting" page loaded
+
+Navigate to Trends Page By URL
+    [Arguments]    ${URL}
+    TrendsPage.Navigate to Trends Page Using URL        ${URL}
 
 Verify EEG Page Loaded Successfully
     EEGPage.Verify EEG Page Loaded Successfully
@@ -433,6 +437,10 @@ Navigate to Trends Using Keyboard Shortcut
     press keys    None      t
     TrendsPage.Verify Trends Page Loads Successfully
 
+Navigate to Patient View Using Keyboard Shortcut
+    press keys    None      p
+    PatientView.Verify Patient View Page Loaded
+
 Change Keyboard Shortcut Setting
     [Arguments]    ${ACTION}    ${KEY}
     Go To Settings Page
@@ -495,4 +503,17 @@ Delete Created Standard Comment From Shared Settings
     [Arguments]    ${COMMENT_NAME}
     Settings.Delete Created Standard Comment          ${COMMENT_NAME}
 
+Navigate to Trends Default Settings
+    Settings.Click on Trends Default Settings
 
+Navigate to EEG Default Settings
+    Settings.Click on EEG Default Settings
+
+Change Trends Default Panel and Duration From Settings
+    [Arguments]    ${PANEL}         ${DURATION}
+    Settings.Select a Panel From Trends Default Panel Dropdown    ${PANEL}
+    Settings.Select a Duration From Trends Default Duration Dropdown    ${DURATION}
+
+Navigate to Patient View From Trends
+    TrendsPage.Click on Patient To Go Back To Patient View
+    PatientView.Verify Patient View Page Loaded

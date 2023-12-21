@@ -1,5 +1,6 @@
 *** Settings ***
 Library          SeleniumLibrary    timeout=0:00:20
+Resource         Base.robot
 
 *** Variables ***
 
@@ -127,6 +128,18 @@ Select an Option From Trends Panel Setting
     ${Panel_Options}     set variable    panel-${PANEL_OPTION}
     wait until page contains element    id=${Panel_Options}
     click element       id=${Panel_Options}
+
+Navigate to Trends Page Using URL
+    [Arguments]    ${URL}
+    go to          ${URL}
+    verify trends page loads successfully
+    sleep    2s
+
+Click on Patient To Go Back To Patient View
+    ${Patient_Button}           set variable    //div[text()='Patients']
+    Wait And Click Element      ${Patient_Button}
+
+
 
 
 

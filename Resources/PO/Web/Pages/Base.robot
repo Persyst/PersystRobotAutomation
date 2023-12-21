@@ -1,5 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
+Library     Collections
 
 *** Variables ***
 ${Wait_Time}            40s
@@ -29,5 +30,11 @@ Delete Items Until None Exist
     END
     Log    Button does not exist anymore
 
-
-
+Extract Text And Append
+    [Arguments]     @{locator_list}         ${text_list}
+    FOR    ${locator}    IN    @{locator_list}
+        ${element}=         Get WebElement    ${locator}
+        ${element_text}=    Get Text          ${element}
+        Append To List    ${text_list}    ${element_text}
+    END
+    [Return]    @{text_list}

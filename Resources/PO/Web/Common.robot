@@ -94,3 +94,24 @@ Reset Shared Settings
     PersystWebApp.Navigate to 'Standard Comments Editor' in Shared Settings
     PersystWebApp.Delete Created Standard Comment From Shared Settings      New Moji Comment
     PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
+
+Reset EEG Default Settings
+    PersystWebApp.Navigate to EEG Default Settings
+    Change EEG Montage Setting              Bipolar longitudinal A
+    Change EEG Page Duration Time           10
+    Change EEG Sensitivity Option           7
+    Change EEG Artifact Reduction Status    ON
+    Change EEG LFF Setting                  0.16
+    Change EEG HFF Setting                  70
+    Change Notch Filter Setting             60Hz
+
+Reset Trends Default Settings
+    PersystWebApp.Navigate to Trends Default Settings
+    PersystWebApp.Change Trends Default Panel and Duration From Settings        Comprehensive       4 hours
+
+Reset Trends and EEG Default Settings
+    PersystWebApp.Navigate to Patient View Using Keyboard Shortcut
+    PersystWebApp.Navigate to Settings From Patient View
+    Reset EEG Default Settings
+    Reset Trends Default Settings
+    PersystWebApp.Navigate From Setting to Patient View
