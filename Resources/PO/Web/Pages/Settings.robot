@@ -575,3 +575,28 @@ Delete Created Standard Comment
     [Arguments]     ${COMMENT_NAME}
     ${Delete_Button}                set variable        xpath=//div[text()=' ${COMMENT_NAME} ']/../button
     Base.Delete Items Until None Exist                             ${Delete_Button}
+
+Click on Trends Default Settings
+    click link    Trends Settings
+    wait until page contains    Default Trends Duration:
+
+
+Click on EEG Default Settings
+    click link                  EEG Settings
+    wait until page contains    Off
+
+Select a Panel From Trends Default Panel Dropdown
+    [Arguments]    ${DEFAULT_PANEL}
+    ${Panel_Dropdown}               set variable    xpath=//mdl-select[@id='Default Panel']/div
+    Wait And Click Element                          ${Panel_Dropdown}
+    ${Panel_Menu}                   set variable    xpath=//mdl-select[@id="Default Panel"]/div/mdl-popover
+    wait until element is visible                   ${Panel_Menu}       40s
+    ${Panel_Option}                 set variable    xpath=//div[text()='${DEFAULT_PANEL}']/..
+    click element                                   ${Panel_Option}
+
+Select a Duration From Trends Default Duration Dropdown
+    [Arguments]    ${DEFAULT_DURATION}
+    ${Duration_Dropdown}               set variable    id=Default Duration
+    Wait And Click Element                          ${Duration_Dropdown}
+    ${Duration_Option}                 set variable    xpath=//div[text()='${DEFAULT_DURATION}']/..
+    Wait And Click Element                          ${Duration_Option}

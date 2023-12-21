@@ -1,5 +1,7 @@
 *** Settings ***
 Library          SeleniumLibrary    timeout=0:00:30
+Library          Collections
+Resource         Base.robot
 
 *** Variables ***
 ${Circle_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__left > div
@@ -36,14 +38,14 @@ ${EEG_Show_Comment_Off}     name=ShowComments Off
 ${EEG_Restrict_Pen_On}      name=RestrictPenDeflection On
 ${EEG_Restrict_Pen_Off}     name=RestrictPenDeflection Off
 ${EEG_Montage_Setting}      css=div[title='Select Montage']
-${EEG_Duration_Setting}     css=div.eegSettings > app-eeg-settings div [title="Select Duration"]
+${EEG_Duration_Setting}     css=div [title="Select Duration"]
 ${EEG_Duration_Menu}        id=eeg-duration-setting
-${EEG_Sensitivity_Setting}  css=div.eegSettings > app-eeg-settings div [title="Select Sensitivity"]
-${EEG_Sensitivity_Menu}     css= div.eegSettings > app-eeg-settings > div > div:nth-child(2)
+${EEG_Sensitivity_Setting}  css=div [title="Select Sensitivity"]
+${EEG_Sensitivity_Menu}     xpath=//div[@id="eeg-sensitivity-menu"]/div[2]
 ${Artifacts_Reduction_On}   name=AR On
 ${Artifacts_Reduction_Off}  name=AR Off
-${LFF_Setting}              css=div.eegSettings > app-eeg-settings div [title="Select LFF"]
-${HFF_Setting}              css=div.eegSettings > app-eeg-settings div [title="Select HFF"]
+${LFF_Setting}              css=div [title="Select LFF"]
+${HFF_Setting}              css=div [title="Select HFF"]
 &{Notch_Filter_Options}     60Hz=60       50Hz=50       OFF=Off
 *** Keywords ***
 Verify EEG Page Loaded Successfully
@@ -221,10 +223,8 @@ Change Artifact Reduction Status
     Navigate Back to Main Setting Menu
     IF    '${ON/OFF}' == 'ON'
         click element       ${Artifacts_Reduction_On}
-        verify eeg page loaded successfully
     ELSE
         click element       ${Artifacts_Reduction_Off}
-        verify eeg page loaded successfully
     END
 
 Click on LFF Setting Menu
@@ -277,4 +277,9 @@ Select a Comment Filter
     [Arguments]    ${FILTER_NAME}
     click element    xpath=//div[text()=" ${FILTER_NAME} "]
 
+Get EEG Waveforms Settings
+    @{List_of_Waveform_Settings}    create list    ${EEG_Montage_Setting}    ${EEG_Duration_Setting}      ${EEG_Sensitivity_Setting}   ${Artifacts_Reduction_On}     ${Artifacts_Reduction_Off}     ${LFF_Setting}   ${HFF_Setting}
+    @{Setting_Values}       create list
+    @{Setting_Values}       Extract Text And Append     @{List_of_Waveform_Settings}        text_list=${Setting_Values}
+    [Return]        @{Setting_Values}
 

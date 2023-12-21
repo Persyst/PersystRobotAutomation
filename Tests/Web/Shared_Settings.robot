@@ -35,6 +35,3 @@ Test Standard Comment
     PersystWebApp.Reset Quick Comment Modal
     ${New_Comment}      set variable    xpath=//span[text()='New Moji Comment']
     page should contain element   ${New_Comment}
-
-
-
