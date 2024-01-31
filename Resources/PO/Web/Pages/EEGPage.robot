@@ -13,12 +13,12 @@ ${Comment_Name_Textfield}   css=#comment-filter-input:nth-child(1)
 ${First_Comment_Row}        css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(2) > div
 ${First_Row_In_Comments}    css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(1) > div
 ${Trends_Link}              xpath=//span[text()='Trends']
-${EEG_PAGE_URL}             http://192.168.156.119/PersystMobile/record-views/eeg/325/0?readOnly=false
 ${Play_Button}              css=body button[title='Start Playing']
 ${Pause_Button}             css=body button[title='Pause Playing']
 ${Quick_Comment_modal}      css=div[mapname="QuickComment"]
 ${Patient_Name_Header}      xpath=//div[text()='EEG for']/following-sibling::div
 ${Comment_Filter_Button}    id=comment-filter-button
+${Video_Modal}              xpath=//app-video
 #==================================================EEG Setting===============================================================
 ${EEG_Setting_Button}       id=eeg-settings-button
 ${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
@@ -51,39 +51,39 @@ ${HFF_Setting}              css=div [title="Select HFF"]
 Verify EEG Page Loaded Successfully
     wait until page does not contain element    ${Circle_Spinner}
     wait until page does not contain element    ${second_spinner}
-    wait until page contains element    ${EEG_Image}
+    wait until page contains element            ${EEG_Image}                    1m
 
 Launch Comment List If Not Launched Already
     ${comment_list_visibility}  get element count    ${Comment_List_box}
     IF    ${comment_list_visibility} == 0
-        wait until page contains element    ${Comment_List_Button}
-        click element    ${Comment_List_Button}
-        wait until page contains element    ${Comment_List_box}         40s
+        wait until page contains element             ${Comment_List_Button}
+        click element                                ${Comment_List_Button}
+        wait until page contains element             ${Comment_List_box}         40s
     END
 
 Close Comment List If Launched Already
     ${comment_list_visibility}  get element count    ${Comment_List_box}
     IF    ${comment_list_visibility} != 0
-        click element    ${Comment_List_Button}
+        click element                                ${Comment_List_Button}
     END
 
 Click on Comment List Button
-    click element    ${Comment_List_Button}
+    click element                                    ${Comment_List_Button}
 
 Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter
     [Arguments]   ${NAME}
     input text    ${Comment_Name_Textfield}     ${NAME}
 
 Get First Row's Text When Searched For Comment
-    wait until page contains element    ${First_Comment_Row}
+    wait until page contains element            ${First_Comment_Row}
     sleep    2s
-    ${Comment_name}     get text    ${First_Comment_Row}
+    ${Comment_name}     get text                ${First_Comment_Row}
     [Return]    ${Comment_name}
 
 Get First Row's Text in List Of Comments
     [Documentation]    This is getting the first row text without searching
-    wait until page contains element    ${First_Comment_Row}
-    ${Comment_name}     get text    ${First_Row_In_Comments}
+    wait until page contains element            ${First_Comment_Row}
+    ${Comment_name}     get text                ${First_Row_In_Comments}
     [Return]    ${Comment_name}
 
 
@@ -104,21 +104,38 @@ Click on Pause Button
 
 Get Patient Name From EEG Header
     ${Patient_Name}     get text    ${Patient_Name_Header}
-    [Return]        ${Patient_Name}
+    [Return]                        ${Patient_Name}
 
+Click on Right Page Button
+    Wait And Click Element          //button[@title="Page Right"]
+    sleep    1s
+
+Click on Left Page Button
+    Wait And Click Element          //button[@title="Page Left"]
+    sleep    1s
+
+Click on Split Screen Button
+    Wait And Click Element          //button[@title="Split Screen"]
+    Verify EEG Page Loaded Successfully
+    sleep    1s
+
+Verify Trends Subview Displays
+    wait until page contains element    //app-trends-subview        50s
+    page should contain element         //app-trends-subview
 #=================================================EEG Setting===============================================================
                      #===========================Display Setting=============================
 Click the EEG Page Setting Button
     Navigate Back to Main Setting Menu
-    ${eeg_setting_button_visibility}    get element count       ${EEG_Setting_Box}
-    IF      ${eeg_setting_button_visibility} == 0
-            click element                       ${EEG_Setting_Button}
-            wait until page contains element    ${EEG_Setting_Box}          40s
+    ${eeg_setting_box_visibility}    get element count     ${EEG_Setting_Box}
+    IF      ${eeg_setting_box_visibility} == 0
+            Click Element Until Visible         ${EEG_Setting_Button}            ${EEG_Setting_Box}
+#            Wait And Click Element                              ${EEG_Setting_Button}
+#            wait until page contains element                    ${EEG_Setting_Box}          40s
     END
 Navigate Back to Main Setting Menu
-    ${Back_Arrow_visibility}   get element count    ${Back_Arrow}
+    ${Back_Arrow_visibility}   get element count                ${Back_Arrow}
     IF  ${Back_Arrow_visibility} != 0
-        click element        ${Back_Arrow}
+        click element                                           ${Back_Arrow}
     END
 
 Click on Display Setting Link
@@ -126,20 +143,20 @@ Click on Display Setting Link
 
 Change the EEG Page Font Size
     [Arguments]           ${FONT_SIZE}
-    input text    id:eeg-font-setting    ${FONT_SIZE}
-
+    Execute JavaScript    document.querySelector('#eeg-font-setting').value = ${FONT_SIZE}
 
 Change Channel Per Page Setting
     [Arguments]    ${NUMBER_OF_CHANNELS}
     SELECT FROM LIST BY VALUE    ${EEG_Channel_Per_Page_Select}     ${NUMBER_OF_CHANNELS}
+    wait until page contains element    ${EEG_Setting_Box}
 
 Change Calibrartion Status
     [Arguments]    ${ON/OFF}
     wait until page contains element    ${EEG_Calibration_Off}
     IF      '${ON/OFF}' == 'ON'
-            click element    ${EEG_Calibration_On}
+            Wait And Click Element    ${EEG_Calibration_On}
     ELSE
-            click element    ${EEG_Calibration_Off}
+            Wait And Click Element    ${EEG_Calibration_Off}
     END
 
 Change Major Grid Status
@@ -188,6 +205,7 @@ Change Restricted Pen Status
     END
 
 Click on Waveforms Setting Link
+    wait until page contains element    ${EEG_Setting_Box}      50s
     click link    Waveforms
 
 Click on Montage Setting
@@ -217,6 +235,8 @@ Select EEG Page Sensitivity
     [Arguments]    ${SENSITIVITY_OPTION}
     ${EEG_Sensitivity_Options}      set variable    sensitivity${SENSITIVITY_OPTION}
     click element    id=${EEG_Sensitivity_Options}
+    wait until page contains element                    ${EEG_Setting_Box}
+
 
 Change Artifact Reduction Status
     [Arguments]    ${ON/OFF}
@@ -235,21 +255,21 @@ Select LFF Setting
     [Documentation]    The LFF options arguments sent should be only the numbers like 0.16
     [Arguments]    ${LFF}
     ${LFF_Options}    set variable      lff-${LFF}
-    click element    id=${LFF_Options}
+    Wait And Click Element    id=${LFF_Options}
 
 Click on HFF Setting Menu
     navigate back to main setting menu
-    click element    ${HFF_Setting}
+    Wait And Click Element    ${HFF_Setting}
 
 Select HFF Setting
     [Documentation]    The HFF options arguments sent should be only the numbers like 0.16
     [Arguments]    ${HFF}
     ${HFF_Options}    set variable      lff-${HFF}
-    click element    id=${HFF_Options}
+    Wait And Click Element    id=${HFF_Options}
 
 Select Notch Filter Option
     [Arguments]    ${NOTCH_OPTION}
-    click element    name=${Notch_Filter_Options}[${NOTCH_OPTION}]
+    Wait And Click Element    name=${Notch_Filter_Options}[${NOTCH_OPTION}]
 
 Open Quick Comment Modal on EEG
     ${modal_exist}    get element count    ${Quick_Comment_modal}
@@ -282,4 +302,18 @@ Get EEG Waveforms Settings
     @{Setting_Values}       create list
     @{Setting_Values}       Extract Text And Append     @{List_of_Waveform_Settings}        text_list=${Setting_Values}
     [Return]        @{Setting_Values}
+
+Click on Video Button
+    ${Video_Button}     set variable    xpath=//button[@title="Video"]
+    Wait And Click Element    ${Video_Button}
+
+Open Video Modal
+    ${Is_Video_Modal_Present}    Wait and Get Element Presence    ${Video_Modal}
+    Run Keyword If  not ${Is_Video_Modal_Present}  Click on Video Button
+    wait until page contains element      ${Video_Modal}
+
+Close Video Modal
+    ${Is_Video_Modal_Present}    Wait and Get Element Presence    ${Video_Modal}
+    Run Keyword If  ${Is_Video_Modal_Present}  Click on Video Button
+    Wait Until Page Does Not Contain Element  ${Video_Modal}
 

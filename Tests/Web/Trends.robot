@@ -10,7 +10,7 @@ Suite Teardown   Run Keywords   Reset the Trends Setting        ${PATIENT_ID}   
 ${COMMENT_NAME}            Moji Comment
 ${SPIKE_NAME}              Spike
 ${SEIZURE_NAME}            @SeizureDetected
-${PATIENT_ID}              36437
+${PATIENT_ID}              679
 
 *** Test Cases ***
 Add Comment On Trends and Verify the comment on Trends Page and List of Comments in EEG Page(record)
@@ -37,32 +37,30 @@ Check Spikes list of Comments based on Spike Inclusion Setting
     should contain          ${Returned_Seizure_Name}      ${SEIZURE_NAME}
 
 Change Page Duration
-    PersystWebApp.Navigate to Trends Page From EEG Page
+    PersystWebApp.Navigate to Trends Page By URL    ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}
     PersystWebApp.Change Trends Page Duration    5min
-    sleep    5s
-#    Compare the Images  5min-rightcorner.png
+    sleep   5s
+    Common.Compare the Images  Trends-5min-rightcorner.png
     PersystWebApp.Change Trends Page Duration    4hours
     sleep    5s
-#    Compare the Images            4hour-bottomleftcorner.png
-#    Compare the Images            4hour-rightcorner.png
+    Common.Compare the Images            Trends-4hour-bottomleftcorner.png
 
 Verify Artifact Reduction Functionality
     PersystWebApp.Change Trends Page Duration       4hours
     PersystWebApp.Change Artifact Reduction Status On Trends    OFF
-    sleep    5s
-
-#    compare the images    artifact-reduction-off.png
+    sleep    3s
+    Common.Compare the Images            Trends-ar-off.png
     PersystWebApp.Change Artifact Reduction Status On Trends    ON
-    sleep    5s
-#    compare the images    artifact-reduction-on.png
+    sleep    3s
+    common.compare the images            Trends-ar-on.png
 
 Verify the Trends Panel Setting Functionality
     PersystWebApp.Change Panel Setting From Trends Setting      Asymmetry
-    sleep    5s
-#    compare the images  asymmetry.png
+    sleep    3s
+    Common.Compare the Images             Trends-asymmetry.png
     PersystWebApp.Change Panel Setting From Trends Setting      SpikeDetails
-    sleep    5s
-#    compare the images  spikedetails
+    sleep    3s
+    Common.Compare the Images             Trends-spikedetails.png
     PersystWebApp.Change Panel Setting From Trends Setting      Comprehensive
-    sleep    5s
-#    compare the images    comprehensive
+    sleep    3s
+    Common.Compare the Images             Trends-comprehensive.png

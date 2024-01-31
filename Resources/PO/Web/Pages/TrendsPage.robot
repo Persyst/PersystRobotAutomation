@@ -18,7 +18,6 @@ ${Single_Comment_Text}      id=Moji Comment@PersystTrends
 ${Comment_Delete_Button}    id=Moji Comment@PersystTrends-delete
 ${Comment_Edit_Button}      id=Moji Comment@PersystTrends-edit
 ${EEG_Link}                 id=EEG-link
-
 ################################################################################################################
 ##############################TRENDS SETTING############################TRENDS SETTING#########################
 
@@ -73,6 +72,8 @@ Click On Edit Button
 Click On EEG
     click element  ${EEG_Link}
 
+
+
 #######################################################################################################
 ############### TRENDS SETTING ########################################################################
 
@@ -91,7 +92,6 @@ Close Setting Menu
     END
 
 click on Page Duration Setting
-    Change Artifact Reduction Status    ON
     ${Trens_Page_Duration_menu_Visibility}  get element count    id=${Page_Duration_Options}[5min]
     IF    ${Trens_Page_Duration_menu_Visibility} == 0
         click element    ${PAGE_DURATION_MENU}
@@ -131,13 +131,28 @@ Select an Option From Trends Panel Setting
 
 Navigate to Trends Page Using URL
     [Arguments]    ${URL}
-    go to          ${URL}
-    verify trends page loads successfully
-    sleep    2s
+    ${current_url}=    Get Location
+    ${contains_trends}=    Run Keyword And Return Status    Should Contain    ${current_url}    trends
+
+    IF    ${contains_trends}
+        Log    Current URL already contains "trends". Doing nothing.
+    ELSE
+        Go To    ${URL}
+        verify trends page loads successfully
+        sleep    2s
+        Log    Navigated to the specified URL.
+    END
 
 Click on Patient To Go Back To Patient View
     ${Patient_Button}           set variable    //div[text()='Patients']
     Wait And Click Element      ${Patient_Button}
+
+Get Patient Name
+    ${Patient_Name_Locator}      set variable    //app-trends-view//div[@class="view-header-title"]/div/div/div[2]
+    ${Patient_Name}     get text    ${Patient_Name_Locator}
+    [Return]            ${Patient_Name}
+
+
 
 
 

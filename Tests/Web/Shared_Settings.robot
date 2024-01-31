@@ -6,10 +6,8 @@ Suite Setup      Run Keywords       Begin Web Suit              AND         Rese
 Suite Teardown   Run Keywords       Reset Shared Settings       AND         End Web Suit
 
 *** Variables ***
-${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/37508/0?readOnly=false
-${Patient_Name}         LnP14D3Nw10ICU
+${Patient_Name}                 LnP14D3Nw10ICU
 ${Patient_Record_Name}          xpath=//div[text()=' Moji Unit ']/../../following-sibling::div
-
 # Command line to run this test: robot -d results Tests/Web/Shared_Settings.robot
 
 *** Test Cases ***
@@ -18,6 +16,11 @@ Test Create Unit and Assignment
     PersystWebApp.Add a New Unit in Shared Settings                   Moji Unit     This is description
     PersystWebApp.Assign a Patient to a Unit from Shared Setting      Moji Unit     ${Patient_Name}
     PersystWebApp.Navigate From Setting to Patient View
+    PatientView.Click on 'Patient List' tab
+    wait until page contains element    ${Patient_Record_Name}      40s
+    PersystWebApp.Mminimize and Maximize Unit In Patient View         Moji Unit         Patient
+    page should not contain element     ${Patient_Record_Name}
+    PersystWebApp.Mminimize and Maximize Unit In Patient View         Moji Unit         Patient
     wait until page contains element    ${Patient_Record_Name}      40s
     ${Patient_Record_Name}    get text        ${Patient_Record_Name}
     should contain    ${Patient_Record_Name}       ${Patient_Name}
@@ -35,3 +38,4 @@ Test Standard Comment
     PersystWebApp.Reset Quick Comment Modal
     ${New_Comment}      set variable    xpath=//span[text()='New Moji Comment']
     page should contain element   ${New_Comment}
+

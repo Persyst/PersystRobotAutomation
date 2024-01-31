@@ -7,9 +7,7 @@ Suite Setup      Run Keywords       Begin Web Suit
 Suite Teardown   Run Keywords       Reset Trends and EEG Default Settings       AND         End Web Suit
 
 *** Variables ***
-${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}     http://192.168.156.119/PersystMobile/record-views/eeg/37508/0?readOnly=false
-${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}     http://192.168.156.119/PersystMobile/record-views/trends/37508/0?readOnly=false
-${Patient_Name}         LnP14D3Nw10ICU
+${Patient_Name}         LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
 
 # Command line to run this test: robot -d results Tests/Web/Shared_Settings.robot
 
@@ -17,6 +15,7 @@ ${Patient_Name}         LnP14D3Nw10ICU
 Test Trends Default Setting
     PersystWebApp.Navigate to Settings From Patient View
     PersystWebApp.Navigate to Trends Default Settings
+    Settings.Select Patient Record For Default Settings     ${Patient_Name}
     PersystWebApp.Change Trends Default Panel and Duration From Settings        ActiveNotifications       4 hours
     PersystWebApp.Navigate to Trends Page By URL        ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}
     TrendsPage.click on Setting Button
@@ -24,9 +23,9 @@ Test Trends Default Setting
     should contain    ${Panel}         ActiveNotifications
     ${Duration}     get text    id=duration-settings
     should contain    ${Duration}      4 hours
-    PersystWebApp.Navigate to Patient View From Trends
 
 Test EEG Default Settings
+    PersystWebApp.Navigate to Patient View From Trends
     PersystWebApp.Navigate to Settings From Patient View
     PersystWebApp.Navigate to EEG Default Settings
     PersystWebApp.Change EEG Montage Setting         Referential (Av12) Longitudinal

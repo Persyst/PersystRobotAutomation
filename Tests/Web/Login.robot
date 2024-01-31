@@ -2,11 +2,11 @@
 Documentation       This test is going to test persyst login
 Resource            ../../Resources/PO/Web/Common.robot
 Resource            ../../Resources/PO/Web/PersystWebApp.robot
-Test Setup          Begin Web Test    ${BROWSER}
-Test Teardown       End Web Test
+Suite Setup         Begin Web Suit With No Login
+Test Setup          Run Keywords            PersystWebApp.Go to "Login" page
+Suite Teardown      End Web Suit
 
 *** Variables ***
-${BROWSER} =    chrome
 ${CORRECT_USERNAME} =  mojgan
 ${CORRECT_PASSWORD} =  mojgan
 
@@ -14,8 +14,15 @@ ${CORRECT_PASSWORD} =  mojgan
 User should be able to login with valid credentials
     [Documentation]         Login is happening in this test with incorrect credentials
     [Tags]                  Login
-    PersystWebApp.Go to "Login" page
     PersystWebApp.Login Into Persyst Web With Valid Credentials    ${CORRECT_USERNAME}     ${CORRECT_PASSWORD}
     PersystWebApp.Logging Out From Persyst Web
 
-*** Keywords ***
+Test About Persyst Mobile Contents
+    LoginPage.Click on 'About' Button
+    Common.Compare the Images       about_page.png
+
+Test About Persyst Mobile User Guide Link
+    LoginPage.Click on 'About' Button
+    LoginPage.Click on 'User Guide' link
+    LoginPage.Switch to User Guide Tab and Verify The URL
+

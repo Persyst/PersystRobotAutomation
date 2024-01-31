@@ -8,6 +8,16 @@ ${Interval}             30s
 ${Timeout_Message}      Element not clickable within timeout
 
 *** Keywords ***
+Click Element Until Visible
+    [Arguments]  ${locator_to_click}  ${locator_to_check}  ${timeout}=30
+    FOR  ${i}  IN RANGE  ${timeout}
+        Click Element  ${locator_to_click}
+        ${visible}=  Run Keyword And Return Status  Element Should Be Visible  ${locator_to_check}
+        Exit For Loop If  ${visible}  # Exit loop if the element is visible
+        Sleep  1s  # Wait for 1 second before trying again
+    END
+    Run Keyword Unless  ${visible}  Fail  Element not visible after ${timeout} seconds
+
 
 Wait And Click Element
     [Arguments]    ${LOCATOR}
@@ -38,3 +48,8 @@ Extract Text And Append
         Append To List    ${text_list}    ${element_text}
     END
     [Return]    @{text_list}
+
+Wait and Get Element Presence
+    [Arguments]    ${LOCATOR}       ${timeout}=30
+    ${result}=  Run Keyword And Return Status  Wait Until Element Is Visible  ${locator}  timeout=${timeout}s
+    [Return]    ${result}
