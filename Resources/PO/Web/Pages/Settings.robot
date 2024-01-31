@@ -7,7 +7,7 @@ ${Setting_Button_Locator}           css=button[title="Settings"]
 ${Logout_Button_Locator}            xpath=//div[text()=' Logout ']
 ${Setting_Page_Last_Element}        id=EEG-high-resolution
 ${Include_Spike_Checkbox}           id=include-spike-comments
-${Setting_Page_URL}                 http://192.168.156.119/PersystMobile/record-views/user-settings
+${Setting_Page_URL}                 http://10.193.0.106/PersystMobile/record-views/user-settings
 ${Patient_Link}                     xpath=//div[text()='Patients']
 ${Include_Spike_Checkbox_Bullet}    css=mdl-switch[id='include-spike-comments'] div[class='mdl-switch__thumb']
 ${Comment_Sort_Dropdown}            id=Comments Sort
@@ -363,6 +363,7 @@ Switch to User Guide Tab and Verify The URL
     ${url}=     get location
     should be equal    ${url}       https://www.persyst.com/PersystMobile/WebUserGuide.pdf
     switch window    ${open_tabs}[0]
+
 Click On Montage Editor
     click link    Montage Editor
     wait until page contains    Other Channels
@@ -531,10 +532,12 @@ Add a New Unit
     input text    ${Unit_Name_Input}               ${UNIT_NAME}
     ${Unit_Description_Input}      set variable    xpath=//mdl-textfield[@label="Unit Description"]/div/input
     input text    ${Unit_Description_Input}        ${UNIT_DESCRIPTION}
+    sleep    2s
     ${Done_Button}                 set variable    xpath=//div[text()=' Done ']
     Wait And Click Element                         ${Done_Button}
-    ${Created_Unit}                set variable    xpath=//div[text()=' ${UNIT_DESCRIPTION} ']
+    ${Created_Unit}                set variable    xpath=//div[text()=' ${UNIT_NAME} ']
     wait until page contains element               ${Created_Unit}
+    sleep    2s
 
 Delete Previously Created Units
     Delete Items Until None Exist                  ${Delete_Button}
@@ -542,13 +545,14 @@ Delete Previously Created Units
 Click on Patient Unit Assignments Link
     click link                                     Patient Unit Assignments
     wait until page contains                       Only Show Unassigned Patients
+    sleep    3s
 
 Assign a Patient to a Unit
     [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
     ${Search_Input}                 set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
     input text                      ${Search_Input}             ${PATIENT_NAME}
     ${Unit_Dropdown}                set variable    xpath=//mdl-select[@placeholder='Unit']/div
-    wait until page contains element                            ${Unit_Dropdown}
+    wait until page contains element                            ${Unit_Dropdown}        40s
     sleep    3s
     Wait And Click Element                                      ${Unit_Dropdown}
     ${Unit_Option}                  set variable    xpath=//div[text()='${UNIT_NAME}']
@@ -600,3 +604,26 @@ Select a Duration From Trends Default Duration Dropdown
     Wait And Click Element                          ${Duration_Dropdown}
     ${Duration_Option}                 set variable    xpath=//div[text()='${DEFAULT_DURATION}']/..
     Wait And Click Element                          ${Duration_Option}
+
+Assign Patient to a Unit For Monitoring(4Backspace)
+    [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
+    ${Search_Input}                 set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
+    input text                      ${Search_Input}             ${PATIENT_NAME}
+    Press Keys    ${Search_Input}    CTRL+END   BACKSPACE   BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE
+    ${Unit_Dropdown}                set variable    xpath=//mdl-select[@placeholder='Unit']/div
+    wait until page contains element                            ${Unit_Dropdown}        40s
+    sleep    3s
+    Wait And Click Element                                      ${Unit_Dropdown}
+    ${Unit_Option}                  set variable    xpath=//div[text()='${UNIT_NAME}']
+    Wait And Click Element                                      ${Unit_Option}
+
+Select Patient Record For Default Settings
+    [Arguments]         ${PATIENT_NAME}
+    ${Patient_Dropdown}         set variable    xpath=//label[text()='Selected Record:']/following-sibling::div
+    Wait And Click Element      ${Patient_Dropdown}
+    wait until page contains    Select Record
+    wait until page contains element            xpath=//mdl-button[text()='Cancel']      # Cancel Button on the modal
+    ${Patient_Record_Textfield}         set variable        xpath=//h3[text()='Select Record']//..//input
+    input text          ${Patient_Record_Textfield}         ${PATIENT_NAME}
+    ${Patient_Item}     set variable        xpath=//mdl-list-item[text()=' ${PATIENT_NAME} ']
+    Wait And Click Element          ${Patient_Item}

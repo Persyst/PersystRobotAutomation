@@ -79,6 +79,12 @@ Navigate to 'Shared Comment Filters' Settings Under Shared Setting
 
 Navigate to 'Standard Comments Editor' in Shared Settings
     Settings.Click on Standard Comments Link
+
+Navigate to Patient View By URL And Search For Patient Name
+    [Arguments]     ${PATIENT_NAME}
+    PatientView.Navigate to Patient View By URL
+    PatientView.Click on 'Patient List' tab
+    Search For Petient Name in Patient View Page        ${PATIENT_NAME}
 #====================================================================================================================
 Go to "Login" page
     LoginPage.Navigate To Login Page
@@ -102,6 +108,7 @@ Logging Out From Persyst Web
 Search For Petient in Patient List With Patient Name
     [Arguments]         ${PATIENT_NAME}
     PatientView.Enter Patient Name In The Patient Name Textfield    ${PATIENT_NAME}
+    sleep   1s
     Click On First Patient In The List After Filtering
     Verify Patient Comments Appear
     sleep    3s
@@ -489,8 +496,12 @@ Add a New Unit in Shared Settings
     [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
     Add a New Unit    ${UNIT_NAME}         ${UNIT_DESCRIPTION}
     Navigate Back to Main Setting Menu From Setting Pages
+    sleep   1s
 
 Delete Previously Created Units From Shared Settings
+    PersystWebApp.Go To Settings Page
+    PersystWebApp.Navigate to Shared Settings
+    PersystWebApp.Navigate to Unit Definitions in Shared Settings
     Settings.Delete Previously Created Units
 
 Assign a Patient to a Unit from Shared Setting
@@ -499,9 +510,20 @@ Assign a Patient to a Unit from Shared Setting
     Settings.Assign a Patient to a Unit     ${UNIT_NAME}                ${PATIENT_NAME}
     Navigate Back to Main Setting Menu From Setting Pages
 
+Add a New Unit and Assign a Patient to it
+    [Arguments]    ${UNIT_NAME}         ${UNIT_DESCRIPTION}         ${PATIENT_NAME}
+    Go To Settings Page
+    PersystWebApp.Navigate to Shared Settings
+    Navigate to Unit Definitions in Shared Settings
+    Add a New Unit in Shared Settings                   ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    Assign a Patient to a Unit from Shared Setting      ${UNIT_NAME}         ${PATIENT_NAME}
+
 Search For Petient Name in Patient View Page
     [Arguments]         ${PATIENT_NAME}
     PatientView.Enter Patient Name In The Patient Name Textfield    ${PATIENT_NAME}
+    Click On First Patient In The List After Filtering
+    Verify Patient Comments Appear
+    sleep    3s
 
 Add a New Standard Comment From Shared Setting
     Navigate to Shared Settings
@@ -517,3 +539,31 @@ Change Trends Default Panel and Duration From Settings
     [Arguments]    ${PANEL}         ${DURATION}
     Settings.Select a Panel From Trends Default Panel Dropdown    ${PANEL}
     Settings.Select a Duration From Trends Default Duration Dropdown    ${DURATION}
+
+Mminimize and Maximize Unit In Patient View
+    [Arguments]    ${UNIT_NAME}     ${PAGE}
+    PatientView.Minimize Unit By Name Either in Patient View Or Monitoring      ${UNIT_NAME}        ${PAGE}
+    sleep   2s
+
+Get Comment Data From Records Event Density
+    PatientView.Click On Wrench Button To Navigate to Event Density
+    @{Values}        PatientView.Find Comment's Data From Event Density
+    [Return]         @{Values}
+
+Get Patient Record Info From Patient View Info Button
+    ${Info}         PatientView.Get Patient Info From Info Button
+    [Return]        ${Info}
+
+Assign First Patient Name to A Unit In Shared Settings
+    [Arguments]         ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    ${Patient_Name}     PatientView.Get 'First Patient' Name in Monitoring Page
+    Navigate to Settings From Patient View
+    Navigate to Shared Settings
+    Navigate to Unit Definitions in Shared Settings
+    Add a New Unit in Shared Settings                   ${UNIT_NAME}         ${UNIT_DESCRIPTION}
+    Settings.Click on Patient Unit Assignments Link
+    Settings.Assign Patient to a Unit For Monitoring(4Backspace)      ${UNIT_NAME}         ${Patient_Name}
+    Navigate Back to Main Setting Menu From Setting Pages
+
+
+

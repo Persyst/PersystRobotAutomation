@@ -8,11 +8,11 @@ Suite Teardown   Run Keywords       Reset the User Basic Settings          End W
 # Command line to run this test: robot -d results Tests/Web/User_Basic_Settings.robot
 
 *** Variables ***
-${PATIENT_ID}       37508
+${PATIENT_ID}       679
 ${Patient_Name}
 &{fcolor}       yellow=#dfca74       white=#ffffff
 ${Trends_Patient_Name}      css=div.view-header-title > div > div > div:nth-child(2)
-${Patient_Record_With_Segments}     xpath=//*[@id="37508"]/../../../following-sibling::div[1]/mdl-list-item[1]
+${Patient_Record_With_Segments}     xpath=//*[@id="679"]/../../../following-sibling::div[1]/mdl-list-item[1]
 
 *** Test Cases ***
 Check Spikes list of Comments based on Spike Inclusion Setting
@@ -36,7 +36,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color
     PersystWebApp.Set Grid Background Color From User Settings              ${fcolor}[white]
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify EEG Page Loaded Successfully
-#    PersystWebApp.compare the images      user-setting-second-test.png
+    Common.Compare the Images      user-setting-second-test.png
     ${Returned_Patient_Name}    PersystWebApp.Get Patient Name on EEG Page
     should contain    ${Returned_Patient_Name}     LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
     PersystWebApp.Open Quick Comment Modal on EEG
@@ -49,7 +49,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other
     PersystWebApp.Set EEG Background Color From User Settings               ${fcolor}[white]
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify Trends Page Loaded Successfully
-#    PersystWebApp.compare the images      user-setting-third-test.png
+    Common.Compare the Images      user-setting-third-test.png
     page should not contain element       ${Trends_Patient_Name}
     run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PersystWebApp.Open Quick Comment Modal on EEG
 
@@ -57,11 +57,11 @@ Test Date Format-Time Format
     PersystWebApp.Change 'Date Formats' for EEG and Trends                  mm-dd-yyyy
     PersystWebApp.Change 'Time Format' From User Setting                    Clock-Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
-#    PersystWebApp.compare the images      user-setting-forth-test.png
+    Common.Compare the Images             user-setting-forth-test.png
     PersystWebApp.Change 'Date Formats' for EEG and Trends                  D1D2
     PersystWebApp.Change 'Time Format' From User Setting                    Elapsed-Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
-#    PersystWebApp.compare the images      user-setting-fifth-test.png
+    Common.Compare the Images             user-setting-fifth-test.png
 
 Test Maximum Record Age
     PersystWebApp.Change 'Maximum Record Age' Setting                       1
@@ -84,6 +84,7 @@ Test Maximum Record Duration-Segment by Day
     PersystWebApp.Navigate From Setting to Patient View
     wait until page contains element    ${Patient_Record_With_Segments}     30s
     scroll element into view    ${Patient_Record_With_Segments}
+    sleep    3s
     ${segment_text}   get text        ${Patient_Record_With_Segments}
     should contain    ${segment_text}                                       2023 10/15 05:06:29
     PersystWebApp.Change 'Maximum Record Duration' Setting                  1
