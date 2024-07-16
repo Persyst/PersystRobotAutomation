@@ -22,7 +22,6 @@ Enter Patient Name In The Patient Name Textfield
 Click On First Patient In The List After Filtering
     Wait And Click Element    css=${First_Row_Patient}
     sleep    3s
-
 Click on Patient Record By ID
     [Arguments]    ${PATIENT_ID}
     ${current_url}      get location
@@ -33,7 +32,7 @@ Click on Patient Record By ID
             verify patient view page loaded
     END
     wait until element is visible    id=${PATIENT_ID}       50s
-    Wait And Click Element                    id=${PATIENT_ID}
+    click element                    id=${PATIENT_ID}
     verify patient comments appear
 
 Navigate to Patient View By URL
@@ -129,11 +128,6 @@ Get 'First Patient' Name in Monitoring Page
 Navigate to Slide Show Tab
     click link    Slide Show
     wait until page contains    Speed:
-
-Navigate to MPM tab
-    Wait And Click Element            xpath=//span[text()='MPM']
-    ${Third_Cell_Ellipses}            set variable    xpath=//*[@id="mat-tab-content-0-4"]/div/app-mpm/div/div/div[3]/div/div/div[2]/button/mat-icon
-    wait until element is visible     ${Third_Cell_Ellipses}
 
 
 

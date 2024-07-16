@@ -6,7 +6,7 @@ Suite Setup      Run Keywords       Begin Web Suit
 Suite Teardown   Run Keywords       End Web Suit
 
 *** Variables ***
-${PATIENT_ID}              225
+${PATIENT_ID}              679
 ${Montage_Name}            Moji Montage (User)
 ${Go_To_EEG_Shortcut_value}       xpath=//div[text()=' Go to EEG ']/following-sibling::div
 ${Patient_Name}         LnP14D3Nw10ICU
@@ -21,7 +21,6 @@ Test Opening User Guide
     PersystWebApp.Open 'User Guide' PDF From User Settings
 
 Test Create a New Montage
-    [Tags]      testrun
     PersystWebApp.Add New Montage From User Settings
     sleep    1s
     PersystWebApp.Navigate Back to Main Setting Menu From Setting Pages
@@ -33,7 +32,6 @@ Test Create a New Montage
     sleep   3s
 
 Test Editing a Created Montage
-    [Tags]      testrun
     PersystWebApp.Edit Montage From Montage Editor
     PersystWebApp.Delete Channels From a Montage
     PersystWebApp.Delete Channels From a Montage
@@ -51,7 +49,6 @@ Test Editing a Created Montage
     sleep   5s
 
 Test Deleting the Created Montage
-    [Tags]      testrun
     PersystWebApp.Delete a Montage From Montage Editor
 
 Test Creating Favorite Montage List

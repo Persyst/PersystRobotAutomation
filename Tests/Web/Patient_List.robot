@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This test is going to test Patinet List
+Documentation    This test is going to test User Shared Settings
 Resource         ../../Resources/PO/Web/Common.robot
 Resource         ../../Resources/PO/Web/PersystWebApp.robot
 Resource         ../../Resources/PO/Web/Pages/TrendsPage.robot
@@ -10,7 +10,7 @@ Suite Teardown   Run Keywords       End Web Suit
 *** Variables ***
 ${Patient_Name}                  LnP14D3Nw10ICU
 ${First_Patient_Canvas}          xpath=/html/body/app-root/div[1]/app-patient-views/div[1]/div[2]/div/mdl-tabs/mdl-tab-panel[2]/app-patient-monitoring/div/div/mdl-list/mdl-list-item[1]/div/div[2]/div[1]/div/div/div[2]/app-patient-monitoring-page/div/canvas
-${Slide_First_Patient}           xpath=//div[text()='Blankinship, Chelsie (2 hours)']/../following-sibling::div/app-patient-monitoring-page
+${Slide_First_Patient}           xpath=//div[text()='Pilling, Willa (4 hours)']/../following-sibling::div/app-patient-monitoring-page
 
 *** Test Cases ***
 #Test Patient View Event Density
@@ -58,7 +58,7 @@ Test Slide Show Records
      click element               ${Slide_First_Patient}
      TrendsPage.Verify Trends Page Loads Successfully
      ${Patient_Name}        TrendsPage.Get Patient Name
-     should contain    ${Patient_Name}      Blankinship, Chelsie
+     should contain    ${Patient_Name}      Pilling, Willa
      PersystWebApp.Navigate to Patient View Using Keyboard Shortcut
 
 

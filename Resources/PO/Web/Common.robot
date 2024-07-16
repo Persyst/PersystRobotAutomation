@@ -4,15 +4,15 @@ Library     ImageHorizonLibrary
 Resource    Pages/LoginPage.robot
 Resource    Pages/TrendsPage.robot
 Resource    PersystWebApp.robot
+Resource    Pages/TrendsPage.robot
 
 *** Variables ***
 ${COMPARISON_IMAGES_PATH}       C:\\Users\\mojgan.dadashi\\pycharmProjects\\PersystRobotAutomation\\ScreenShots
 @{Browser}                      chrome      Edge        Firefox
 &{Login_Credentials}            Username=mojgan     Password=mojgan
-${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}     http://10.193.0.106/PersystMobile/record-views/eeg/225/0?readOnly=false
-${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}     http://10.193.0.106/PersystMobile/record-views/trends/225/0?readOnly=false
+${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}     http://10.193.0.106/PersystMobile/record-views/eeg/679/0?readOnly=false
+${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}     http://10.193.0.106/PersystMobile/record-views/trends/679/0?readOnly=false
 &{colors}       yellow=#dfca74       white=#ffffff
-${PATIENT_ID}   225
 *** Keywords ***
 
 
@@ -74,7 +74,6 @@ Reset EEG Setting
     Change Comment Line Status              OFF
     Change EEG Comment Show Status          ON
     Change Restricted Pen Status            OFF
-    EEGPage.Close Video Modal
 
 Test Reset EEG Setting
     Change EEG Montage Setting              Bipolar longitudinal A

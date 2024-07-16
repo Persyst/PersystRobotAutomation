@@ -44,7 +44,7 @@ ${Escape}                           \\35
 ${Reset_User_Interface}             id=ui-reset-button
 ${Montage_Editor_New_Button}        xpath=//mdl-button[text()='New']
 ${New_Montage_Modal}                xpath=//mdl-dialog-host-component[@class='mdl-dialog open']
-${New_Montage_Name_Textfield}       xpath=//mdl-textfield[@label="Montage Name"]//input
+${New_Montage_Name_Textfield}       id=mdl-textfield-3
 ${New_Montage_Modal_Ok_Button}      xpath=//mdl-button[text()='Ok']
 ${Select_Montage_Dropdown}          css=input[placeholder="Click New to create a Montage."]
 ${Reset_All_User_Settings_Button}   id=reset-button
@@ -109,7 +109,6 @@ Verify "Setting" page loaded
 
 Click on Patient Link
     Wait And Click Element    ${PATIENT_LINK}
-    sleep    1s
 
 Verify User Successfully Logged Out
     wait until page contains     Welcome To Persyst Mobile
@@ -397,7 +396,7 @@ Select First Montage On Dropdown
 
 Select Delete Montage
     click button                ${Montage_Editor_More_Actins_Button}
-    click element                ${Delete_Montage_Option}
+    click element      ${Delete_Montage_Option}
     click button     OK
 
 Edit Created Montage
@@ -437,16 +436,6 @@ Select Montage From List Of Favorite Montages
     [Arguments]      ${MONTAGE_NAME}
     wait until page contains element     xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
     Wait And Click Element               xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
-
-Delete Previouly Create Montage If Exist
-    ${First_Montage}    set variable    xpath=//input[@placeholder="Click New to create a Montage."]/../mdl-popover/div/mdl-option[1]/div/div
-    Click on Montage List Dropdown
-    ${First_Montage_Name}       get text    ${First_Montage}
-    IF    '${First_Montage_Name}' == 'Moji Montage (User)'
-            Settings.Select First Montage On Dropdown
-            Settings.Select Delete Montage
-            sleep   5s
-    END
 
 Click On User Settings From Inside Settings Pages
     Wait And Click Element       ${User_Settings_Link}

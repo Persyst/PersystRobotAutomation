@@ -10,11 +10,11 @@ Suite Teardown   Run Keywords   Reset the Trends Setting        ${PATIENT_ID}   
 ${COMMENT_NAME}            Moji Comment
 ${SPIKE_NAME}              Spike
 ${SEIZURE_NAME}            @SeizureDetected
-${PATIENT_ID}              225
+${PATIENT_ID}              679
 
 *** Test Cases ***
 Add Comment On Trends and Verify the comment on Trends Page and List of Comments in EEG Page(record)
-    [Documentation]    This test is going to add a comment on trends and then delete it after verifying it
+    [Documentation]    This test is going to login and look for specific patient
     PersystWebApp.Create A Comment On Trends
     ${Comment_text}    PersystWebApp.Click on Created Comment On Trends and Get Comment Name
     should contain     ${Comment_text}      ${COMMENT_NAME}
@@ -39,10 +39,10 @@ Check Spikes list of Comments based on Spike Inclusion Setting
 Change Page Duration
     PersystWebApp.Navigate to Trends Page By URL    ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}
     PersystWebApp.Change Trends Page Duration    5min
-    sleep   3s
+    sleep   5s
     Common.Compare the Images  Trends-5min-rightcorner.png
     PersystWebApp.Change Trends Page Duration    4hours
-    sleep    3s
+    sleep    5s
     Common.Compare the Images            Trends-4hour-bottomleftcorner.png
 
 Verify Artifact Reduction Functionality
@@ -55,7 +55,6 @@ Verify Artifact Reduction Functionality
     common.compare the images            Trends-ar-on.png
 
 Verify the Trends Panel Setting Functionality
-    [Tags]    testrun
     PersystWebApp.Change Panel Setting From Trends Setting      Asymmetry
     sleep    3s
     Common.Compare the Images             Trends-asymmetry.png

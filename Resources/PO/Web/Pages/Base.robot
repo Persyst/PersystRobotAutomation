@@ -1,9 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
 Library     Collections
-Library     OperatingSystem
-Library     JSONLibrary
-
 
 *** Variables ***
 ${Wait_Time}            40s
@@ -56,60 +53,3 @@ Wait and Get Element Presence
     [Arguments]    ${LOCATOR}       ${timeout}=30
     ${result}=  Run Keyword And Return Status  Wait Until Element Is Visible  ${locator}  timeout=${timeout}s
     [Return]    ${result}
-
-Verify smaller dictionary in bigger dictionary
-    [Arguments]    ${smaller_dict}    ${bigger_dict}
-    FOR    ${key}    ${value}    IN ZIP    ${smaller_dict.keys()}    ${smaller_dict.values()}
-        ${actual_value} =    Evaluate    ${bigger_dict}.get("${key}")
-        Should Be Equal As Strings    ${actual_value}    ${value}
-    END
-
-Verify smaller dictionary in bigger dictionary with tolerance
-    [Arguments]    ${smaller_dict}    ${bigger_dict}
-    ${tolerance} =    Set Variable    10  # Adjust tolerance as needed
-    FOR    ${key}    ${value}    IN ZIP    ${smaller_dict.keys()}    ${smaller_dict.values()}
-        ${actual_value} =    Evaluate    ${bigger_dict}.get("${key}")
-        ${key_type} =    Evaluate    type("${value}")
-
-        # Check if the key exists in the bigger dictionary
-        Should Be True    ${actual_value} is not None    Key '${key}' not found in bigger dictionary
-       IF     isinstance($value, (int, float))
-        # Use comparison with tolerance for numerical values
-            ${delta} =    Evaluate    abs(${actual_value} - ${value})
-            Should Be True    ${delta} <= ${tolerance}    Values for key '${key}' differ by more than ${tolerance}
-        ELSE
-            # Use strict comparison for other data types
-            Should Be Equal As Strings    ${actual_value}    ${value}
-        END
-    END
-
-Compare Dictionaries And Report Key Differences
-    [Arguments]    ${smaller_dict}    ${bigger_dict}
-
-    ${different_keys} =    Create List
-
-    FOR    ${key}    ${value}    IN ZIP    ${smaller_dict.keys()}    ${smaller_dict.values()}
-        ${actual_value} =    Evaluate    ${bigger_dict}.get("${key}")
-        IF    $actual_value != $value
-            append to list    ${different_keys}     ${key}
-        END
-    END
-
-    IF    $different_keys != []
-        Fail    Dictionaries differ in values for keys: ${different_keys}
-    ELSE
-        Log    Dictionaries are equal.
-    END
-
-Read expected JSON
-    [Arguments]    ${file_path}
-    ${expected_json}=    OperatingSystem.get file    ${file_path}
-    ${expected_dict}=    Evaluate    json.loads($expected_json)
-    log    ${expected_dict}
-    [Return]    ${expected_dict}
-
-Read expected JSON Directly
-    [Arguments]    ${file_path}
-    ${expected_dict}=    load json from file    ${file_path}
-    log    ${expected_dict}
-    [Return]    ${expected_dict}
