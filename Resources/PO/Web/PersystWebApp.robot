@@ -85,6 +85,12 @@ Navigate to Patient View By URL And Search For Patient Name
     PatientView.Navigate to Patient View By URL
     PatientView.Click on 'Patient List' tab
     Search For Petient Name in Patient View Page        ${PATIENT_NAME}
+
+Go To EEG Page By URL   # URL variable comes from the test file depending on which patiend record we need to have
+    [Arguments]    ${URL}
+    EEGPage.Go To EEG Page Through URL  ${URL}
+    EEGPage.Verify EEG Page Loaded Successfully
+    sleep    2s
 #====================================================================================================================
 Go to "Login" page
     LoginPage.Navigate To Login Page
@@ -142,12 +148,26 @@ Open Comment List from EEG Page
 Close Comment List from EEG Page
     EEGPage.Close Comment List If Launched Already
 
+Create A Comment On EEG
+    EEGPage.Click On Comment Button
+    TrendsPage.Fill In "Comment Name" Input
+    EEGPage.Click on "+" button To Add The Comment
+
+Click on Created Comment On EEG and Get Comment Name
+    EEGPage.Click On Created Comment On EEG
+    ${Comment_name}    TrendsPage.Get Created Comment Text
+    [Return]    ${Comment_name}
+
 Search For The Comment/Spike/Seizure In The EEG Comment Box
     [Arguments]    ${COMMENT_NAME}
     Open Comment List from EEG Page
     EEGPage.Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter    ${COMMENT_NAME}
     ${Comment_name}    EEGPage.Get First Row's Text When Searched For Comment
     [Return]    ${Comment_name}
+
+Delete a Comment from EEG Page
+    EEGPage.Click On Created Comment On EEG
+    EEGPage.Click on Delete Comment Button
 
 Go To Settings Page
     Settings.Go To Settings Page
@@ -158,12 +178,6 @@ Change "Include Spikes In Comment" Setting
     [Arguments]    ${STATUS}        # The status should be either "Enable" or "Disable"
     Go To Settings Page
     Settings.Change "Include Spikes In Comment" checkbox    ${STATUS}
-
-Go To EEG Page By URL   # URL variable comes from the test file depending on which patiend record we need to have
-    [Arguments]    ${URL}
-    EEGPage.Go To EEG Page Through URL  ${URL}
-    EEGPage.Verify EEG Page Loaded Successfully
-    sleep    2s
 
 Verify EEG Page Loaded Successfully
     EEGPage.Verify EEG Page Loaded Successfully
@@ -285,6 +299,18 @@ Change EEG HFF Setting
     EEGPage.Click on Waveforms Setting Link
     EEGPage.Click on HFF Setting Menu
     EEGPage.Select HFF Setting    ${HFF}
+
+Create Patient Montage in EEG Page
+    EEGPage.Click the EEG Page Setting Button
+    EEGPage.click on Edit Montage
+    wait until page contains     Bipolar longitudinal A (Patient)
+    # When you delete one of the system Montage channels you automatically creating a patient montage
+    EEGPage.Delete one of the Montage Channels
+
+Delete Created Montage From EEG Page
+    EEGPage.Click the EEG Page Setting Button
+    EEGPage.click on Edit Montage
+    EEGPage.Delete Patient Montage
 
 Change Notch Filter Setting
     [Arguments]    ${NOTCH_OPTION}
@@ -417,6 +443,7 @@ Open 'User Guide' PDF From User Settings
 Add New Montage From User Settings
     Go To Settings Page
     Click On Montage Editor
+    Settings.Delete Previouly Create Montage If Exist
     Settings.Create New Montage
 
 Reset All User Settings

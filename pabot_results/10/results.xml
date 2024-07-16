@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20240314 14:24:14.108" rpa="false" schemaversion="4">
+<suite id="s1" name="PMC-AES" source="C:\Users\mojgan.dadashi\PycharmProjects\PersystRobotAutomation\Tests\PMC\PMC-AES">
+<suite id="s1-s1" name="SmokeTest7" source="C:\Users\mojgan.dadashi\PycharmProjects\PersystRobotAutomation\Tests\PMC\PMC-AES\SmokeTest7.robot">
+<test id="s1-s1-t1" name="User should be able to login with valid credentials" line="15">
+<kw name="Begin Web Suit With No Login" library="Common" type="SETUP">
+<kw name="Set Selenium Timeout" library="SeleniumLibrary">
+<arg>15s</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" starttime="20240314 14:24:15.096" endtime="20240314 14:24:15.096"/>
+</kw>
+<kw name="Set Reference Folder" library="ImageHorizonLibrary">
+<arg>${COMPARISON_IMAGES_PATH}</arg>
+<doc>Sets where all reference images are stored.</doc>
+<status status="PASS" starttime="20240314 14:24:15.096" endtime="20240314 14:24:15.097"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>sbout:blank</arg>
+<arg>${Browser}[0]</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20240314 14:24:15.097" level="INFO">Opening browser 'chrome' to base url 'sbout:blank'.</msg>
+<status status="PASS" starttime="20240314 14:24:15.097" endtime="20240314 14:24:20.047"/>
+</kw>
+<kw name="Set Window Size" library="SeleniumLibrary">
+<arg>1552</arg>
+<arg>928</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" starttime="20240314 14:24:20.048" endtime="20240314 14:24:20.235"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:15.095" endtime="20240314 14:24:20.235"/>
+</kw>
+<kw name="Navigate To Login Page" library="LoginPage">
+<arg>${PMC_Prod_URL}</arg>
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20240314 14:24:20.274" level="INFO">${current_url} = data:,</msg>
+<status status="PASS" starttime="20240314 14:24:20.236" endtime="20240314 14:24:20.274"/>
+</kw>
+<if>
+<branch type="IF" condition="$current_url == $URL">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="NOT RUN" starttime="20240314 14:24:20.274" endtime="20240314 14:24:20.275"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:24:20.274" endtime="20240314 14:24:20.275"/>
+</branch>
+<branch type="ELSE">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20240314 14:24:20.276" level="INFO">Opening url 'https://pmc.persyst.com/login'</msg>
+<status status="PASS" starttime="20240314 14:24:20.275" endtime="20240314 14:24:24.081"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:20.275" endtime="20240314 14:24:24.081"/>
+</branch>
+<status status="PASS" starttime="20240314 14:24:20.274" endtime="20240314 14:24:24.081"/>
+</if>
+<status status="PASS" starttime="20240314 14:24:20.236" endtime="20240314 14:24:24.081"/>
+</kw>
+<kw name="Login Into PMC With Valid Credentials" library="PMCApp">
+<arg>${CORRECT_USERNAME}</arg>
+<arg>${CORRECT_PASSWORD}</arg>
+<kw name="Login With Valid Credentials" library="LoginPage">
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Fill &quot;Username&quot; field" library="LoginPage">
+<arg>${USERNAME}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${USER_NAME_LOCATOR}</arg>
+<arg>${Username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:24.085" level="INFO">Typing text 'astonstudent7@persyst.com' into text field 'name=username'.</msg>
+<status status="PASS" starttime="20240314 14:24:24.085" endtime="20240314 14:24:24.358"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:24.084" endtime="20240314 14:24:24.359"/>
+</kw>
+<kw name="Fill &quot;Password&quot; Field" library="LoginPage">
+<arg>${PASSWORD}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${PASSWORD_LOCATOR}</arg>
+<arg>${Password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:24.360" level="INFO">Typing text 'AstonUni2024!' into text field 'name=password'.</msg>
+<status status="PASS" starttime="20240314 14:24:24.359" endtime="20240314 14:24:24.529"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:24.359" endtime="20240314 14:24:24.529"/>
+</kw>
+<kw name="Click Login Button" library="LoginPage">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>Sign in</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:24.532" level="INFO">Clicking button 'Sign in'.</msg>
+<status status="PASS" starttime="20240314 14:24:24.531" endtime="20240314 14:24:24.958"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:27.960" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:24:24.958" endtime="20240314 14:24:27.960"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:24.529" endtime="20240314 14:24:27.960"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:24.082" endtime="20240314 14:24:27.960"/>
+</kw>
+<kw name="Verify Patient View Page Loaded" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Record List</arg>
+<arg>40s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:27.961" endtime="20240314 14:24:27.981"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:27.960" endtime="20240314 14:24:27.981"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:24.081" endtime="20240314 14:24:27.981"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>3</value>
+<iter>
+<var name="${index}">0</var>
+<kw name="Log" library="BuiltIn">
+<arg>Iteration: ${index + 1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240314 14:24:27.984" level="INFO">Iteration: 1</msg>
+<status status="PASS" starttime="20240314 14:24:27.981" endtime="20240314 14:24:27.984"/>
+</kw>
+<kw name="Enter Patient Name In The Patient Name Textfield" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${Patient_Filter_Textfield}</arg>
+<arg>${PATIENT_NAME}</arg>
+<arg>clear=True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:27.986" level="INFO">Typing text 'A2_24-clip-sz' into text field 'xpath=//mdl-textfield[@label='Record Filter']/div/input'.</msg>
+<status status="PASS" starttime="20240314 14:24:27.985" endtime="20240314 14:24:28.215"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:27.985" endtime="20240314 14:24:28.215"/>
+</kw>
+<kw name="Click On Record By Name" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_With_Name}</var>
+<arg>//span[text()="${Patient_Name}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:24:28.216" level="INFO">${Record_With_Name} = //span[text()="A2_24-clip-sz"]</msg>
+<status status="PASS" starttime="20240314 14:24:28.216" endtime="20240314 14:24:28.216"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>xpath=${Record_With_Name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:24:28.217" endtime="20240314 14:24:28.257"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:24:28.258" endtime="20240314 14:24:28.300"/>
+</kw>
+<msg timestamp="20240314 14:24:28.300" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:24:28.257" endtime="20240314 14:24:28.300"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:28.301" level="INFO">Clicking element 'xpath=//span[text()="A2_24-clip-sz"]'.</msg>
+<status status="PASS" starttime="20240314 14:24:28.301" endtime="20240314 14:24:28.396"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:28.300" endtime="20240314 14:24:28.396"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:24:28.396" endtime="20240314 14:24:28.397"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:24:28.396" endtime="20240314 14:24:28.397"/>
+</branch>
+<status status="PASS" starttime="20240314 14:24:28.300" endtime="20240314 14:24:28.397"/>
+</if>
+<status status="PASS" starttime="20240314 14:24:28.217" endtime="20240314 14:24:28.397"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:31.398" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:24:28.397" endtime="20240314 14:24:31.398"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:28.215" endtime="20240314 14:24:31.399"/>
+</kw>
+<kw name="Click on Patient Beginning of Record" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Beginning of Record</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:31.399" endtime="20240314 14:24:31.435"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:31.435" endtime="20240314 14:24:31.484"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:31.485" level="INFO">Clicking element 'id=Beginning of Record'.</msg>
+<status status="PASS" starttime="20240314 14:24:31.484" endtime="20240314 14:24:31.598"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:31.399" endtime="20240314 14:24:31.598"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:33.599" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20240314 14:24:31.598" endtime="20240314 14:24:33.599"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:24:33.600" endtime="20240314 14:24:33.667"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:24:33.668" endtime="20240314 14:24:33.729"/>
+</kw>
+<msg timestamp="20240314 14:24:33.729" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:24:33.667" endtime="20240314 14:24:33.729"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:33.731" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:24:33.731" endtime="20240314 14:24:33.837"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:33.729" endtime="20240314 14:24:33.837"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:24:33.837" endtime="20240314 14:24:33.838"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:24:33.837" endtime="20240314 14:24:33.838"/>
+</branch>
+<status status="PASS" starttime="20240314 14:24:33.729" endtime="20240314 14:24:33.838"/>
+</if>
+<status status="PASS" starttime="20240314 14:24:33.600" endtime="20240314 14:24:33.838"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:34.839" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:24:33.838" endtime="20240314 14:24:34.839"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:33.599" endtime="20240314 14:24:34.839"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:24:34.840" endtime="20240314 14:24:34.919"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:24:34.919" endtime="20240314 14:24:34.951"/>
+</kw>
+<msg timestamp="20240314 14:24:34.951" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:24:34.919" endtime="20240314 14:24:34.952"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:34.953" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:24:34.952" endtime="20240314 14:24:35.007"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:34.952" endtime="20240314 14:24:35.007"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:24:35.008" endtime="20240314 14:24:35.008"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:24:35.007" endtime="20240314 14:24:35.008"/>
+</branch>
+<status status="PASS" starttime="20240314 14:24:34.952" endtime="20240314 14:24:35.008"/>
+</if>
+<status status="PASS" starttime="20240314 14:24:34.839" endtime="20240314 14:24:35.008"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:36.010" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:24:35.008" endtime="20240314 14:24:36.010"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:34.839" endtime="20240314 14:24:36.010"/>
+</kw>
+<kw name="Click on Play EEG" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Play_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:36.012" level="INFO">Clicking element 'css=body button[title='Start Playing']'.</msg>
+<status status="PASS" starttime="20240314 14:24:36.011" endtime="20240314 14:24:36.096"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:39.098" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:24:36.097" endtime="20240314 14:24:39.098"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:36.011" endtime="20240314 14:24:39.098"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:24:54.098" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20240314 14:24:39.098" endtime="20240314 14:24:54.098"/>
+</kw>
+<kw name="Navigate to Trends Page From EEG Page" library="PMCApp">
+<kw name="Click on &quot;Trends&quot; link" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Trends_Link}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:24:54.100" level="INFO">Clicking element 'xpath=//span[text()='Trends']'.</msg>
+<status status="PASS" starttime="20240314 14:24:54.100" endtime="20240314 14:24:54.160"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:54.098" endtime="20240314 14:24:54.161"/>
+</kw>
+<kw name="Verify Trends Page Loads Successfully" library="TrendsPage">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css=${Trends_View}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:54.161" endtime="20240314 14:24:55.648"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Trends_Image}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:55.648" endtime="20240314 14:24:55.662"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${Circle_Spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:55.662" endtime="20240314 14:24:55.671"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${second_spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:24:55.672" endtime="20240314 14:25:03.588"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Trends_Canvas}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:03.588" endtime="20240314 14:25:03.609"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:04.610" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:03.610" endtime="20240314 14:25:04.610"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:54.161" endtime="20240314 14:25:04.610"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:54.098" endtime="20240314 14:25:04.610"/>
+</kw>
+<kw name="Navigate to Patient View From Trends" library="PMCApp">
+<kw name="Click on Record List On Trends Page" library="TrendsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_List_Button}</var>
+<arg>xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:25:04.611" level="INFO">${Record_List_Button} = xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</msg>
+<status status="PASS" starttime="20240314 14:25:04.611" endtime="20240314 14:25:04.611"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>${Record_List_Button}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:04.612" endtime="20240314 14:25:04.634"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:04.635" endtime="20240314 14:25:04.675"/>
+</kw>
+<msg timestamp="20240314 14:25:04.675" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:04.634" endtime="20240314 14:25:04.675"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:04.677" level="INFO">Clicking element 'xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div'.</msg>
+<status status="PASS" starttime="20240314 14:25:04.676" endtime="20240314 14:25:04.713"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.676" endtime="20240314 14:25:04.713"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:04.714" endtime="20240314 14:25:04.714"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:04.713" endtime="20240314 14:25:04.714"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:04.675" endtime="20240314 14:25:04.714"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:04.612" endtime="20240314 14:25:04.714"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.610" endtime="20240314 14:25:04.714"/>
+</kw>
+<kw name="Verify Patient View Page Loaded" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Record List</arg>
+<arg>40s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:04.715" endtime="20240314 14:25:04.725"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.714" endtime="20240314 14:25:04.725"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.610" endtime="20240314 14:25:04.726"/>
+</kw>
+<status status="PASS" starttime="20240314 14:24:27.981" endtime="20240314 14:25:04.726"/>
+</iter>
+<iter>
+<var name="${index}">1</var>
+<kw name="Log" library="BuiltIn">
+<arg>Iteration: ${index + 1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240314 14:25:04.728" level="INFO">Iteration: 2</msg>
+<status status="PASS" starttime="20240314 14:25:04.726" endtime="20240314 14:25:04.728"/>
+</kw>
+<kw name="Enter Patient Name In The Patient Name Textfield" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${Patient_Filter_Textfield}</arg>
+<arg>${PATIENT_NAME}</arg>
+<arg>clear=True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:04.730" level="INFO">Typing text 'A2_24-clip-sz' into text field 'xpath=//mdl-textfield[@label='Record Filter']/div/input'.</msg>
+<status status="PASS" starttime="20240314 14:25:04.729" endtime="20240314 14:25:04.878"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.728" endtime="20240314 14:25:04.878"/>
+</kw>
+<kw name="Click On Record By Name" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_With_Name}</var>
+<arg>//span[text()="${Patient_Name}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:25:04.880" level="INFO">${Record_With_Name} = //span[text()="A2_24-clip-sz"]</msg>
+<status status="PASS" starttime="20240314 14:25:04.879" endtime="20240314 14:25:04.880"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>xpath=${Record_With_Name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:04.881" endtime="20240314 14:25:04.898"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:04.899" endtime="20240314 14:25:04.918"/>
+</kw>
+<msg timestamp="20240314 14:25:04.918" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:04.898" endtime="20240314 14:25:04.918"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:04.919" level="INFO">Clicking element 'xpath=//span[text()="A2_24-clip-sz"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:04.919" endtime="20240314 14:25:04.961"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.918" endtime="20240314 14:25:04.962"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:04.962" endtime="20240314 14:25:04.963"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:04.962" endtime="20240314 14:25:04.963"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:04.918" endtime="20240314 14:25:04.963"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:04.880" endtime="20240314 14:25:04.963"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:07.963" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:04.963" endtime="20240314 14:25:07.963"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.878" endtime="20240314 14:25:07.963"/>
+</kw>
+<kw name="Click on Patient Beginning of Record" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Beginning of Record</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:07.964" endtime="20240314 14:25:07.995"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:07.995" endtime="20240314 14:25:08.009"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:08.009" level="INFO">Clicking element 'id=Beginning of Record'.</msg>
+<status status="PASS" starttime="20240314 14:25:08.009" endtime="20240314 14:25:08.067"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:07.963" endtime="20240314 14:25:08.067"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:10.068" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:08.067" endtime="20240314 14:25:10.068"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:10.069" endtime="20240314 14:25:10.092"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:10.092" endtime="20240314 14:25:10.133"/>
+</kw>
+<msg timestamp="20240314 14:25:10.133" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:10.092" endtime="20240314 14:25:10.133"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:10.134" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:10.133" endtime="20240314 14:25:10.237"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:10.133" endtime="20240314 14:25:10.237"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:10.238" endtime="20240314 14:25:10.238"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:10.237" endtime="20240314 14:25:10.238"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:10.133" endtime="20240314 14:25:10.238"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:10.068" endtime="20240314 14:25:10.238"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:11.239" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:10.238" endtime="20240314 14:25:11.239"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:10.068" endtime="20240314 14:25:11.239"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:11.240" endtime="20240314 14:25:11.262"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:11.263" endtime="20240314 14:25:11.293"/>
+</kw>
+<msg timestamp="20240314 14:25:11.294" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:11.263" endtime="20240314 14:25:11.294"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:11.295" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:11.294" endtime="20240314 14:25:11.349"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:11.294" endtime="20240314 14:25:11.351"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:11.351" endtime="20240314 14:25:11.352"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:11.351" endtime="20240314 14:25:11.352"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:11.294" endtime="20240314 14:25:11.352"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:11.240" endtime="20240314 14:25:11.352"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:12.352" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:11.352" endtime="20240314 14:25:12.352"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:11.239" endtime="20240314 14:25:12.352"/>
+</kw>
+<kw name="Click on Play EEG" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Play_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:12.353" level="INFO">Clicking element 'css=body button[title='Start Playing']'.</msg>
+<status status="PASS" starttime="20240314 14:25:12.353" endtime="20240314 14:25:12.424"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:15.425" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:12.424" endtime="20240314 14:25:15.425"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:12.352" endtime="20240314 14:25:15.425"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:30.426" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:15.426" endtime="20240314 14:25:30.426"/>
+</kw>
+<kw name="Navigate to Trends Page From EEG Page" library="PMCApp">
+<kw name="Click on &quot;Trends&quot; link" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Trends_Link}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:30.427" level="INFO">Clicking element 'xpath=//span[text()='Trends']'.</msg>
+<status status="PASS" starttime="20240314 14:25:30.427" endtime="20240314 14:25:30.506"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:30.427" endtime="20240314 14:25:30.506"/>
+</kw>
+<kw name="Verify Trends Page Loads Successfully" library="TrendsPage">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css=${Trends_View}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:30.509" endtime="20240314 14:25:32.851"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Trends_Image}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:32.851" endtime="20240314 14:25:32.864"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${Circle_Spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:32.864" endtime="20240314 14:25:32.876"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${second_spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:32.876" endtime="20240314 14:25:34.375"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Trends_Canvas}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:34.378" endtime="20240314 14:25:34.406"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:35.407" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:34.406" endtime="20240314 14:25:35.407"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:30.506" endtime="20240314 14:25:35.407"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:30.426" endtime="20240314 14:25:35.407"/>
+</kw>
+<kw name="Navigate to Patient View From Trends" library="PMCApp">
+<kw name="Click on Record List On Trends Page" library="TrendsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_List_Button}</var>
+<arg>xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:25:35.409" level="INFO">${Record_List_Button} = xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</msg>
+<status status="PASS" starttime="20240314 14:25:35.409" endtime="20240314 14:25:35.409"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>${Record_List_Button}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:35.409" endtime="20240314 14:25:35.436"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:35.438" endtime="20240314 14:25:35.479"/>
+</kw>
+<msg timestamp="20240314 14:25:35.479" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:35.436" endtime="20240314 14:25:35.479"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:35.480" level="INFO">Clicking element 'xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div'.</msg>
+<status status="PASS" starttime="20240314 14:25:35.480" endtime="20240314 14:25:35.558"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.480" endtime="20240314 14:25:35.559"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:35.559" endtime="20240314 14:25:35.559"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:35.559" endtime="20240314 14:25:35.559"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:35.480" endtime="20240314 14:25:35.559"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:35.409" endtime="20240314 14:25:35.559"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.407" endtime="20240314 14:25:35.559"/>
+</kw>
+<kw name="Verify Patient View Page Loaded" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Record List</arg>
+<arg>40s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:35.559" endtime="20240314 14:25:35.578"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.559" endtime="20240314 14:25:35.578"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.407" endtime="20240314 14:25:35.578"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:04.726" endtime="20240314 14:25:35.578"/>
+</iter>
+<iter>
+<var name="${index}">2</var>
+<kw name="Log" library="BuiltIn">
+<arg>Iteration: ${index + 1}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240314 14:25:35.580" level="INFO">Iteration: 3</msg>
+<status status="PASS" starttime="20240314 14:25:35.578" endtime="20240314 14:25:35.580"/>
+</kw>
+<kw name="Enter Patient Name In The Patient Name Textfield" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${Patient_Filter_Textfield}</arg>
+<arg>${PATIENT_NAME}</arg>
+<arg>clear=True</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:35.582" level="INFO">Typing text 'A2_24-clip-sz' into text field 'xpath=//mdl-textfield[@label='Record Filter']/div/input'.</msg>
+<status status="PASS" starttime="20240314 14:25:35.581" endtime="20240314 14:25:35.798"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.580" endtime="20240314 14:25:35.798"/>
+</kw>
+<kw name="Click On Record By Name" library="PatientView">
+<arg>${Record_Name}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_With_Name}</var>
+<arg>//span[text()="${Patient_Name}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:25:35.800" level="INFO">${Record_With_Name} = //span[text()="A2_24-clip-sz"]</msg>
+<status status="PASS" starttime="20240314 14:25:35.799" endtime="20240314 14:25:35.800"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>xpath=${Record_With_Name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:35.801" endtime="20240314 14:25:35.838"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:35.839" endtime="20240314 14:25:35.882"/>
+</kw>
+<msg timestamp="20240314 14:25:35.882" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:35.839" endtime="20240314 14:25:35.882"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:35.885" level="INFO">Clicking element 'xpath=//span[text()="A2_24-clip-sz"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:35.884" endtime="20240314 14:25:35.974"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.883" endtime="20240314 14:25:35.974"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:35.974" endtime="20240314 14:25:35.976"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:35.974" endtime="20240314 14:25:35.976"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:35.883" endtime="20240314 14:25:35.976"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:35.800" endtime="20240314 14:25:35.976"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:38.977" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:35.976" endtime="20240314 14:25:38.977"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.799" endtime="20240314 14:25:38.977"/>
+</kw>
+<kw name="Click on Patient Beginning of Record" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Beginning of Record</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:38.977" endtime="20240314 14:25:38.991"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:25:38.991" endtime="20240314 14:25:39.004"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Beginning_Of_Recording}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:39.005" level="INFO">Clicking element 'id=Beginning of Record'.</msg>
+<status status="PASS" starttime="20240314 14:25:39.005" endtime="20240314 14:25:39.064"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:38.977" endtime="20240314 14:25:39.064"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:41.065" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:39.064" endtime="20240314 14:25:41.065"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:41.065" endtime="20240314 14:25:41.127"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:41.128" endtime="20240314 14:25:41.176"/>
+</kw>
+<msg timestamp="20240314 14:25:41.176" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:41.128" endtime="20240314 14:25:41.176"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:41.177" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:41.177" endtime="20240314 14:25:41.253"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:41.177" endtime="20240314 14:25:41.253"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:41.254" endtime="20240314 14:25:41.254"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:41.253" endtime="20240314 14:25:41.254"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:41.176" endtime="20240314 14:25:41.255"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:41.065" endtime="20240314 14:25:41.255"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:42.255" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:41.255" endtime="20240314 14:25:42.255"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:41.065" endtime="20240314 14:25:42.255"/>
+</kw>
+<kw name="Click on Right Page Button" library="EEGPage">
+<kw name="Wait And Click Element" library="Base">
+<arg>//button[@title="Page Right"]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:25:42.256" endtime="20240314 14:25:42.279"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:25:42.279" endtime="20240314 14:25:42.308"/>
+</kw>
+<msg timestamp="20240314 14:25:42.308" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:25:42.279" endtime="20240314 14:25:42.308"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:42.311" level="INFO">Clicking element '//button[@title="Page Right"]'.</msg>
+<status status="PASS" starttime="20240314 14:25:42.311" endtime="20240314 14:25:42.367"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:42.308" endtime="20240314 14:25:42.367"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:25:42.368" endtime="20240314 14:25:42.368"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:25:42.368" endtime="20240314 14:25:42.368"/>
+</branch>
+<status status="PASS" starttime="20240314 14:25:42.308" endtime="20240314 14:25:42.368"/>
+</if>
+<status status="PASS" starttime="20240314 14:25:42.256" endtime="20240314 14:25:42.368"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:43.368" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:25:42.368" endtime="20240314 14:25:43.368"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:42.255" endtime="20240314 14:25:43.368"/>
+</kw>
+<kw name="Click on Play EEG" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Play_Button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:25:43.369" level="INFO">Clicking element 'css=body button[title='Start Playing']'.</msg>
+<status status="PASS" starttime="20240314 14:25:43.368" endtime="20240314 14:25:43.420"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:25:46.421" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:43.420" endtime="20240314 14:25:46.421"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:43.368" endtime="20240314 14:25:46.421"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>15s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:26:01.421" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20240314 14:25:46.421" endtime="20240314 14:26:01.421"/>
+</kw>
+<kw name="Navigate to Trends Page From EEG Page" library="PMCApp">
+<kw name="Click on &quot;Trends&quot; link" library="EEGPage">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${Trends_Link}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:26:01.423" level="INFO">Clicking element 'xpath=//span[text()='Trends']'.</msg>
+<status status="PASS" starttime="20240314 14:26:01.423" endtime="20240314 14:26:01.498"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:01.421" endtime="20240314 14:26:01.498"/>
+</kw>
+<kw name="Verify Trends Page Loads Successfully" library="TrendsPage">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>css=${Trends_View}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:01.499" endtime="20240314 14:26:03.401"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Trends_Image}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:03.401" endtime="20240314 14:26:03.413"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${Circle_Spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:03.413" endtime="20240314 14:26:03.423"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${second_spinner}</arg>
+<doc>Waits until the element ``locator`` disappears from the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:03.423" endtime="20240314 14:26:05.326"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Trends_Canvas}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:26:05.326" endtime="20240314 14:26:05.366"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:26:06.368" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20240314 14:26:05.366" endtime="20240314 14:26:06.368"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:01.498" endtime="20240314 14:26:06.368"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:01.421" endtime="20240314 14:26:06.368"/>
+</kw>
+<kw name="Navigate to Patient View From Trends" library="PMCApp">
+<kw name="Click on Record List On Trends Page" library="TrendsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${Record_List_Button}</var>
+<arg>xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240314 14:26:06.369" level="INFO">${Record_List_Button} = xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div</msg>
+<status status="PASS" starttime="20240314 14:26:06.368" endtime="20240314 14:26:06.369"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>${Record_List_Button}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:26:06.369" endtime="20240314 14:26:06.401"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:26:06.403" endtime="20240314 14:26:06.445"/>
+</kw>
+<msg timestamp="20240314 14:26:06.445" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:26:06.403" endtime="20240314 14:26:06.445"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:26:06.446" level="INFO">Clicking element 'xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div'.</msg>
+<status status="PASS" starttime="20240314 14:26:06.446" endtime="20240314 14:26:06.512"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.446" endtime="20240314 14:26:06.512"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:26:06.512" endtime="20240314 14:26:06.512"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:26:06.512" endtime="20240314 14:26:06.513"/>
+</branch>
+<status status="PASS" starttime="20240314 14:26:06.446" endtime="20240314 14:26:06.513"/>
+</if>
+<status status="PASS" starttime="20240314 14:26:06.369" endtime="20240314 14:26:06.513"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.368" endtime="20240314 14:26:06.513"/>
+</kw>
+<kw name="Verify Patient View Page Loaded" library="PatientView">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Record List</arg>
+<arg>40s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:06.514" endtime="20240314 14:26:06.528"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.513" endtime="20240314 14:26:06.528"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.368" endtime="20240314 14:26:06.528"/>
+</kw>
+<status status="PASS" starttime="20240314 14:25:35.578" endtime="20240314 14:26:06.528"/>
+</iter>
+<status status="PASS" starttime="20240314 14:24:27.981" endtime="20240314 14:26:06.528"/>
+</for>
+<kw name="Logging Out From PMC" library="PMCApp">
+<kw name="Logging out" library="Settings">
+<kw name="Click On Settings Button" library="Settings">
+<kw name="Get Location" library="SeleniumLibrary">
+<var>${current_url}</var>
+<doc>Returns the current browser window URL.</doc>
+<msg timestamp="20240314 14:26:06.535" level="INFO">${current_url} = https://pmc.persyst.com/record-views</msg>
+<status status="PASS" starttime="20240314 14:26:06.530" endtime="20240314 14:26:06.535"/>
+</kw>
+<if>
+<branch type="IF" condition="$current_url == $Setting_Page_URL">
+<kw name="No Operation" library="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="NOT RUN" starttime="20240314 14:26:06.538" endtime="20240314 14:26:06.538"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:26:06.535" endtime="20240314 14:26:06.538"/>
+</branch>
+<branch type="ELSE">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Setting_Button_Locator}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:06.538" endtime="20240314 14:26:06.550"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>${Setting_Button_Locator}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:26:06.550" endtime="20240314 14:26:06.569"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:26:06.569" endtime="20240314 14:26:06.612"/>
+</kw>
+<msg timestamp="20240314 14:26:06.612" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:26:06.569" endtime="20240314 14:26:06.612"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:26:06.612" level="INFO">Clicking element 'css=button[title="Settings"]'.</msg>
+<status status="PASS" starttime="20240314 14:26:06.612" endtime="20240314 14:26:06.740"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.612" endtime="20240314 14:26:06.741"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:26:06.741" endtime="20240314 14:26:06.741"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:26:06.741" endtime="20240314 14:26:06.741"/>
+</branch>
+<status status="PASS" starttime="20240314 14:26:06.612" endtime="20240314 14:26:06.741"/>
+</if>
+<status status="PASS" starttime="20240314 14:26:06.550" endtime="20240314 14:26:06.741"/>
+</kw>
+<kw name="Verify &quot;Setting&quot; page loaded" library="Settings">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Setting_Page_Last_Element}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:06.743" endtime="20240314 14:26:06.764"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.741" endtime="20240314 14:26:06.764"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.538" endtime="20240314 14:26:06.764"/>
+</branch>
+<status status="PASS" starttime="20240314 14:26:06.535" endtime="20240314 14:26:06.764"/>
+</if>
+<status status="PASS" starttime="20240314 14:26:06.530" endtime="20240314 14:26:06.764"/>
+</kw>
+<kw name="Verify &quot;Setting&quot; page loaded" library="Settings">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Setting_Page_Last_Element}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:06.764" endtime="20240314 14:26:06.777"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.764" endtime="20240314 14:26:06.777"/>
+</kw>
+<kw name="Click On &quot;Logout&quot;" library="Settings">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${Logout_Button_Locator}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:06.777" endtime="20240314 14:26:06.805"/>
+</kw>
+<kw name="Wait And Click Element" library="Base">
+<arg>${Logout_Button_Locator}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<arg>timeout=${Wait_Time}</arg>
+<arg>error=${Timeout_Message}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240314 14:26:06.805" endtime="20240314 14:26:06.841"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${element_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${LOCATOR}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240314 14:26:06.842" endtime="20240314 14:26:06.890"/>
+</kw>
+<msg timestamp="20240314 14:26:06.891" level="INFO">${element_enabled} = True</msg>
+<status status="PASS" starttime="20240314 14:26:06.841" endtime="20240314 14:26:06.891"/>
+</kw>
+<if>
+<branch type="IF" condition="$element_enabled">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${LOCATOR}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240314 14:26:06.893" level="INFO">Clicking element 'xpath=//div[text()=' Logout ']'.</msg>
+<status status="PASS" starttime="20240314 14:26:06.891" endtime="20240314 14:26:06.979"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.891" endtime="20240314 14:26:06.981"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20240314 14:26:06.981" endtime="20240314 14:26:06.981"/>
+</kw>
+<status status="NOT RUN" starttime="20240314 14:26:06.981" endtime="20240314 14:26:06.981"/>
+</branch>
+<status status="PASS" starttime="20240314 14:26:06.891" endtime="20240314 14:26:06.981"/>
+</if>
+<status status="PASS" starttime="20240314 14:26:06.805" endtime="20240314 14:26:06.981"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20240314 14:26:09.981" level="INFO">Slept 3 seconds</msg>
+<status status="PASS" starttime="20240314 14:26:06.981" endtime="20240314 14:26:09.981"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.777" endtime="20240314 14:26:09.981"/>
+</kw>
+<kw name="Verify User Successfully Logged Out" library="Settings">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Welcome To Persyst Mobile</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20240314 14:26:09.981" endtime="20240314 14:26:09.988"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:09.981" endtime="20240314 14:26:09.988"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.530" endtime="20240314 14:26:09.988"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:06.528" endtime="20240314 14:26:09.988"/>
+</kw>
+<kw name="End Web Suit" library="Common" type="TEARDOWN">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20240314 14:26:09.988" endtime="20240314 14:26:12.200"/>
+</kw>
+<status status="PASS" starttime="20240314 14:26:09.988" endtime="20240314 14:26:12.200"/>
+</kw>
+<doc>Login is happening in this test with incorrect credentials</doc>
+<tag>Login</tag>
+<status status="PASS" starttime="20240314 14:24:15.094" endtime="20240314 14:26:12.200"/>
+</test>
+<doc>This test is going to test persyst login</doc>
+<status status="PASS" starttime="20240314 14:24:14.139" endtime="20240314 14:26:12.200"/>
+</suite>
+<status status="PASS" starttime="20240314 14:24:14.120" endtime="20240314 14:26:12.200"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Login</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="PMC-AES">PMC-AES</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="SmokeTest7">PMC-AES.SmokeTest7</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
