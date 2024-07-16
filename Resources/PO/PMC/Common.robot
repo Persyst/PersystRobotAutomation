@@ -10,7 +10,11 @@ Resource    Pages/TrendsPage.robot
 ${COMPARISON_IMAGES_PATH}       C:\\Users\\mojgan.dadashi\\pycharmProjects\\PersystRobotAutomation\\ScreenShots
 @{Browser}                      chrome      Edge        Firefox
 &{Login_Credentials}            Username=mojgan.dadashi@persyst.com     Password=NpNl582.
+<<<<<<< HEAD
 ${ICU-SUBTLE_SZ_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/325/0?readOnly=false
+=======
+${ICU-SUBTLE_SZ_EEG_URL}   http://10.193.0.106/PersystMobile/record-views/eeg/325/0?readOnly=false
+>>>>>>> parent of d558983 (all)
 *** Keywords ***
 
 

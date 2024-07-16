@@ -21,7 +21,6 @@ Click On First Patient In The List After Filtering
     wait until page contains element    css=${First_Row_Patient}
     click element    css=${First_Row_Patient}
     sleep    3s
-
 Click on Patient Record By ID
     [Arguments]    ${PATIENT_ID}
     ${current_url}      get location
@@ -33,7 +32,11 @@ Click on Patient Record By ID
 
     END
     wait until element is visible    id=${PATIENT_ID}       50s
+<<<<<<< HEAD
         click element                    id=${PATIENT_ID}
+=======
+    click element                    id=${PATIENT_ID}
+>>>>>>> parent of d558983 (all)
     verify patient comments appear
 
 Verify Patient Comments Appear
@@ -59,8 +62,73 @@ Check If Patient Record Exist
 Click on Filter List Icon
     click element    ${Filter_List_Icon}
 
+<<<<<<< HEAD
 Minimize Unit By Name
     [Arguments]    ${UNIT_NAME}
     ${Minimize_icon}        set variable    //div[text()=' ${UNIT_NAME} ']/../div/button
     scroll element into view    ${Minimize_icon}
     click element    ${Minimize_icon}
+=======
+Minimize Unit By Name Either in Patient View Or Monitoring
+    [Arguments]    ${UNIT_NAME}         ${PAGE}
+    IF      '${PAGE}' == 'Monitoring'
+            ${Minimize_icon}        set variable    //app-patient-monitoring//div[text()=' ${UNIT_NAME} ']/../div/button
+    ELSE
+            ${Minimize_icon}        set variable    //app-patient-list//div[text()=' ${UNIT_NAME} ']/../div/button
+    END
+    scroll element into view    xpath=${Minimize_icon}
+    sleep    1s
+    Wait And Click Element      xpath=${Minimize_icon}
+
+Click on 'Monitoring' tab
+    click link    Monitoring
+    wait until page contains     Unassigned
+
+Click On Wrench Button To Navigate to Event Density
+    ${Wrench_Button}            set variable    xpath=//mdl-icon[text()='build']/..
+    Wait And Click Element      ${Wrench_Button}
+    ${Event_Density_Option}     set variable    xpath=//mdl-menu-item[text()='Event Density']
+    Wait And Click Element      ${Event_Density_Option}
+    wait until page contains    Select Comment to specify the time range.       40s
+
+Find Comment's Data From Event Density
+    ${Comment_Time}             set variable    xpath=//mdl-select[@id='Time Range']/div/input
+    click element               ${Comment_Time}
+    ${Use_Entire_Record}        set variable    xpath=//div[text()='[Use entire record]']
+    click element               ${Use_Entire_Record}
+    ${Comment_Events}           set variable    xpath=//mdl-select[@id='Event Comment']/div/input
+    click element               ${Comment_Events}
+    ${Comment_Option}           set variable    xpath=//div[text()='@SeizureDetected(Persyst)']
+    click element               ${Comment_Option}
+    click button                Calculate
+    sleep       5s
+    @{Comment_Inputs}      create list    id="Time Span Start"     id="Time Span End"      id="Total Time Span Duration"   id="Total Events"   id="Total Events Duration"  id="Mean Event Duration"    id="Events Percent"
+    @{Comment_Datas}       create list
+    Extract Text And Append     @{Comment_Inputs}           text_list=${Comment_Datas}
+    [Return]              @{Comment_Datas}
+
+Get Patient Info From Info Button
+    ${Info_Button}      set variable        xpath=//mdl-icon[text()='info']/..
+    click element       ${Info_Button}
+    ${Info_Modal}       set variable        xpath=//mdl-dialog-host-component
+    wait until page contains element        ${Info_Modal}
+    sleep    1s
+    ${Patient_Info}     set variable        xpath=//app-patient-information
+    ${Info}             get text            ${Patient_Info}
+    click button        OK
+    wait until page does not contain element       ${Info_Modal}
+    [Return]            ${Info}
+
+Get 'First Patient' Name in Monitoring Page
+    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/mdl-list/mdl-list-item/div/div/div[1]/div/div/div[1]/div[2]
+    wait until page contains element        ${Fisrt_Patient_Name}
+    ${Name}         get text    ${Fisrt_Patient_Name}
+    [Return]    ${Name}
+
+Navigate to Slide Show Tab
+    click link    Slide Show
+    wait until page contains    Speed:
+
+
+
+>>>>>>> parent of d558983 (all)

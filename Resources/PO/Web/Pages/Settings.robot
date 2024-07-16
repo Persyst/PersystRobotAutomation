@@ -193,7 +193,7 @@ Change "Show Patient Name" setting
             ELSE
                 no operation
             END
-    END
+    ENDgit
 
 Enter EEG Background Color
     [Arguments]      ${COLOR-CODE}

@@ -10,7 +10,11 @@ Suite Teardown   Run Keywords   Reset the Trends Setting        ${PATIENT_ID}   
 ${COMMENT_NAME}            Moji Comment
 ${SPIKE_NAME}              Spike
 ${SEIZURE_NAME}            @SeizureDetected
+<<<<<<< HEAD
 ${PATIENT_ID}              36437
+=======
+${PATIENT_ID}              679
+>>>>>>> parent of d558983 (all)
 
 *** Test Cases ***
 Add Comment On Trends and Verify the comment on Trends Page and List of Comments in EEG Page(record)
@@ -39,12 +43,20 @@ Check Spikes list of Comments based on Spike Inclusion Setting
 Change Page Duration
     PersystWebApp.Navigate to Trends Page From EEG Page
     PersystWebApp.Change Trends Page Duration    5min
+<<<<<<< HEAD
     sleep    5s
 #    Compare the Images  5min-rightcorner.png
     PersystWebApp.Change Trends Page Duration    4hours
     sleep    5s
 #    Compare the Images            4hour-bottomleftcorner.png
 #    Compare the Images            4hour-rightcorner.png
+=======
+    sleep   5s
+    Common.Compare the Images  Trends-5min-rightcorner.png
+    PersystWebApp.Change Trends Page Duration    4hours
+    sleep    5s
+    Common.Compare the Images            Trends-4hour-bottomleftcorner.png
+>>>>>>> parent of d558983 (all)
 
 Verify Artifact Reduction Functionality
     PersystWebApp.Change Trends Page Duration       4hours

@@ -283,3 +283,20 @@ Get EEG Waveforms Settings
     @{Setting_Values}       Extract Text And Append     @{List_of_Waveform_Settings}        text_list=${Setting_Values}
     [Return]        @{Setting_Values}
 
+<<<<<<< HEAD
+=======
+Click on Video Button
+    ${Video_Button}     set variable    xpath=//button[@title="Video"]
+    Wait And Click Element    ${Video_Button}
+
+Open Video Modal
+    ${Is_Video_Modal_Present}    Wait and Get Element Presence    ${Video_Modal}
+    Run Keyword If  not ${Is_Video_Modal_Present}  Click on Video Button
+    wait until page contains element      ${Video_Modal}
+
+Close Video Modal
+    ${Is_Video_Modal_Present}    Wait and Get Element Presence    ${Video_Modal}
+    Run Keyword If  ${Is_Video_Modal_Present}  Click on Video Button
+    Wait Until Page Does Not Contain Element  ${Video_Modal}
+
+>>>>>>> parent of d558983 (all)

@@ -2,8 +2,14 @@
 Documentation       This test is going to test persyst login
 Resource            ../../Resources/PO/Web/Common.robot
 Resource            ../../Resources/PO/Web/PersystWebApp.robot
+<<<<<<< HEAD
 Test Setup          Begin Web Test    ${BROWSER}
 Test Teardown       End Web Test
+=======
+Suite Setup         Begin Web Suit With No Login
+Test Setup          Run Keywords            PersystWebApp.Go to "Login" page
+Suite Teardown      End Web Suit
+>>>>>>> parent of d558983 (all)
 
 *** Variables ***
 ${BROWSER} =    chrome

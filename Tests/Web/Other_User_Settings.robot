@@ -6,8 +6,12 @@ Suite Setup      Run Keywords       Begin Web Suit
 Suite Teardown   Run Keywords       End Web Suit
 
 *** Variables ***
+<<<<<<< HEAD
 ${PATIENT_ID}              37508
 ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/37508/0?readOnly=false
+=======
+${PATIENT_ID}              679
+>>>>>>> parent of d558983 (all)
 ${Montage_Name}            Moji Montage (User)
 ${Go_To_EEG_Shortcut_value}       xpath=//div[text()=' Go to EEG ']/following-sibling::div
 ${Patient_Name}         LnP14D3Nw10ICU

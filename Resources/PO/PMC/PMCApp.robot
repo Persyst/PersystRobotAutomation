@@ -37,7 +37,10 @@ Navigate to Trends From EEG
     EEGPage.Navigate Back to Trends
     sleep    3s
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d558983 (all)
 Navigate to Next Page on EEG
     EEGPage.Click on Next Page Button
     sleep    2s

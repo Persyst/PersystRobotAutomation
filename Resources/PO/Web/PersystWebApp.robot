@@ -7,6 +7,88 @@ Resource         Pages/EEGPage.robot
 Resource         Common.robot
 
 *** Keywords ***
+<<<<<<< HEAD
+=======
+#==================================================NAVIGATIONS=========================================================
+Navigate to Trends Page From EEG Page
+    EEGPage.Click on "Trends" link
+    TrendsPage.Verify Trends Page Loads Successfully
+
+Navigate to EEG Page From Trends
+    TrendsPage.Click On EEG
+    EEGPage.Verify EEG Page Loaded Successfully
+    sleep    2s
+
+Navigate to EEG Page From Setting
+    [Arguments]    ${PATIENT_ID}
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+    PersystWebApp.Select Patient Record By Patient ID    ${PATIENT_ID}
+    Navigate to EEG Page From Trends
+
+Navigate From Setting to Patient View
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+
+Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
+    [Arguments]    ${PATIENT_ID}
+    Settings.Click on Patient Link
+    PatientView.Verify Patient View Page Loaded
+    PERSYSTWEBAPP.SELECT PATIENT RECORD BY PATIENT ID    ${PATIENT_ID}
+
+Navigate to Settings From Patient View
+    Settings.Click On Settings Button
+    Settings.Verify "Setting" page loaded
+
+Navigate to Trends Page By URL
+    [Arguments]    ${URL}
+    TrendsPage.Navigate to Trends Page Using URL        ${URL}
+
+Navigate to EEG Using Keyboard Shortcut
+    press keys    None      e
+    EEGPage.Verify EEG Page Loaded Successfully
+
+Navigate to Trends Using Keyboard Shortcut
+    press keys    None      t
+    TrendsPage.Verify Trends Page Loads Successfully
+
+Navigate to Patient View Using Keyboard Shortcut
+    press keys    None      p
+    PatientView.Verify Patient View Page Loaded
+
+Navigate Back to Main Setting Menu From Setting Pages
+    Settings.Click On User Settings From Inside Settings Pages
+    wait until page contains    EEG Settings
+
+Navigate to Shared Settings
+    Settings.Click on Shared Setting Link
+
+Navigate to Unit Definitions in Shared Settings
+    Settings.Click on Unit Definition
+
+Navigate to Patient View From Trends
+    TrendsPage.Click on Patient To Go Back To Patient View
+    PatientView.Verify Patient View Page Loaded
+
+Navigate to Trends Default Settings
+    Settings.Click on Trends Default Settings
+
+Navigate to EEG Default Settings
+    Settings.Click on EEG Default Settings
+
+Navigate to 'Shared Comment Filters' Settings Under Shared Setting
+    Settings.Click on Shared Comment Filters on Shared Settings
+
+Navigate to 'Standard Comments Editor' in Shared Settings
+    Settings.Click on Standard Comments Link
+
+Navigate to Patient View By URL And Search For Patient Name
+    [Arguments]     ${PATIENT_NAME}
+    PatientView.Navigate to Patient View By URL
+    PatientView.Click on 'Patient List' tab
+    Search For Petient Name in Patient View Page        ${PATIENT_NAME}
+#====================================================================================================================
+>>>>>>> parent of d558983 (all)
 Go to "Login" page
     LoginPage.Navigate To Login Page
     LoginPage.Verify "Login" Page Loaded
@@ -74,10 +156,13 @@ Search For The Comment/Spike/Seizure In The EEG Comment Box
     ${Comment_name}    EEGPage.Get First Row's Text When Searched For Comment
     [Return]    ${Comment_name}
 
+<<<<<<< HEAD
 Navigate to Trends Page From EEG Page
     EEGPage.Click on "Trends" link
     TrendsPage.Verify Trends Page Loads Successfully
 
+=======
+>>>>>>> parent of d558983 (all)
 Go To Settings Page
     Settings.Go To Settings Page
     Settings.Verify "Setting" page loaded
@@ -94,6 +179,7 @@ Go To EEG Page By URL   # URL variable comes from the test file depending on whi
     EEGPage.Verify EEG Page Loaded Successfully
     sleep    2s
 
+<<<<<<< HEAD
 Navigate to EEG Page From Setting
     [Arguments]    ${PATIENT_ID}
     Settings.Click on Patient Link
@@ -119,6 +205,8 @@ Navigate to Trends Page By URL
     [Arguments]    ${URL}
     TrendsPage.Navigate to Trends Page Using URL        ${URL}
 
+=======
+>>>>>>> parent of d558983 (all)
 Verify EEG Page Loaded Successfully
     EEGPage.Verify EEG Page Loaded Successfully
 

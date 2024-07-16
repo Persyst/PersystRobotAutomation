@@ -38,3 +38,11 @@ Extract Text And Append
         Append To List    ${text_list}    ${element_text}
     END
     [Return]    @{text_list}
+<<<<<<< HEAD
+=======
+
+Wait and Get Element Presence
+    [Arguments]    ${LOCATOR}       ${timeout}=30
+    ${result}=  Run Keyword And Return Status  Wait Until Element Is Visible  ${locator}  timeout=${timeout}s
+    [Return]    ${result}
+>>>>>>> parent of d558983 (all)

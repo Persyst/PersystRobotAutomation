@@ -10,8 +10,13 @@ Resource    Pages/TrendsPage.robot
 ${COMPARISON_IMAGES_PATH}       C:\\Users\\mojgan.dadashi\\pycharmProjects\\PersystRobotAutomation\\ScreenShots
 @{Browser}                      chrome      Edge        Firefox
 &{Login_Credentials}            Username=mojgan     Password=mojgan
+<<<<<<< HEAD
 ${ICU-SUBTLE_SZ_EEG_URL}   http://192.168.156.119/PersystMobile/record-views/eeg/2980/0?readOnly=false
 ${FnRC7NWB07-Gstlmn2_LEEG_URL}      http://192.168.156.119/PersystMobile/record-views/eeg/36437/0?readOnly=false
+=======
+${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}     http://10.193.0.106/PersystMobile/record-views/eeg/679/0?readOnly=false
+${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_Trends_URL}     http://10.193.0.106/PersystMobile/record-views/trends/679/0?readOnly=false
+>>>>>>> parent of d558983 (all)
 &{colors}       yellow=#dfca74       white=#ffffff
 *** Keywords ***
 
@@ -69,7 +74,28 @@ Reset EEG Setting
     Change Notch Filter Setting             60Hz
     Change EEG Page Font Size               2
     Change Channel Per Page Setting         All
+<<<<<<< HEAD
     Change Calibrartion Status              OFF
+=======
+    Change EEG Calibration Status           OFF
+    Change Major Grid Status                ON
+    Change Minor Grid Status                ON
+    Change Comment Line Status              OFF
+    Change EEG Comment Show Status          ON
+    Change Restricted Pen Status            OFF
+
+Test Reset EEG Setting
+    Change EEG Montage Setting              Bipolar longitudinal A
+    Change EEG Page Duration Time           10
+    Change EEG Sensitivity Option           7
+    Change EEG Artifact Reduction Status    ON
+    Change EEG LFF Setting                  0.16
+    Change EEG HFF Setting                  70
+    Change Notch Filter Setting             60Hz
+    Change EEG Page Font Size               2
+    Change Channel Per Page Setting         All
+    Change EEG Calibration Status           OFF
+>>>>>>> parent of d558983 (all)
     Change Major Grid Status                ON
     Change Minor Grid Status                ON
     Change Comment Line Status              OFF

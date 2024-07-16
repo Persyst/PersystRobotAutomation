@@ -11,7 +11,11 @@ ${Comment_Name_Textfield}   css=#comment-filter-input:nth-child(1)
 ${First_Comment_Row}        css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(2) > div
 ${First_Row_In_Comments}    css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(1) > div
 ${Trends_Link}              css=body > app-root app-eeg-view div.view-header > div:nth-child(1) > div > span
+<<<<<<< HEAD
 ${EEG_PAGE_URL}             http://192.168.156.119/PersystMobile/record-views/eeg/325/0?readOnly=false
+=======
+${EEG_PAGE_URL}             http://10.193.0.106/PersystMobile/record-views/eeg/325/0?readOnly=false
+>>>>>>> parent of d558983 (all)
 ${PLAY_BUTTON}              css=body button[title='Start Playing']
 ${Next_Page_Button}         css=button[title="Page Right"]
 *** Keywords ***
