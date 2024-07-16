@@ -1,0 +1,201 @@
+{
+    "settingsVersion": 2,
+    "userSettings": {
+        "settingsForPatient": {
+            "679": {
+                "showNotifications": true,
+                "trendsSettings": {
+                    "panel": "Comprehensive",
+                    "pageDuration": 14400,
+                    "ar": true
+                }
+            }
+        },
+        "patientNotifications": 0,
+        "notificationSound": "default",
+        "unitsForNotifications": {},
+        "refreshInterval": 5,
+        "defaultTrendsSettings": {
+            "panel": "Asymmetry",
+            "pageDuration": 7200,
+            "ar": true
+        },
+        "trendsFontScale": 2,
+        "eegBackgroundColor": null,
+        "eegGridColor": null,
+        "dateFormat": "2",
+        "timeFormat": "0",
+        "timeDecimalPlaces": 0,
+        "notificationFilterIndex": 0,
+        "notificationFilter": {
+            "name": "Default Notification Filter",
+            "searchString": "PT EVENT|Patient Event|Mark On",
+            "ignoreString": null,
+            "includeSpikes": false,
+            "includeSeizures": true,
+            "includeNotifications": true,
+            "useRegularExpressions": true,
+            "shared": true
+        },
+        "commentFilterIndex": null,
+        "commentFilter": null,
+        "notificationDuration": 4,
+        "maximumRecordDuration": 0,
+        "maximumRecordAge": 0,
+        "slideShowPlaySpeed": 0.5,
+        "inactivityTimeout": 15,
+        "ignoreInactivityTimeout": false,
+        "commentSort": 1,
+        "userFilters": [
+            {
+                "name": "Moji Filter",
+                "searchString": "Moji Comment",
+                "ignoreString": null,
+                "includeSpikes": false,
+                "includeSeizures": false,
+                "includeNotifications": false,
+                "useRegularExpressions": false,
+                "shared": false
+            }
+        ],
+        "userRecordFilters": [],
+        "commentMarker": 0,
+        "eegCommentListLocation": {
+            "top": 0.09989023051591657,
+            "left": 0.6996557659208261,
+            "width": 0.29991394148020656,
+            "height": 0.75
+        },
+        "eegCommentListOpen": false,
+        "eegVideoLocation": {
+            "top": 0.09989023051591657,
+            "left": 0.6006904487917146,
+            "width": 0.2999856156501726,
+            "height": 0.2999965697036224
+        },
+        "eegVideoOpen": true,
+        "eegQuickCommentsLocation": null,
+        "eegQuickCommentsOpen": false,
+        "includeSpikeComments": true,
+        "eegQuickMontagesLocation": null,
+        "closedUnitNames": [],
+        "showAllMontages": true,
+        "montagesToShow": [],
+        "montageDefinitionsToShow": [],
+        "virtualClipping": {
+            "filterIndex": 1,
+            "filter": {
+                "name": "Default Clipping Filter",
+                "searchString": "PT EVENT|Patient Event|Mark On|@Archive|@Clip",
+                "ignoreString": null,
+                "includeSpikes": false,
+                "includeSeizures": true,
+                "includeNotifications": true,
+                "useRegularExpressions": true,
+                "shared": true
+            },
+            "secondsBefore": 10,
+            "secondsAfter": 10,
+            "initialMinutesPerHour": 5
+        },
+        "eegMarginOpen": false,
+        "eegMarginPosition": 0.75,
+        "displayOption": "0",
+        "showPatientName": true,
+        "maximumNotificationsShownPerPatient": 20,
+        "notificationsUnitShown": null,
+        "activePatientViewTab": 0,
+        "showConnectionSpeed": false,
+        "highResolutionEEG": true,
+        "previousEventCommentName": null,
+        "lastReleaseNotesRead": "2.1.2(15)",
+        "selectedOrganization": null,
+        "mpmSettings": {
+            "isEnabled": false,
+            "columns": 3,
+            "rows": 3,
+            "refreshInterval": 30,
+            "itemSettings": {}
+        },
+        "segmentPatientRecords": false,
+        "startPatientSegmentsAtTime": true,
+        "timeToStartPatientSegments": "09:00",
+        "addQuickCommentsImmediately": true,
+        "standardCommentListName": "User",
+        "closedUnits": []
+    },
+    "eegSettings": {
+        "montage": "Bipolar longitudinal A",
+        "montageIdentifier": {
+            "montageName": "Bipolar longitudinal A",
+            "montageGroup": "System",
+            "montageID": null
+        },
+        "pageDuration": 10,
+        "sensitivity": 7,
+        "notch": "60",
+        "hff": "70",
+        "lff": "0.16",
+        "lffType": "1",
+        "ar": true,
+        "fontScale": 2.2,
+        "playingSpeed": 5,
+        "showSplitScreen": false,
+        "splitScreenSize": 0.5,
+        "calibrationMark": false,
+        "channelsPerPage": "All",
+        "minorGrid": true,
+        "showComments": true,
+        "majorGrid": true,
+        "commentLines": false,
+        "restrictPenDeflection": false,
+        "spikeSensitivity": "Medium"
+    },
+    "standardComments": [
+        {
+            "text": "Seizure Onset",
+            "hasDuration": false,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "Seizure Offset",
+            "hasDuration": false,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "Spike",
+            "hasDuration": false,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "Slowing",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "Artifact",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "PDR",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "LPDS",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "GPDS",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        },
+        {
+            "text": "Rhythmic Delta",
+            "hasDuration": true,
+            "canAddAdditionalText": false
+        }
+    ]
+}

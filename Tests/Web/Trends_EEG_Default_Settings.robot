@@ -9,7 +9,7 @@ Suite Teardown   Run Keywords       Reset Trends and EEG Default Settings       
 *** Variables ***
 ${Patient_Name}         LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
 
-# Command line to run this test: robot -d results Tests/Web/Shared_Settings.robot
+# Command line to run this test: robot -d results Tests/Web/Trends_EEG_Default_Settings.robot
 
 *** Test Cases ***
 Test Trends Default Setting
@@ -36,6 +36,7 @@ Test EEG Default Settings
     PersystWebApp.Change EEG HFF Setting                  5
     PersystWebApp.Change Notch Filter Setting             50Hz
     PersystWebApp.Navigate From Setting to Patient View
+    PatientView.Click on 'Patient List' tab
     PersystWebApp.Search For Petient in Patient List With Patient Name  ${Patient_Name}
     PersystWebApp.Navigate to EEG Using Keyboard Shortcut
     EEGPage.Click the EEG Page Setting Button

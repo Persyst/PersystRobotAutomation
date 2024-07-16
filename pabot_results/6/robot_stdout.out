@@ -1,0 +1,14 @@
+==============================================================================
+PMC-AES                                                                       
+==============================================================================
+PMC-AES.SmokeTest3 :: This test is going to test persyst login                
+==============================================================================
+User should be able to login with valid credentials :: Login is ha... | PASS |
+------------------------------------------------------------------------------
+PMC-AES.SmokeTest3 :: This test is going to test persyst login        | PASS |
+1 test, 1 passed, 0 failed
+==============================================================================
+PMC-AES                                                               | PASS |
+1 test, 1 passed, 0 failed
+==============================================================================
+Output:  C:\Users\mojgan.dadashi\PycharmProjects\PersystRobotAutomation\pabot_results\6\results.xml
