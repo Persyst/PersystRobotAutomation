@@ -1,0 +1,22 @@
+{
+    "roleID": 80,
+    "permissions": {
+        "adminInherited": false,
+        "deleteRecordInherited": false,
+        "downloadRecordInherited": false,
+        "editRecordInherited": false,
+        "blindMarkRecordInherited": false,
+        "moveRecordInherited": false,
+        "readRecordInherited": false,
+        "seeAllCommentsInherited": false,
+        "admin": true,
+        "addRecord": false,
+        "deleteRecord": true,
+        "downloadRecord": true,
+        "editRecord": true,
+        "blindMarkRecord": false,
+        "moveRecord": true,
+        "readRecord": true,
+        "seeAllComments": true
+    }
+}

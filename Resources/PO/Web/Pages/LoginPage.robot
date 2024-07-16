@@ -5,7 +5,7 @@ Resource         Base.robot
 *** Variables ***
 ${USER_NAME_LOCATOR} =    id=User Name
 ${PASSWORD_LOCATOR} =     id=Password
-${LOGIN_BUTTON} =         css=body > app-root > div:nth-child(1) > app-login > div:nth-child(1) > div:nth-child(4) > mdl-button
+${LOGIN_BUTTON} =         xpath=//mdl-button[text()='Login']
 ${LOGIN_PAGE_URL} =       http://10.193.0.106/PersystMobile/login
 ${About_Button}           xpath=//mdl-button[text()='About']
 *** Keywords ***
@@ -42,7 +42,7 @@ Click Login Button
 
 Click on 'About' Button
     Wait And Click Element          ${About_Button}
-    wait until page contains    Web Version:
+    wait until page contains    Client Version:
 
 Click on 'User Guide' link
     ${UserGuide_Link}   set variable    //a[@href="https://www.persyst.com/PersystMobile/UserGuide.pdf"]
