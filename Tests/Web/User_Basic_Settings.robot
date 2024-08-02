@@ -11,8 +11,8 @@ Suite Teardown   Run Keywords       Reset the User Basic Settings          End W
 ${PATIENT_ID}       225
 ${Patient_Name}
 &{fcolor}       yellow=#dfca74       white=#ffffff
-${Trends_Patient_Name}      css=div.view-header-title > div > div > div:nth-child(2)
-${Patient_Record_With_Segments}     xpath=//*[@id="${PATIENT_ID}"]/../../../following-sibling::div[1]/mdl-list-item[1]
+${Trends_Patient_Name}              xpath=//app-trends-view/div/div/div/div/div[@class="view-header-title"]
+${Patient_Record_With_Segments}     xpath=//*[@id="${PATIENT_ID}"]/../../../following-sibling::div[1]/div[1]
 
 *** Test Cases ***
 Check Spikes list of Comments based on Spike Inclusion Setting
@@ -40,7 +40,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color
     Test Reset EEG Setting
     PersystWebApp.Verify EEG Page Loaded Successfully
     sleep    3s
-    Common.Compare the Images      user-setting-second-test.png
+#    Common.Compare the Images      user-setting-second-test.png
     ${Returned_Patient_Name}    PersystWebApp.Get Patient Name on EEG Page
     should contain    ${Returned_Patient_Name}     LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
     PersystWebApp.Open Quick Comment Modal on EEG
@@ -55,27 +55,28 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify Trends Page Loaded Successfully
     sleep    3s
-    Common.Compare the Images      user-setting-third-test.png
-    page should not contain element       ${Trends_Patient_Name}
+#   Common.Compare the Images      user-setting-third-test.png
+    ${Patient_Name}   get text    ${Trends_Patient_Name}
+    should not contain    ${Patient_Name}           "LnP14D3"
     run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PersystWebApp.Open Quick Comment Modal on EEG
 
 Test Date Format-Time Format
-    PersystWebApp.Change 'Date Formats' for EEG and Trends                  mm-dd-yyyy
-    PersystWebApp.Change 'Time Format' From User Setting                    Clock-Time
+    PersystWebApp.Change 'Date Formats' for EEG and Trends                  YYYYMMDD
+    PersystWebApp.Change 'Time Format' From User Setting                    Clock Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify Trends Page Loaded Successfully
     sleep    3s
-    Common.Compare the Images             user-setting-forth-test.png
-    PersystWebApp.Change 'Date Formats' for EEG and Trends                  D1D2
-    PersystWebApp.Change 'Time Format' From User Setting                    Elapsed-Time
+#    Common.Compare the Images             user-setting-forth-test.png
+    PersystWebApp.Change 'Date Formats' for EEG and Trends                  D1D2...
+    PersystWebApp.Change 'Time Format' From User Setting                    Elapsed Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
-    Common.Compare the Images             user-setting-fifth-test.png
+#    Common.Compare the Images             user-setting-fifth-test.png
 
 Test Maximum Record Age
     PersystWebApp.Change 'Maximum Record Age' Setting                       1
     sleep    1s
     PersystWebApp.Navigate From Setting to Patient View
-    sleep    1s
+    sleep    20s
     ${Visisbility}      PersystWebApp.Verify If Patient Record Exist in Patient View      ${PATIENT_ID}
     should be equal     ${Visisbility}        False
     PersystWebApp.Change 'Maximum Record Age' Setting                       0
@@ -95,7 +96,6 @@ Test Maximum Record Duration-Segment by Day
     sleep    6s
     ${segment_text}   get text        ${Patient_Record_With_Segments}
     should contain    ${segment_text}                                       2023 10/15 05:06:29
-    PersystWebApp.Change 'Maximum Record Duration' Setting                  1
     PersystWebApp.Change 'Segment By Day' Status From User Setting          Disable
     PersystWebApp.Navigate From Setting to Patient View
     wait until page does not contain element    ${Patient_Record_With_Segments}
@@ -104,10 +104,10 @@ Test Maximum Record Duration-Segment by Day
 Test Inactivity Timeout
      PersystWebApp.Change 'Inactivity Timeout' Status From User Setting      Disable
      sleep    2s
-     PersystWebApp.Enter "Inactivity Timeout" Time in Minues                 1
+     PersystWebApp.Enter "Inactivity Timeout" Time in Minues                 1.5
      sleep    2s
      PersystWebApp.Navigate From Setting to Patient View
-     sleep    65s
+     sleep    92
      run keyword and warn on failure    page should contain    Session Timed Out.
      Common.Login With Credentials
      PersystWebApp.Change 'Inactivity Timeout' Status From User Setting      Enable

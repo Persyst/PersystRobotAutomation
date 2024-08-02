@@ -4,12 +4,12 @@ Resource         Base.robot
 
 *** Variables ***
 
-${Trends_View}              body > app-root div > div:nth-child(1) > div.unselectable app-trends-page:nth-child(1)
+${Trends_View}              css=body > app-root div > div:nth-child(1) > div.unselectable app-trends-page:nth-child(1)
 ${Trends_Canvas}            css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > div > div > div:nth-child(1) > div.scroll-view > div > div:nth-child(1) > div.unselectable > div > div > app-trends-page:nth-child(1) > canvas
 ${Comment_Button}           css=button[title="Comment Editor"]
 ${Comment_editor}           id=comment-editor
-${Comment_name_input}       css=#comment-editor > input
-${Comment_Add_Button}       css=app-comment-editor button:nth-child(3)
+${Comment_name_input}       id=comment-editor-input
+${Comment_Add_Button}       xpath=//*[@id="comment-editor"]/div[2]/button[3]
 ${Trends_Image}             css=body > app-root app-patient-views div.scroll-view > div > div:nth-child(2) > img
 ${Circle_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__left > div
 ${Second_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > div > div > div:nth-child(1) > div.scroll-view > div > div:nth-child(1) > div.unselectable > div > div > app-trends-page:nth-child(1) > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__right > div
@@ -27,13 +27,13 @@ ${Page_Duration_Menu}       id=duration-settings
 &{Page_Duration_Options}    4hours=duration-4 hours       5min=duration-5 minutes
 ${Artifacts_Reduction_On}   name=AR On
 ${Artifacts_Reduction_Off}  name=AR Off
-${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
+${Back_Arrow}               css=body div.back-arrow-item.back-arrow mat-icon
 ${Panel_menu}               id=panel-settings
 
 *** Keywords ***
 
 Verify Trends Page Loads Successfully
-    wait until page contains element            css=${Trends_View}
+    wait until page contains element            ${Trends_View}
     wait until page contains element            ${Trends_Image}         timeout=40s
     wait until page does not contain element    ${Circle_Spinner}
     wait until page does not contain element    ${second_spinner}
@@ -145,10 +145,10 @@ Navigate to Trends Page Using URL
     END
 
 Click on Record List On Trends Page
-    ${Record_List_Button}           set variable    xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div
+    ${Record_List_Button}           set variable    xpath=//mat-icon[text()='arrow_back_ios']/following-sibling::div
     Wait And Click Element          ${Record_List_Button}
 
 Get Patient Name
-    ${Patient_Name_Locator}      set variable    //app-trends-view//div[@class="view-header-title"]/div/div/div[2]
+    ${Patient_Name_Locator}      set variable    //app-trends-view//div[@class="view-header-title"]/div/div/div
     ${Patient_Name}     get text    ${Patient_Name_Locator}
     [Return]            ${Patient_Name}

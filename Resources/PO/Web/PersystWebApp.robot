@@ -207,6 +207,7 @@ Change EEG Page Font Size
     [Arguments]     ${FONT_SIZE}
     EEGPage.Click the EEG Page Setting Button
     EEGPage.Click on Display Setting Link
+    sleep    2s
     EEGPage.Change the EEG Page Font Size       ${FONT_SIZE}
 
 Change EEG Channel Per Page Setting
@@ -263,6 +264,7 @@ Change EEG Montage Setting
     [Arguments]    ${MONTAGE_OPTIONS}
     EEGPage.Click the EEG Page Setting Button
     EEGPage.Click on Waveforms Setting Link
+    sleep    2s
     EEGPage.Click on Montage Setting
     EEGPage.Select Montage Option    ${MONTAGE_OPTIONS}
 

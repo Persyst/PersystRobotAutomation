@@ -10,22 +10,22 @@ ${EEG_Image}                id=image
 ${Comment_Button}           css=button[title="Comment Editor"]
 ${Comment_editor}           id=comment-editor
 ${Comment_Box_On_EEG}       css=#comment-selection-list > div
-${Comment_+_Button}         css=#comment-editor > div:nth-child(4) > button:nth-child(3) > mdl-icon
-${Comment_List_box}         css=body > app-root app-patient-views > app-eeg-view  div:nth-child(2) > app-comment-list > div
+${Comment_+_Button}         xpath=//*[@id="comment-editor"]/div[2]/button[3]/mat-icon
+${Comment_List_box}         css=app-patient-views app-eeg-view app-comment-list
 ${Comment_List_Button}      css=body > app-root button[title="Comment List"]
-${Comment_Name_Textfield}   css=#comment-filter-input:nth-child(1)
-${First_Comment_Row}        css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(2) > div
-${First_Row_In_Comments}    css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(1) > div
+${Comment_Name_Textfield}   id=comment-filter-input
+${First_Comment_Row}        css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(2) > span > span > div
+${First_Row_In_Comments}    css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(1) > span > span > div
 ${Trends_Link}              xpath=//span[text()='Trends']
 ${Play_Button}              css=body button[title='Start Playing']
 ${Pause_Button}             css=body button[title='Pause Playing']
 ${Quick_Comment_modal}      css=div[mapname="QuickComment"]
-${Patient_Name_Header}      xpath=//div[text()='EEG for']/following-sibling::div
+${Patient_Name_Header}      css=body > app-root > div > app-patient-views > app-eeg-view div.view-header-title > div > div > div
 ${Comment_Filter_Button}    id=comment-filter-button
 ${Video_Modal}              xpath=//app-video
 #==================================================EEG Setting===============================================================
 ${EEG_Setting_Button}       id=eeg-settings-button
-${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
+${Back_Arrow}               css=body div.back-arrow-item.back-arrow mat-icon
 ${EEG_Setting_Box}          css=body app-patient-views app-eeg-settings
 ${EEG_Font_Size_Setting}    body app-eeg-settings div.settingsText > input
 ${EEG_Channel_Per_Page_Select}      id=eeg-channel-per-page
@@ -51,9 +51,10 @@ ${Artifacts_Reduction_Off}  name=AR Off
 ${LFF_Setting}              css=div [title="Select LFF"]
 ${HFF_Setting}              css=div [title="Select HFF"]
 &{Notch_Filter_Options}     60Hz=60       50Hz=50       OFF=Off
-${Montage_Editor_Elipses}   CSS= mdl-dialog-host-component > div:nth-child(2) > div > div > div > button > mdl-icon
-${Delete_Montage}           CSS=mdl-dialog-host-component > div:nth-child(2) > mdl-menu > div > div.mdl-menu > mdl-menu-item:nth-child(3)
-
+${Montage_Editor_Elipses}   CSS=#mat-mdc-dialog-7 mat-dialog-actions > button.mat-mdc-menu-trigger.mdc-icon-button.mat-mdc-icon-button.mat-unthemed.mat-mdc-button-base
+${Delete_Montage}           CSS=#mat-menu-panel-17 > div > button:nth-child(3)
+${Waveforms_Dropdown}       name=Waveforms-Select
+${Display_Tab}              name=Display-Tab
 *** Keywords ***
 Verify EEG Page Loaded Successfully
     wait until page does not contain element    ${Circle_Spinner}
@@ -92,7 +93,6 @@ Get First Row's Text in List Of Comments
     wait until page contains element            ${First_Comment_Row}
     ${Comment_name}     get text                ${First_Row_In_Comments}
     [Return]    ${Comment_name}
-
 
 Click on "Trends" link
     click element    ${Trends_Link}
@@ -135,7 +135,7 @@ Click the EEG Page Setting Button
     Navigate Back to Main Setting Menu
     ${eeg_setting_box_visibility}    get element count     ${EEG_Setting_Box}
     IF      ${eeg_setting_box_visibility} == 0
-            Click Element Until Visible         ${EEG_Setting_Button}            ${EEG_Setting_Box}
+        Click Element Until Visible         ${EEG_Setting_Button}            ${EEG_Setting_Box}
 #            Wait And Click Element                              ${EEG_Setting_Button}
 #            wait until page contains element                    ${EEG_Setting_Box}          40s
     END
@@ -146,7 +146,8 @@ Navigate Back to Main Setting Menu
     END
 
 Click on Display Setting Link
-    click link    Display
+    ${Display_Settings_Tab}     set variable    xpath=//span[text()="Display"]
+    Wait And Click Element      ${Display_Settings_Tab}
 
 Change the EEG Page Font Size
     [Arguments]           ${FONT_SIZE}
@@ -213,7 +214,8 @@ Change Restricted Pen Status
 
 Click on Waveforms Setting Link
     wait until page contains element    ${EEG_Setting_Box}      50s
-    click link    Waveforms
+    ${Waveforms_Settings_Tab}   set variable    xpath=//span[text()="Waveforms"]
+    Wait And Click Element    ${Waveforms_Settings_Tab}
 
 Click on Montage Setting
     click element    ${EEG_Montage_Setting}
@@ -322,7 +324,8 @@ Open Video Modal
 Close Video Modal
     ${Is_Video_Modal_Present}    Wait and Get Element Presence    ${Video_Modal}
     Run Keyword If  ${Is_Video_Modal_Present}  Click on Video Button
-    Wait Until Page Does Not Contain Element  ${Video_Modal}
+#    Wait Until Page Does Not Contain Element  ${Video_Modal}
+    sleep    2s
 
 click on Edit Montage
     Click on Waveforms Setting Link

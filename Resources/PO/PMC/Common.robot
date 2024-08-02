@@ -6,7 +6,7 @@ Resource    Pages/TrendsPage.robot
 Resource    PMCApp.robot
 
 *** Variables ***
-${Server}                       EU
+${Server}                       Test
 &{Trends_Page_URL}              Test=https://pmctest.pmc.ninja/record-views/trends/642/0?readOnly=false        EU=https://eu.pmc.persyst.com/record-views/trends/212/0?readOnly=false
 &{Setting_Page_URL}             Test=https://pmctest.pmc.ninja/record-views/user-settings        EU=https://eu.pmc.persyst.com/record-views/user-settings
 &{Patinet_View_URL}             Test=https://pmctest.pmc.ninja/record-views     EU=https://eu.pmc.persyst.com/record-views

@@ -5,8 +5,8 @@ Resource         Base.robot
 *** Variables ***
 ${USER_NAME_LOCATOR} =    name=username
 ${PASSWORD_LOCATOR} =     name=password
-${LOGIN_BUTTON} =         css=body > app-root > div:nth-child(1) > app-login > div:nth-child(1) > div:nth-child(4) > mdl-button
-${About_Button}           xpath=//mdl-button[text()='About']
+${LOGIN_BUTTON} =         id=login-button
+${About_Button}           id=about-button
 *** Keywords ***
 Navigate To Login Page
     [Arguments]         ${URL}

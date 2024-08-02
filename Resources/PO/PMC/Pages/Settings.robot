@@ -7,20 +7,20 @@ ${Setting_Button_Locator}           css=button[title="Settings"]
 ${Logout_Button_Locator}            xpath=//div[text()=' Logout ']
 ${Setting_Page_Last_Element}        id=EEG-high-resolution
 ${Include_Spike_Checkbox}           id=include-spike-comments
-${Record_List}                      xpath=//mdl-icon[text()='arrow_back_ios']/following-sibling::div
-${Include_Spike_Checkbox_Bullet}    css=mdl-switch[id='include-spike-comments'] div[class='mdl-switch__thumb']
+${Record_List}                      xpath=//mat-icon[text()='arrow_back_ios']/following-sibling::div
+${Include_Spike_Checkbox_Bullet}    css=#include-spike-comments-button > div.mdc-switch__handle-track
 ${Comment_Sort_Dropdown}            id=Comments Sort
-&{Comment_Sort_Options}             ASC=div [id$='Sort'] mdl-option:nth-child(2)     DES=div [id$='Sort'] mdl-option:nth-child(1)
+&{Comment_Sort_Options}             ASC=#mat-option-1 > span     DES=#mat-option-0 > span
 ${Quick_Comment_Switch}             id=quick-comment-checkbox
-${Quick_Comment_Bullet}             css=mdl-switch[id='quick-comment-checkbox'] div[class='mdl-switch__thumb']
+${Quick_Comment_Bullet}             css=#quick-comment-checkbox-button > div.mdc-switch__handle-track svg.mdc-switch__icon.mdc-switch__icon--off
 &{Display_Options}                  EEG=display-eeg     Trends=display-trends     Only-EEG=display-only-eeg
 ${Patient_Name_Switch}              id=patient-name-display
-${Patient_Name_Bullet}              css=mdl-switch[id='patient-name-display'] div[class='mdl-switch__thumb']
+${Patient_Name_Bullet}              css=#patient-name-display-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${EEG_BackgroundColor_Button}       id=EEG Background Color
-${EEG_BackColor_Input}              css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(1) > div:nth-child(7) > color-picker > div > div.hex-text > div:nth-child(1) > input
+${EEG_BackColor_Input}              css=#ngx-colors-overlay input
 ${Grid_BackColor_Label}             xpath=//label[text()='Show Patient Names on EEG and Trends:']
 ${Grid_BackColor_Button}            id=EEG Grid Color
-${Grid_BackColor_Input}             css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(1) > div:nth-child(8) > color-picker > div > div.hex-text > div:nth-child(1) > input
+${Grid_BackColor_Input}             css=#ngx-colors-overlay > ngx-colors-panel input
 &{LFF_Type}                         Time-Constant=LFF-time     Frequency=LFF-frequency
 &{Date_Format_Options}              mm-dd-yyyy=date-mm-dd-yyyy    D1D2=date-D1D2    None=date-None
 &{Time_Formats}                     Clock-Time=time-clock   Elapsed-Time=time-elapsed     Seconds=time-seconds
@@ -28,49 +28,48 @@ ${Time_Decimal_Input}               id=Time Decimals
 ${Max_Record_Age_Input}             id=Maximum Record Age
 ${Max_Record_Duration_Input}        id=Maximum Record Duration
 ${Segment_Record_Day_switch}        id=segment-by-day
-${Segment_Record_Day_Bullet}        css=mdl-switch[id="segment-by-day"] div:nth-child(4)
+${Segment_Record_Day_Bullet}        css=#segment-by-day-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${Segment_Specific_Time_Switch}     id=segment-specific-time
-${Segment_Specific_Time_Bullet}     css=mdl-switch[id="segment-specific-time"] div:nth-child(4)
+${Segment_Specific_Time_Bullet}     css=#segment-specific-time-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${Refresh_Interval}                 id=Refresh Interval
 ${Inactivity_Timeout}               id=Inactivity Timeout
 ${Turnoff_On_Inactivity_Switch}     id=inactivity-on-off
-${Turnoff_On_Inactivity_Bullet}     css=mdl-switch[id="inactivity-on-off"] div:nth-child(4)
-${Show_Connection_Speed_Switch}     css=mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(1) > div:nth-child(24) > div > mdl-switch
-${Show_Connection_Speed_Bullet}     css=mdl-tabs > mdl-tab-panel.mdl-tabs__panel.is-active > div > div:nth-child(1) > div:nth-child(24) > div > mdl-switch > div.mdl-switch__thumb
+${Turnoff_On_Inactivity_Bullet}     css=#inactivity-on-off-button svg.mdc-switch__icon.mdc-switch__icon--off
+${Show_Connection_Speed_Switch}     id=mat-mdc-slide-toggle-3
+${Show_Connection_Speed_Bullet}     css=#mat-mdc-slide-toggle-3-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${High_Resolution_EEG_Switch}       id=EEG-high-resolution
-${High_Resolution_EEG_Bullet}       css=mdl-switch[id='EEG-high-resolution'] div:nth-child(4)
+${High_Resolution_EEG_Bullet}       css=#EEG-high-resolution-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${Escape}                           \\35
 ${Reset_User_Interface}             id=ui-reset-button
-${Montage_Editor_New_Button}        xpath=//mdl-button[text()='New']
-${New_Montage_Modal}                xpath=//mdl-dialog-host-component[@class='mdl-dialog open']
-${New_Montage_Name_Textfield}       xpath=//mdl-textfield[@label="Montage Name"]//input
-${New_Montage_Modal_Ok_Button}      xpath=//mdl-button[text()='Ok']
-${Select_Montage_Dropdown}          css=input[placeholder="Click New to create a Montage."]
+${Montage_Editor_New_Button}        name=New-Montage
+${New_Montage_Modal}                xpath=//mat-dialog-container
+${New_Montage_Name_Textfield}       name=New-Montage-Input
+${New_Montage_Modal_Ok_Button}      name=Name-Ok
+${Select_Montage_Dropdown}          xpath=//mat-select[@placeholder="Click New to create a Montage."]
 ${Reset_All_User_Settings_Button}   id=reset-button
-${Reset_Modal_Title}                xpath=//h3[text()=" Confirm Reset "]
+${Reset_Modal_Title}                id=mat-mdc-dialog-title-4
 ${Reset_Modal_RESET_Button}         xpath=//button[text()=' Reset ']
 ${Reset-Modal_OK_Button}            xpath=//button[text()=' Ok ']
-${First_Montage_In_Dropdown}        css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-montage-editor-page > div > div:nth-child(2) > app-montage-editor > div > div:nth-child(1) > div > div:nth-child(1) > div > mdl-select > div > mdl-popover > div > mdl-option:nth-child(1) > div > div
+${First_Montage_In_Dropdown}        css=#mat-select-8 span span
 ${Save_New_Montage_Button}          xpath=//mdl-button[text()="Save"]
 ${Montage_Editor_More_Actins_Button}   xpath=//button[@title="More Actions"]
 ${Delete_Montage_Option}            css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-montage-editor-page > div > div:nth-child(2) > app-montage-editor > mdl-menu > div > div.mdl-menu > mdl-menu-item:nth-child(3)
 ${Edit_Montage_Channel_Modal}       xpath=//mdl-dialog-host-component[contains(@class, 'mdl-dialog') and contains(@class, 'open')]
 ${Edit_Mtg_Modal_Cancel}            xpath=//mdl-button[text()="Cancel"]
-${Show_All_Montage_Switch}          css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-montage-favorites > div > div:nth-child(2) > div > div > mdl-switch
-${Show_All_Montage_Bullet}          css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-montage-favorites > div > div:nth-child(2) > div > div > mdl-switch > div.mdl-switch__thumb
+${Show_All_Montage_Switch}          xpath=//*[@label="ShowAllMontages"]
+${Show_All_Montage_Bullet}          css=app-montage-favorites mat-slide-toggle[label='ShowAllMontages'] svg:nth-child(1)
 ${User_Settings_Link}               xpath=//div[text()="User Settings"]
 ${Add_Comment_Record_Filter}        xpath=//div[text()=" Add "]
-${New_Comment_Filter_Name_Input}    xpath=//mdl-textfield[@label="Filter Name"]//input[@type="text"]
-${New_Comment_Filter_String_Input}  xpath=//mdl-textfield[@label="Search String"]//input[@type="text"]
-${Regular_String_Switch}            css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-filters-editor > div > div:nth-child(2) > div > div:nth-child(1) > div > mdl-switch
-${Regular_String_Bullet}            xpath=//span[text()='Use Regular Expressions For the Search and Ignore String']/following-sibling::div[@class='mdl-switch__thumb']
-${Ignore_String_Switch}             css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-filters-editor > div > div:nth-child(2) > div > div:nth-child(1) > mdl-switch:nth-child(7)
-${Ignore_String_Bullet}             xpath=//span[text()='Include Seizure Detections']/following-sibling::div[@class='mdl-switch__thumb']
-${Include_Notification_Switch}      css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-filters-editor > div > div:nth-child(2) > div > div:nth-child(1) > mdl-switch:nth-child(8)
-${Include_Notification_Bullet}      xpath=//span[text()='Include Notifications']/following-sibling::div[@class='mdl-switch__thumb']
-${New_Record_Filter_String_Input}   xpath=//mdl-textfield[@label="User Short Name (empty matches all)"]//input[@type="text"]
+${New_Comment_Filter_Name_Input}    xpath=//input[@label="Filter-Name"]
+${New_Comment_Filter_String_Input}  xpath=//input[@label="Filter-String"]
+${Regular_String_Switch}            xpath=//mat-slide-toggle[@label="Regular-Toggle"]
+${Regular_String_Bullet}            xpath=//mat-slide-toggle[@label="Regular-Toggle"]/div/button/div[2]/div
+${Ignore_String_Switch}             xpath=//mat-slide-toggle[@label="Seizure-Toggle"]
+${Ignore_String_Bullet}             xpath=//mat-slide-toggle[@label="Seizure-Toggle"]/div/button/div[2]/div
+${Include_Notification_Switch}      xpath=//mat-slide-toggle[@label="Notification-Toggle"]
+${Include_Notification_Bullet}      xpath=//mat-slide-toggle[@label="Notification-Toggle"]/div/button/div[2]/div
 ${New_Comment_Done_Button}          xpath=//div[text()=" Done "]
-${Delete_Button}                    xpath=//button[@class='btn btn-xs btn-danger']
+${Delete_Button}                    xpath=//button[@class='btn btn-xs btn-danger ng-star-inserted']
 
 *** Keywords ***
 Reset User Settings
@@ -478,7 +477,7 @@ Change Keyboard Shortcut Settings
     press keys    None      ${KEY}
 
 Click On Reset Keyboard Shortcut Button
-    ${Reset_Default}            set variable    xpath=//mdl-button[text()='Reset to Defaults']
+    ${Reset_Default}            set variable    id=Reset-Defaults-Button
     click element                               ${Reset_Default}
     ${Reset_Modal_Text}         set variable    xpath=//div[text()='Are you sure you want to reset to the default values?']
     wait until page contains element            ${Reset_Modal_Text}
@@ -499,7 +498,7 @@ Enter Old and New Password
     input text    id=Old Password           ${OLD_PASSWORD}
     input text    id=New Password           ${NEW_PASSWORD}
     input text    id=Retype New Password    ${NEW_PASSWORD}
-    ${Update_Password}    set variable    xpath=//mdl-button[text()='Update Password']
+    ${Update_Password}    set variable      id=Update-Password-Button
     click element    ${Update_Password}
     wait until page contains              Your password has been successfully changed
     wait until page contains              Ok
@@ -512,7 +511,7 @@ Delete Filter If Exist
     END
 
 Delete Previouly Create Montage If Exist
-    ${First_Montage}    set variable    xpath=//input[@placeholder="Click New to create a Montage."]/../mdl-popover/div/mdl-option[1]/div/div
+    ${First_Montage}    set variable    xpath=//app-montage-editor//mat-select[@placeholder="Click New to create a Montage."]/div/div/span/span
     Click on Montage List Dropdown
     ${First_Montage_Name}       get text    ${First_Montage}
     IF    '${First_Montage_Name}' == 'Moji Montage (User)'
@@ -532,8 +531,8 @@ Delete Comment Filters Until None Exist
     Log    Button does not exist anymore
 
 Click on Shared Setting Link
-    ${Shared_link}      set variable    xpath=//a[text()="Shared Settings"]
-    wait and click element      ${Shared_link}
+    ${Shared_Settings}      set variable    xpath=//span[text()="Shared Settings"]
+    Wait And Click Element      ${Shared_Settings}
     wait until page contains    Standard Comments
 
 Click on Unit Definition
@@ -545,9 +544,9 @@ Add a New Unit
     [Arguments]                    ${UNIT_NAME}    ${UNIT_DESCRIPTION}
     ${Add_Unit_Button}             set variable    xpath=//div[text()=' Add Unit ']
     Base.Wait And Click Element                    ${Add_Unit_Button}
-    ${Unit_Name_Input}             set variable    xpath=//mdl-textfield[@label="Unit Name"]/div/input
+    ${Unit_Name_Input}             set variable    xpath=//input[@label="Unit-Name"]
     input text    ${Unit_Name_Input}               ${UNIT_NAME}
-    ${Unit_Description_Input}      set variable    xpath=//mdl-textfield[@label="Unit Description"]/div/input
+    ${Unit_Description_Input}      set variable    xpath=//input[@label="Unit-Description"]
     input text    ${Unit_Description_Input}        ${UNIT_DESCRIPTION}
     sleep    2s
     ${Done_Button}                 set variable    xpath=//div[text()=' Done ']
@@ -566,13 +565,13 @@ Click on Patient Unit Assignments Link
 
 Assign a Patient to a Unit
     [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
-    ${Search_Input}                 set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
+    ${Search_Input}                 set variable        xpath=//input[@label="String-Text-Input"]
     input text                      ${Search_Input}             ${PATIENT_NAME}
-    ${Unit_Dropdown}                set variable    xpath=//mdl-select[@placeholder='Unit']/div
+    ${Unit_Dropdown}                set variable        xpath=//mat-select[@placeholder='Unit']/div
     wait until page contains element                            ${Unit_Dropdown}        40s
     sleep    3s
     Wait And Click Element                                      ${Unit_Dropdown}
-    ${Unit_Option}                  set variable    xpath=//div[text()='${UNIT_NAME}']
+    ${Unit_Option}                  set variable        xpath=//span[text()='${UNIT_NAME}']
     Wait And Click Element                                      ${Unit_Option}
 
 Click on Standard Comments Link
@@ -580,13 +579,14 @@ Click on Standard Comments Link
     wait until page contains                        Rhythmic Delta
 
 Add a New Standard Comment
-    ${Add_Button}                   set variable    xpath=//mdl-button/mdl-icon[text()='add']
-    click element                                                 ${Add_Button}
-    ${Done_Button}                  set variable    xpath=//mdl-button[text()=' Done ']
-    wait until page contains element                              ${Done_Button}
-    ${Comment_Text_Input}           set variable    xpath=//mdl-textfield[@label="Comment Text"]/div/input
+    ${Add_Button}                   set variable    xpath=//mat-icon[@label="Add-Button"]/following-sibling::span[2]
+    wait until page contains element                                       ${Add_Button}
+    Wait And Click Element                                                 ${Add_Button}
+    ${Save_Button}                  set variable    xpath=//button[@id="Save-Button"]
+    wait until page contains element                              ${Save_Button}
+    ${Comment_Text_Input}           set variable    xpath=//input[@label="Comment-Text-Input"]
     input text                      ${Comment_Text_Input}         New Moji Comment
-    click element                   ${Done_Button}
+    Wait And Click Element                   ${Save_Button}
 
 Click on Shared Comment Filters on Shared Settings
     click link                                      Shared Comment Filters
@@ -598,50 +598,52 @@ Delete Created Standard Comment
     Base.Delete Items Until None Exist                             ${Delete_Button}
 
 Click on Trends Default Settings
-    click link    Trends Settings
+    ${Trends_Settings}      set variable    xpath=//span[text()="Trends Settings"]
+    Wait And Click Element      ${Trends_Settings}
     wait until page contains    Default Trends Duration:
 
 Click on EEG Default Settings
-    click link                  EEG Settings
+    ${EEG_Settings}      set variable    xpath=//span[text()="EEG Settings"]
+    Wait And Click Element      ${EEG_Settings}
     wait until page contains    Off
 
 Select a Panel From Trends Default Panel Dropdown
     [Arguments]    ${DEFAULT_PANEL}
-    ${Panel_Dropdown}               set variable    xpath=//mdl-select[@id='Default Panel']/div
+    ${Panel_Dropdown}               set variable    xpath=//mat-select[@id="Default Panel"]/div
     Wait And Click Element                          ${Panel_Dropdown}
-    ${Panel_Menu}                   set variable    xpath=//mdl-select[@id="Default Panel"]/div/mdl-popover
+    ${Panel_Menu}                   set variable    xpath=//div[@id="Default Panel-panel"]
     wait until element is visible                   ${Panel_Menu}       40s
-    ${Panel_Option}                 set variable    xpath=//div[text()='${DEFAULT_PANEL}']/..
+    ${Panel_Option}                 set variable    xpath=//mat-option/span[text()='${DEFAULT_PANEL}']
     click element                                   ${Panel_Option}
 
 Select a Duration From Trends Default Duration Dropdown
     [Arguments]    ${DEFAULT_DURATION}
     ${Duration_Dropdown}               set variable    id=Default Duration
     Wait And Click Element                          ${Duration_Dropdown}
-    ${Duration_Option}                 set variable    xpath=//div[text()='${DEFAULT_DURATION}']/..
+    ${Duration_Option}                 set variable    xpath=//mat-option/span[text()='${DEFAULT_DURATION}']
     Wait And Click Element                          ${Duration_Option}
 
 Assign Patient to a Unit For Monitoring(4Backspace)
     [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
-    ${Search_Input}                 set variable    xpath=//mdl-textfield[@label="Search String"]/div/input
+    ${Search_Input}                 set variable    xpath=//input[@label="String-Text-Input"]
     input text                      ${Search_Input}             ${PATIENT_NAME}
     Press Keys    ${Search_Input}    CTRL+END   BACKSPACE   BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE
-    ${Unit_Dropdown}                set variable    xpath=//mdl-select[@placeholder='Unit']/div
+    ${Unit_Dropdown}                set variable    xpath=//mat-select[@placeholder='Unit']/div
     wait until page contains element                            ${Unit_Dropdown}        40s
     sleep    3s
     Wait And Click Element                                      ${Unit_Dropdown}
-    ${Unit_Option}                  set variable    xpath=//div[text()='${UNIT_NAME}']
-    Wait And Click Element                                      ${Unit_Option}
+    ${Unit_Option}                  set variable    xpath=//span[text()='${UNIT_NAME}']
+    Wait And Click Element                                      ${Unit_Option}                                      ${Unit_Option}
 
 Select Patient Record For Default Settings
     [Arguments]         ${PATIENT_NAME}
     ${Patient_Dropdown}         set variable    xpath=//label[text()='Selected Record:']/following-sibling::div
     Wait And Click Element      ${Patient_Dropdown}
     wait until page contains    Select Record
-    wait until page contains element            xpath=//mdl-button[text()='Cancel']      # Cancel Button on the modal
-    ${Patient_Record_Textfield}         set variable        xpath=//h3[text()='Select Record']//..//input
+    wait until page contains element            id=Cancel_Button      # Cancel Button on the modal
+    ${Patient_Record_Textfield}         set variable        xpath=//input[@label="Modal Patient Name Filter"]
     input text          ${Patient_Record_Textfield}         ${PATIENT_NAME}
-    ${Patient_Item}     set variable        xpath=//mdl-list-item[text()=' ${PATIENT_NAME} ']
+    ${Patient_Item}     set variable        xpath=//mat-list-item/span/span[text()=' ${PATIENT_NAME} ']
     Wait And Click Element          ${Patient_Item}
 
 Navigate To Shared Record Filters
@@ -654,11 +656,10 @@ Click on ADD Record Filter Button
 
 Create a New Record Filter
     [Arguments]    ${RECORD_FILTER_NAME}        ${FILTER_STRING}
-    ${Filter_Name_Input}    set variable        xpath=//mdl-textfield[@label='Filter Name']//input
+    ${Filter_Name_Input}    set variable        xpath=//input[@label="Filter-Input"]
     input text          ${Filter_Name_Input}        ${RECORD_FILTER_NAME}       clear=True
-    ${Search_String_Input}  set variable        xpath=//mdl-textfield[@label='Filter Name']/following-sibling::mdl-textfield[@label='Search String']//input
+    ${Search_String_Input}  set variable        xpath=//input[@label="Filter-String"]
     input text          ${Search_String_Input}      ${FILTER_STRING}            clear=True
     ${Done_Button}      set variable            xpath=//div[text()=' Done ']
     Wait And Click Element                      ${Done_Button}
     wait until page contains                    ${RECORD_FILTER_NAME}
-

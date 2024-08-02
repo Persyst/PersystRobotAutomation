@@ -7,16 +7,16 @@ Resource         Base.robot
 ${Circle_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__left > div
 ${Second_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > div > div > div:nth-child(1) > div.scroll-view > div > div:nth-child(1) > div.unselectable > div > div > app-trends-page:nth-child(1) > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__right > div
 ${EEG_Image}                id=image
-${Comment_List_box}         css=body > app-root app-patient-views > app-eeg-view  div:nth-child(2) > app-comment-list > div
+${Comment_List_box}         css=app-patient-views app-eeg-view app-comment-list
 ${Comment_List_Button}      css=body > app-root button[title="Comment List"]
-${Comment_Name_Textfield}   css=#comment-filter-input:nth-child(1)
-${First_Comment_Row}        css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(2) > div
-${First_Row_In_Comments}    css=body  app-eeg-view app-comment-list div:nth-child(4) > mdl-list > mdl-list-item:nth-child(1) > div
+${Comment_Name_Textfield}   id=comment-filter-input
+${First_Comment_Row}        css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(2) > span > span > div
+${First_Row_In_Comments}    css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(2) > span > span > div
 ${Trends_Link}              xpath=//span[text()='Trends']
 ${Play_Button}              css=body button[title='Start Playing']
 ${Pause_Button}             css=body button[title='Pause Playing']
 ${Quick_Comment_modal}      css=div[mapname="QuickComment"]
-${Patient_Name_Header}      xpath=//div[text()='EEG for']/following-sibling::div
+${Patient_Name_Header}      css=body > app-root > div > app-patient-views > app-eeg-view div.view-header-title > div > div > div
 ${Comment_Filter_Button}    id=comment-filter-button
 ${Video_Modal}              xpath=//app-video
 #==================================================EEG Setting===============================================================
@@ -139,7 +139,8 @@ Navigate Back to Main Setting Menu
     END
 
 Click on Display Setting Link
-    click link    Display
+    ${Display_Settings_Tab}     set variable    xpath=//span[text()="Display"]
+    Wait And Click Element      ${Display_Settings_Tab}
 
 Change the EEG Page Font Size
     [Arguments]           ${FONT_SIZE}
@@ -206,7 +207,8 @@ Change Restricted Pen Status
 
 Click on Waveforms Setting Link
     wait until page contains element    ${EEG_Setting_Box}      50s
-    click link    Waveforms
+    ${Waveforms_Settings_Tab}   set variable    xpath=//span[text()="Waveforms"]
+    Wait And Click Element    ${Waveforms_Settings_Tab}
 
 Click on Montage Setting
     click element    ${EEG_Montage_Setting}

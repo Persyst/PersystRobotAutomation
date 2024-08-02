@@ -3,12 +3,11 @@ Library          SeleniumLibrary    timeout=0:00:30
 Resource         Base.robot
 
 *** Variables ***
-${Patient_Filter_Textfield}     //mdl-textfield[@label='Record Filter']/div/input
+${Patient_Filter_Textfield}     //input[@label="Patient Name Filter"]
 ${Record_With_Name}             //span[text()="A2_24-clip-sz"]
-${Comment_List}                 css=body > app-root > div:nth-child(1) > app-patient-views div > app-record-comments > div > mdl-list > mdl-list-item:nth-child(1)
 ${Beginning_Of_Recording}       id=Beginning\ of\ Record
 ${Setting_Button}               css=body  app-patient-views  div.view-header button[title="Settings"]
-${Filter_List_Icon}             xpath=//mdl-icon[text()="filter_list"]
+${Filter_List_Icon}             xpath=//mat-icon[text()="filter_list"]
 ${Patient_View_Page_URL}        https://pmctest.pmc.ninja/record-views
 
 *** Keywords ***
@@ -17,7 +16,7 @@ Verify Patient View Page Loaded
 
 Enter Patient Name In The Patient Name Textfield
     [Arguments]   ${PATIENT_NAME}
-    input text    xpath=${Patient_Filter_Textfield}   ${PATIENT_NAME}  clear=True
+    input text    ${Patient_Filter_Textfield}   ${PATIENT_NAME}  clear=True
 
 Click On First Patient In The List After Filtering
     [Arguments]    ${Patient_Name}
@@ -97,9 +96,9 @@ Click on 'Monitoring' tab
     wait until page contains     Unassigned
 
 Click On Wrench Button To Navigate to Event Density
-    ${Wrench_Button}            set variable    xpath=//mdl-icon[text()='build']/..
+    ${Wrench_Button}            set variable    xpath=//mat-icon[text()='build']/..
     Wait And Click Element      ${Wrench_Button}
-    ${Event_Density_Option}     set variable    xpath=//mdl-menu-item[text()='Event Density']
+    ${Event_Density_Option}     set variable    xpath=//span[text()='Event Density']
     Wait And Click Element      ${Event_Density_Option}
     wait until page contains    Select Comment to specify the time range.       40s
 
@@ -120,9 +119,9 @@ Find Comment's Data From Event Density
     [Return]              @{Comment_Datas}
 
 Get Patient Info From Info Button
-    ${Info_Button}      set variable        xpath=//mdl-icon[text()='info']/..
+    ${Info_Button}      set variable        xpath=//mat-icon[text()='info']/..
     click element       ${Info_Button}
-    ${Info_Modal}       set variable        xpath=//mdl-dialog-host-component
+    ${Info_Modal}       set variable        xpath=//mat-dialog-container
     wait until page contains element        ${Info_Modal}
     sleep    1s
     ${Patient_Info}     set variable        xpath=//app-patient-information
@@ -132,7 +131,7 @@ Get Patient Info From Info Button
     [Return]            ${Info}
 
 Get 'First Patient' Name in Monitoring Page
-    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/mdl-list/mdl-list-item/div/div/div[1]/div/div/div[1]/div[2]
+    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/div[1]/div/div[2]/div[1]/div/div[1]/div[2]
     wait until page contains element        ${Fisrt_Patient_Name}
     ${Name}         get text    ${Fisrt_Patient_Name}
     [Return]    ${Name}
@@ -143,7 +142,7 @@ Navigate to Slide Show Tab
 
 Select A Record Filter
     [Arguments]    ${RECORD_FILTER_NAME}
-    ${Record_Filter_Button}         set variable    xpath=//mdl-button[@mdl-tooltip="Record Filters"]
+    ${Record_Filter_Button}         set variable    xpath=//button[@mattooltip="Record Filters"]
     Wait And Click Element          ${Record_Filter_Button}
     wait until page contains element        //app-record-filters        #Record Filter Modal
     click link    Saved Filters
@@ -151,7 +150,7 @@ Select A Record Filter
     Wait And Click Element          xpath=//mdl-icon[text()='close']        #Closing the filter pop up
 
 Cleaning the Record Filter From List Of Record
-   ${Record_Filter}     set variable    xpath=//mdl-textfield[@label="Record Filter"]//input
+   ${Record_Filter}     set variable    id=Record-Filter
    Wait And Click Element    ${Record_Filter}
 
 

@@ -68,10 +68,10 @@ Test Inactivity Timeout
     [Tags]    testrun
      PMCApp.Change 'Inactivity Timeout' Status From User Setting      Disable
      sleep    2s
-     PMCApp.Enter "Inactivity Timeout" Time in Minues                 1
+     PMCApp.Enter "Inactivity Timeout" Time in Minues                 1.5
      sleep    2s
      PMCApp.Navigate From Setting to Patient View
-     sleep    65s
+     sleep    92s
      page should contain    Session Timed Out.
      Common.Login With Credentials
      PMCApp.Change 'Inactivity Timeout' Status From User Setting      Enable

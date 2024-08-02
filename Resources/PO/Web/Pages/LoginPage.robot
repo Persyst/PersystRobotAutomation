@@ -5,9 +5,9 @@ Resource         Base.robot
 *** Variables ***
 ${USER_NAME_LOCATOR} =    id=User Name
 ${PASSWORD_LOCATOR} =     id=Password
-${LOGIN_BUTTON} =         xpath=//mdl-button[text()='Login']
+${LOGIN_BUTTON} =         id=login-button
 ${LOGIN_PAGE_URL} =       http://10.193.0.106/PersystMobile/login
-${About_Button}           xpath=//mdl-button[text()='About']
+${About_Button}           id=about-button
 *** Keywords ***
 Navigate To Login Page
     ${current_url}      get location

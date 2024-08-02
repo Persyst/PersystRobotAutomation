@@ -3,12 +3,11 @@ Library          SeleniumLibrary    timeout=0:00:30
 Resource         Base.robot
 
 *** Variables ***
-${Patient_Filter_Textfield}     //mdl-textfield[@label='Patient Name Filter']/div/input
-${First_Row_Patient}            body app-patient-list > div > div:nth-child(1) mdl-list > mdl-list-item > div:nth-child(1) > div
-${Comment_List}                 css=body > app-root > div:nth-child(1) > app-patient-views div > app-record-comments > div > mdl-list > mdl-list-item:nth-child(1)
+${Patient_Filter_Textfield}     xpath=//input[@label="Patient Name Filter"]
+${First_Row_Patient}            css=app-patient-list > div > div:nth-child(1) > div > div > div > div > div:nth-child(1) > div > div
 ${Beginning_Of_Recording}       id=Beginning\ of\ Record
 ${Setting_Button}               css=body  app-patient-views  div.view-header button[title="Settings"]
-${Filter_List_Icon}             xpath=//mdl-icon[text()="filter_list"]
+${Filter_List_Icon}             xpath=//mat-icon[text()="filter_list"]
 ${Patient_View_Page_URL}        http://10.193.0.106/PersystMobile/record-views
 
 *** Keywords ***
@@ -17,10 +16,10 @@ Verify Patient View Page Loaded
 
 Enter Patient Name In The Patient Name Textfield
     [Arguments]   ${PATIENT_NAME}
-    input text    xpath=${Patient_Filter_Textfield}   ${PATIENT_NAME}  clear=True
+    input text    ${Patient_Filter_Textfield}   ${PATIENT_NAME}  clear=True
 
 Click On First Patient In The List After Filtering
-    Wait And Click Element    css=${First_Row_Patient}
+    Wait And Click Element    ${First_Row_Patient}
     sleep    3s
 
 Click on Patient Record By ID
@@ -54,11 +53,13 @@ Click on Patient Beginning of Record
     click element    ${Beginning_Of_Recording}
 
 Click on Monitoring tab
-    click link    Monitoring
+    ${Monitoring}         set variable    xpath=//span[text()="Monitoring"]
+    Wait And Click Element    ${Monitoring}
     sleep       2s
 
 Click on 'Patient List' tab
-    click link    Patient List
+    ${Patient_List}         set variable    xpath=//span[text()="Patient List"]
+    Wait And Click Element    ${Patient_List}
     wait until page contains element        ${Patient_Filter_Textfield}
 
 Check If Patient Record Exist
@@ -82,13 +83,14 @@ Minimize Unit By Name Either in Patient View Or Monitoring
     Wait And Click Element      xpath=${Minimize_icon}
 
 Click on 'Monitoring' tab
-    click link    Monitoring
+    ${Monitoring}         set variable    xpath=//span[text()="Monitoring"]
+    Wait And Click Element    ${Monitoring}
     wait until page contains     Unassigned
 
 Click On Wrench Button To Navigate to Event Density
-    ${Wrench_Button}            set variable    xpath=//mdl-icon[text()='build']/..
+    ${Wrench_Button}            set variable    xpath=//mat-icon[text()='build']/..
     Wait And Click Element      ${Wrench_Button}
-    ${Event_Density_Option}     set variable    xpath=//mdl-menu-item[text()='Event Density']
+    ${Event_Density_Option}     set variable    xpath=//span[text()='Event Density']
     Wait And Click Element      ${Event_Density_Option}
     wait until page contains    Select Comment to specify the time range.       40s
 
@@ -109,9 +111,9 @@ Find Comment's Data From Event Density
     [Return]              @{Comment_Datas}
 
 Get Patient Info From Info Button
-    ${Info_Button}      set variable        xpath=//mdl-icon[text()='info']/..
+    ${Info_Button}      set variable        xpath=//mat-icon[text()='info']/..
     click element       ${Info_Button}
-    ${Info_Modal}       set variable        xpath=//mdl-dialog-host-component
+    ${Info_Modal}       set variable        xpath=//mat-dialog-container
     wait until page contains element        ${Info_Modal}
     sleep    1s
     ${Patient_Info}     set variable        xpath=//app-patient-information
@@ -121,19 +123,20 @@ Get Patient Info From Info Button
     [Return]            ${Info}
 
 Get 'First Patient' Name in Monitoring Page
-    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/mdl-list/mdl-list-item/div/div/div[1]/div/div/div[1]/div[2]
+    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/div[1]/div/div[2]/div[1]/div/div[1]/div[2]
     wait until page contains element        ${Fisrt_Patient_Name}
     ${Name}         get text    ${Fisrt_Patient_Name}
     [Return]    ${Name}
 
 Navigate to Slide Show Tab
-    click link    Slide Show
+    ${Slide_Show}         set variable    xpath=//span[text()="Slide Show"]
+    Wait And Click Element    ${Slide_Show}
     wait until page contains    Speed:
 
 Navigate to MPM tab
     Wait And Click Element            xpath=//span[text()='MPM']
-    ${Third_Cell_Ellipses}            set variable    xpath=//*[@id="mat-tab-content-0-4"]/div/app-mpm/div/div/div[3]/div/div/div[2]/button/mat-icon
-    wait until element is visible     ${Third_Cell_Ellipses}
+    ${Stations_Grid}            set variable    xpath=/html/body/app-root/div/app-patient-views/div/div[2]/div/mat-tab-group/div
+    wait until element is visible     ${Stations_Grid}
 
 
 
