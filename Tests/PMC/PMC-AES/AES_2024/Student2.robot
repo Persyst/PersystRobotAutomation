@@ -1,5 +1,4 @@
 *** Settings ***
-Resource            ../../../../Resources/PO/PMC/Common.robot
 Resource            ../../../../Resources/PO/PMC/PMCApp.robot
 Resource            ../Info.robot
 Suite Setup          Run Keywords     Begin Web Suit With No Login      AND     Login to PMC Production and Login   ${USERS}[1]     ${PASSWORD}
