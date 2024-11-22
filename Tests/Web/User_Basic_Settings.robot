@@ -39,8 +39,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     Test Reset EEG Setting
     PersystWebApp.Verify EEG Page Loaded Successfully
-    sleep    3s
-#    Common.Compare the Images      user-setting-second-test.png
+    Common.Compare the Images      user-setting-second-test.png
     ${Returned_Patient_Name}    PersystWebApp.Get Patient Name on EEG Page
     should contain    ${Returned_Patient_Name}     LnP14D3Nw10ICU, FnLnP14D3Nw10ICU
     PersystWebApp.Open Quick Comment Modal on EEG
@@ -54,8 +53,7 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other
     PersystWebApp.Set EEG Background Color From User Settings               ${fcolor}[white]
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify Trends Page Loaded Successfully
-    sleep    3s
-#   Common.Compare the Images      user-setting-third-test.png
+   Common.Compare the Images      user-setting-third-test.png
     ${Patient_Name}   get text    ${Trends_Patient_Name}
     should not contain    ${Patient_Name}           "LnP14D3"
     run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PersystWebApp.Open Quick Comment Modal on EEG
@@ -65,12 +63,11 @@ Test Date Format-Time Format
     PersystWebApp.Change 'Time Format' From User Setting                    Clock Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
     PersystWebApp.Verify Trends Page Loaded Successfully
-    sleep    3s
-#    Common.Compare the Images             user-setting-forth-test.png
+    Common.Compare the Images             user-setting-forth-test.png
     PersystWebApp.Change 'Date Formats' for EEG and Trends                  D1D2...
     PersystWebApp.Change 'Time Format' From User Setting                    Elapsed Time
     PersystWebApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${PATIENT_ID}
-#    Common.Compare the Images             user-setting-fifth-test.png
+    Common.Compare the Images             user-setting-fifth-test.png
 
 Test Maximum Record Age
     PersystWebApp.Change 'Maximum Record Age' Setting                       1

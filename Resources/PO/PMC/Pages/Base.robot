@@ -4,6 +4,7 @@ Library     Collections
 Library     RequestsLibrary
 Library     OperatingSystem
 Library     JSONLibrary
+Library     String
 
 *** Variables ***
 ${Wait_Time}            40s
@@ -27,6 +28,16 @@ Wait And Click Element
     ${element_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${LOCATOR}
     IF      $element_enabled
           Click Element    ${LOCATOR}
+    ELSE
+          Log    Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}
+    END
+
+Wait and Get Element Text
+    [Arguments]    ${LOCATOR}
+    Wait Until Element Is Visible    ${LOCATOR}    timeout=${Wait_Time}   error=${Timeout_Message}
+    ${element_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${LOCATOR}
+    IF      $element_enabled
+          get text    ${LOCATOR}
     ELSE
           Log    Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}
     END
@@ -162,3 +173,26 @@ Get Child DirectoryID
     [Arguments]    ${json}
     ${Directory_ID}    set variable    ${json}[contents][0][contents][0][directoryID]
     RETURN     ${Directory_ID}
+
+Check if URLS match
+    [Arguments]    ${URL}
+    ${current_url}=    Get Location
+    Should Be Equal    ${current_url}    ${URL}
+
+Check Toggle Status
+    [Documentation]    Check if the "toggle-checked" class is present in the mat-slide-toggle element's class attribute.
+    [Arguments]    ${TOGGLE_ID}
+    ${EXPECTED_CLASS}   set variable    toggle-checked
+    Wait Until Element Is Visible    ${TOGGLE_ID}    10s
+    # Get the class attribute of the mat-slide-toggle element
+    ${class_attr}=    Get Element Attribute    ${TOGGLE_ID}    class
+
+    # Check if the expected class "toggle-checked" is present
+    ${Toggle_Status}        set variable    unknown
+    IF     '${EXPECTED_CLASS}' in '${class_attr}'
+            ${Toggle_Status}    Set Variable        checked
+    ELSE
+            ${Toggle_Status}    Set Variable        unchecked
+    END
+    [Return]    ${Toggle_Status}
+

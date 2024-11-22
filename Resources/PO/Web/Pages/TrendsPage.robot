@@ -18,6 +18,7 @@ ${Single_Comment_Text}      id=Moji Comment@PersystTrends
 ${Comment_Delete_Button}    id=Moji Comment@PersystTrends-delete
 ${Comment_Edit_Button}      id=Moji Comment@PersystTrends-edit
 ${EEG_Link}                 id=EEG-link
+${TRENDS_PROGRESS_BAR}     css=app-trends-view app-trends-page:nth-child(1) > mat-progress-bar
 ################################################################################################################
 ##############################TRENDS SETTING############################TRENDS SETTING#########################
 
@@ -39,6 +40,7 @@ Verify Trends Page Loads Successfully
     wait until page does not contain element    ${second_spinner}
     wait until element is visible               ${Trends_Canvas}
     sleep    1s
+    wait until page does not contain element    ${TRENDS_PROGRESS_BAR}
 
 Click On Comment Button
     click element at coordinates       ${Trends_Image}    xoffset=-165   yoffset=100

@@ -46,7 +46,7 @@ Click on Patient Record By Name
 Navigate to Patient View By URL
     [Arguments]    ${URL}
     ${current_url}      get location
-    IF      $current_url == ${URL}
+    IF      $current_url == $URL
             no operation
     ELSE
             go to    ${URL}
@@ -145,12 +145,12 @@ Select A Record Filter
     ${Record_Filter_Button}         set variable    xpath=//button[@mattooltip="Record Filters"]
     Wait And Click Element          ${Record_Filter_Button}
     wait until page contains element        //app-record-filters        #Record Filter Modal
-    click link    Saved Filters
+    Wait And Click Element          xpath=//span[text()="Saved Filters"]
     Wait And Click Element          xpath=//div[text()=' ${RECORD_FILTER_NAME} ']
-    Wait And Click Element          xpath=//mdl-icon[text()='close']        #Closing the filter pop up
+    Wait And Click Element          xpath=//mat-icon[text()='close']/..        #Closing the filter pop up
 
 Cleaning the Record Filter From List Of Record
-   ${Record_Filter}     set variable    id=Record-Filter
+   ${Record_Filter}     set variable    xpath=//button//mat-icon[text()='filter_list']
    Wait And Click Element    ${Record_Filter}
 
 

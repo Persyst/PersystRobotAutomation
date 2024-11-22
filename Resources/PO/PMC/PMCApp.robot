@@ -23,10 +23,12 @@ Navigate to EEG Page From Trends
 
 Navigate to EEG From Record List Page By Patient Name
     [Arguments]    ${PATIENT_NAME}
-    Select Patient Record By Patient Name    ${PATIENT_NAME}
-    TrendsPage.Verify Trends Page Loads Successfully
-    Navigate to EEG Page From Trends
-    EEGPage.Verify EEG Page Loaded Successfully
+    ${EEG_URL}=      Set the EEG Page URL
+    Run Keyword Unless    Check if URLS match    ${EEG_URL}
+        Select Patient Record By Patient Name    ${PATIENT_NAME}
+        TrendsPage.Verify Trends Page Loads Successfully
+        Navigate to EEG Page From Trends
+        EEGPage.Verify EEG Page Loaded Successfully
 
 Navigate to EEG Page From Setting
     [Arguments]    ${PATIENT_NAME}
@@ -46,7 +48,8 @@ Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)
     PMCApp.Select Patient Record By Patient Name     ${PATIENT_NAME}
 
 Navigate to Settings From Patient View
-    Settings.Click On Settings Button
+    ${Setting_URL}=      Set the Settings URL
+    Settings.Click On Settings Button       ${Setting_URL}
     Settings.Verify "Setting" page loaded
 
 Navigate to User's Settings From Trends
@@ -103,8 +106,8 @@ Navigate to Patient View By URL And Search For Patient Name
     Search For Petient Name in Patient View Page        ${PATIENT_NAME}
 
 Go To EEG Page By URL   # URL variable comes from the test file depending on which patiend record we need to have
-    [Arguments]    ${URL}
-    EEGPage.Go To EEG Page Through URL  ${URL}
+    ${EEG_URL}      Set the EEG Page URL
+    EEGPage.Go To EEG Page Through URL  ${EEG_URL}
     EEGPage.Verify EEG Page Loaded Successfully
     sleep    2s
 
@@ -113,6 +116,12 @@ Go To Settings Page
     ${URL}      Common.Set the Settings URL
     Settings.Go To Settings Page        ${URL}
     Settings.Verify "Setting" page loaded
+    sleep    2s
+
+Go To Shared Settings Page
+    ${URL}      Common.Set the Settings URL
+    Settings.Go To Settings Page        ${URL}
+    Navigate to Shared Settings
     sleep    2s
 
 Go to "Login" page
@@ -133,7 +142,8 @@ Navigate to Login Page and Login
     PatientView.Verify Patient View Page Loaded
 
 Logging Out From PMC
-    Settings.Logging out
+    ${Setting_URL}=      Set the Settings URL
+    Settings.Logging out        ${Setting_URL}
 
 Search For Petient in Patient List With Patient Name
     [Arguments]         ${PATIENT_NAME}
@@ -183,6 +193,12 @@ Search For The Comment/Spike/Seizure In The EEG Comment Box
     EEGPage.Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter    ${COMMENT_NAME}
     ${Comment_name}    EEGPage.Get First Row's Text When Searched For Comment
     [Return]    ${Comment_name}
+
+Select Comment/Scene/Seizure In EEG Comment Box
+    [Arguments]    ${COMMENT_NAME}
+    Open Comment List from EEG Page
+    EEGPage.Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter    ${COMMENT_NAME}
+    Click on Comment/Spike/Seizzure On Comment Box      ${COMMENT_NAME}
 
 Change "Include Spikes In Comment" Setting
     [Arguments]    ${STATUS}        # The status should be either "Enable" or "Disable"
@@ -525,10 +541,11 @@ Change User Password From User Settings
     [Arguments]    ${OLD_PASSWORD}          ${NEW_PASSWORD}
     Go To Settings Page
     Settings.Click Change Password On Settings
-    Settings.Enter Old and New Password         ${OLD_PASSWORD}          ${NEW_PASSWORD}
+    ${Setting_URL}      Set the Settings URL
+    Settings.Enter Old and New Password         ${OLD_PASSWORD}          ${NEW_PASSWORD}         ${Setting_URL}
 
 Add a New Standard Comment From Shared Setting
-    Navigate to Shared Settings
+    Go To Shared Settings Page
     Navigate to 'Standard Comments Editor' in Shared Settings
     Settings.Add a New Standard Comment
     Navigate Back to Main Setting Menu From Setting Pages
@@ -553,8 +570,9 @@ Get Patient Record Info From Patient View Info Button
 
 Add New Record Filter in Shared Settings
     [Arguments]         ${FILTER_NAME}          ${FILTER_STRING}
-    PMCApp.Go To Settings Page
+    Go To Settings Page
     Navigate to Shared Settings
     Navigate To Shared Record Filters
     Settings.Click on ADD Record Filter Button
     Settings.Create a New Record Filter     ${FILTER_NAME}          ${FILTER_STRING}
+

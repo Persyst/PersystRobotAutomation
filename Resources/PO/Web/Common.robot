@@ -129,3 +129,11 @@ Reset Trends and EEG Default Settings
     Reset EEG Default Settings
     Reset Trends Default Settings
     PersystWebApp.Navigate From Setting to Patient View
+
+Reset User Settings(Common)
+    PersystWebApp.Go To Settings Page
+    PersystWebApp.Reset All User Settings
+
+Reset Spike Review Settings
+    SpikeReviewPage.Close Spike Review If Launched Already
+    SpikeReviewPage.Launch Spike Review If Not Launched Already

@@ -3,8 +3,6 @@ Documentation    This test is going to test EEG Settings
 Resource         ../../Resources/PO/Web/Common.robot
 Resource         ../../Resources/PO/Web/PersystWebApp.robot
 Resource         ../../Resources/PO/Web/Pages/EEGPage.robot
-#Suite Setup      Run Keywords   Begin Web Suit    AND    Reset EEG Setting
-#Suite Teardown   Run Keywords   Reset EEG Setting   AND    End Web Suit
 Suite Setup      Run Keywords   Begin Web Suit  AND    Reset EEG Setting
 Suite Teardown   Run Keywords   End Web Suit
 
@@ -17,18 +15,18 @@ Test Create Patient Montage
     PersystWebApp.Create Patient Montage in EEG Page
     sleep    3s
     ${EEG_Montage_Name}      EEGPage.Get EEG Selected Montage
-    wait until page contains element     xpath=//mdl-button[text()=' F3-C3 ']          30s
-    page should not contain element      xpath=//mdl-button[text()=' FP1-F3 ']
-    page should contain element          xpath=//mdl-button[text()=' FP1-F7 ']
+    wait until page contains element     xpath=//button/span[text()=' F3-C3 ']          30s
+    page should not contain element      xpath=//button/span[text()=' Fp1-F3 ']
+    page should contain element          xpath=//button/span[text()=' Fp1-F7 ']
     should be equal     ${EEG_Montage_Name}          Bipolar longitudinal A (Patient)\n>
 
 Test Delete Created Patient Montage
     PersystWebApp.Delete Created Montage From EEG Page
     sleep    3s
     ${EEG_Montage_Name}      EEGPage.Get EEG Selected Montage
-    wait until page contains element     xpath=//mdl-button[text()=' F3-C3 ']          30s
-    page should contain element          xpath=//mdl-button[text()=' FP1-F3 ']
-    page should contain element          xpath=//mdl-button[text()=' FP1-F7 ']
+    wait until page contains element     xpath=//button//span[text()=' F3-C3 ']          30s
+    page should contain element          xpath=//button//span[text()=' Fp1-F3 ']
+    page should contain element          xpath=//button//span[text()=' Fp1-F7 ']
     should be equal     ${EEG_Montage_Name}          Bipolar longitudinal A\n>
 
 Add Comment On EGG Page Verify On Patient

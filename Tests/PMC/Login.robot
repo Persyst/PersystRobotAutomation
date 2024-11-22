@@ -24,5 +24,6 @@ User should be able to login with valid credentials
 
 Test About Persyst Mobile Contents
     LoginPage.Click on 'About' Button
+    sleep    9s
     Common.Compare the Images       about_page.png
 

@@ -8,18 +8,17 @@ ${Logout_Button_Locator}            xpath=//div[text()=' Logout ']
 ${Setting_Page_Last_Element}        id=EEG-high-resolution
 ${Include_Spike_Checkbox}           id=include-spike-comments
 ${Record_List}                      xpath=//mat-icon[text()='arrow_back_ios']/following-sibling::div
-${Include_Spike_Checkbox_Bullet}    css=#include-spike-comments-button > div.mdc-switch__handle-track
+${Include_Spike_Checkbox_Bullet}    css=#include-spike-comments-button > *.mdc-switch__handle-track
 ${Comment_Sort_Dropdown}            id=Comments Sort
 &{Comment_Sort_Options}             ASC=#mat-option-1 > span     DES=#mat-option-0 > span
 ${Quick_Comment_Switch}             id=quick-comment-checkbox
-${Quick_Comment_Bullet}             css=#quick-comment-checkbox-button > div.mdc-switch__handle-track svg.mdc-switch__icon.mdc-switch__icon--off
-&{Display_Options}                  EEG=display-eeg     Trends=display-trends     Only-EEG=display-only-eeg
+${Quick_Comment_Bullet}             css=#quick-comment-checkbox-button > *.mdc-switch__handle-track > * > *.mdc-switch__icons.ng-star-inserted
 ${Patient_Name_Switch}              id=patient-name-display
-${Patient_Name_Bullet}              css=#patient-name-display-button svg.mdc-switch__icon.mdc-switch__icon--off
-${EEG_BackgroundColor_Button}       id=EEG Background Color
+${Patient_Name_Bullet}              css=#patient-name-display-button > *.mdc-switch__handle-track > * > *.mdc-switch__icons.ng-star-inserted
+${EEG_BackgroundColor_Button}       xpath=//ngx-colors[1]
 ${EEG_BackColor_Input}              css=#ngx-colors-overlay input
 ${Grid_BackColor_Label}             xpath=//label[text()='Show Patient Names on EEG and Trends:']
-${Grid_BackColor_Button}            id=EEG Grid Color
+${Grid_BackColor_Button}            xpath=//ngx-colors[2]
 ${Grid_BackColor_Input}             css=#ngx-colors-overlay > ngx-colors-panel input
 &{LFF_Type}                         Time-Constant=LFF-time     Frequency=LFF-frequency
 &{Date_Format_Options}              mm-dd-yyyy=date-mm-dd-yyyy    D1D2=date-D1D2    None=date-None
@@ -28,9 +27,9 @@ ${Time_Decimal_Input}               id=Time Decimals
 ${Max_Record_Age_Input}             id=Maximum Record Age
 ${Max_Record_Duration_Input}        id=Maximum Record Duration
 ${Segment_Record_Day_switch}        id=segment-by-day
-${Segment_Record_Day_Bullet}        css=#segment-by-day-button svg.mdc-switch__icon.mdc-switch__icon--off
+${Segment_Record_Day_Bullet}        css=#segment-by-day-button > *.mdc-switch__handle-track > * > *.mdc-switch__icons.ng-star-inserted
 ${Segment_Specific_Time_Switch}     id=segment-specific-time
-${Segment_Specific_Time_Bullet}     css=#segment-specific-time-button svg.mdc-switch__icon.mdc-switch__icon--off
+${Segment_Specific_Time_Bullet}     css=#segment-specific-time-button > *.mdc-switch__handle-track > * > *.mdc-switch__icons.ng-star-inserted
 ${Refresh_Interval}                 id=Refresh Interval
 ${Inactivity_Timeout}               id=Inactivity Timeout
 ${Turnoff_On_Inactivity_Switch}     id=inactivity-on-off
@@ -41,33 +40,34 @@ ${High_Resolution_EEG_Switch}       id=EEG-high-resolution
 ${High_Resolution_EEG_Bullet}       css=#EEG-high-resolution-button svg.mdc-switch__icon.mdc-switch__icon--off
 ${Escape}                           \\35
 ${Reset_User_Interface}             id=ui-reset-button
+&{Favorite_Montage_Options}         Laplacian=//div[text()=' Laplacian ']/../*/mat-slide-toggle/*/button/*[2]/*/*[3]   Neo AvRef=//div[text()=' Neo AvRef ']/../*/mat-slide-toggle/*/button/*[2]/*/*[3]
 ${Montage_Editor_New_Button}        name=New-Montage
 ${New_Montage_Modal}                xpath=//mat-dialog-container
 ${New_Montage_Name_Textfield}       name=New-Montage-Input
 ${New_Montage_Modal_Ok_Button}      name=Name-Ok
 ${Select_Montage_Dropdown}          xpath=//mat-select[@placeholder="Click New to create a Montage."]
 ${Reset_All_User_Settings_Button}   id=reset-button
-${Reset_Modal_Title}                id=mat-mdc-dialog-title-4
+${Reset_Modal_Title}                xpath=//app-alert-confirm-dialog/h1
 ${Reset_Modal_RESET_Button}         xpath=//button[text()=' Reset ']
-${Reset-Modal_OK_Button}            xpath=//button[text()=' Ok ']
-${First_Montage_In_Dropdown}        css=#mat-select-8 span span
-${Save_New_Montage_Button}          xpath=//mdl-button[text()="Save"]
-${Montage_Editor_More_Actins_Button}   xpath=//button[@title="More Actions"]
-${Delete_Montage_Option}            css=body > app-root > div:nth-child(1) > app-patient-views > app-user-settings > div > app-montage-editor-page > div > div:nth-child(2) > app-montage-editor > mdl-menu > div > div.mdl-menu > mdl-menu-item:nth-child(3)
-${Edit_Montage_Channel_Modal}       xpath=//mdl-dialog-host-component[contains(@class, 'mdl-dialog') and contains(@class, 'open')]
-${Edit_Mtg_Modal_Cancel}            xpath=//mdl-button[text()="Cancel"]
+${Reset-Modal_OK_Button}            id=Reset Complete-OK
+${First_Montage_In_Dropdown}        xpath=//mat-option[1]
+${Save_New_Montage_Button}          name=Save-New-Montage
+${Montage_Editor_More_Actins_Button}  name=More-Actions
+${Delete_Montage_Option}            name=Delete-Montage
+${Edit_Montage_Channel_Modal}       xpath=//mat-dialog-container[contains(@class, 'mdc-dialog') and contains(@class, 'open')]
+${Edit_Mtg_Modal_Cancel}            xpath=//button/span[text()="Cancel"]
 ${Show_All_Montage_Switch}          xpath=//*[@label="ShowAllMontages"]
-${Show_All_Montage_Bullet}          css=app-montage-favorites mat-slide-toggle[label='ShowAllMontages'] svg:nth-child(1)
+${Show_All_Montage_Bullet}          xpath=//mat-slide-toggle[@label="ShowAllMontages"]/*//*[@class="mdc-switch__icons ng-star-inserted"]
 ${User_Settings_Link}               xpath=//div[text()="User Settings"]
 ${Add_Comment_Record_Filter}        xpath=//div[text()=" Add "]
-${New_Comment_Filter_Name_Input}    xpath=//input[@label="Filter-Name"]
-${New_Comment_Filter_String_Input}  xpath=//input[@label="Filter-String"]
+${New_Comment_Filter_Name_Input}       name=Filter-Name-Input
+${New_Comment_Filter_String_Input}     name=Filter-Search-String
 ${Regular_String_Switch}            xpath=//mat-slide-toggle[@label="Regular-Toggle"]
-${Regular_String_Bullet}            xpath=//mat-slide-toggle[@label="Regular-Toggle"]/div/button/div[2]/div
+${Regular_String_Bullet}            xpath=//mat-slide-toggle[@label="Regular-Toggle"]/*/button/*[2]/*
 ${Ignore_String_Switch}             xpath=//mat-slide-toggle[@label="Seizure-Toggle"]
-${Ignore_String_Bullet}             xpath=//mat-slide-toggle[@label="Seizure-Toggle"]/div/button/div[2]/div
+${Ignore_String_Bullet}             xpath=//mat-slide-toggle[@label="Seizure-Toggle"]/*/button/*[2]/*
 ${Include_Notification_Switch}      xpath=//mat-slide-toggle[@label="Notification-Toggle"]
-${Include_Notification_Bullet}      xpath=//mat-slide-toggle[@label="Notification-Toggle"]/div/button/div[2]/div
+${Include_Notification_Bullet}      xpath=//mat-slide-toggle[@label="Notification-Toggle"]/*/button/*[2]/*
 ${New_Comment_Done_Button}          xpath=//div[text()=" Done "]
 ${Delete_Button}                    xpath=//button[@class='btn btn-xs btn-danger ng-star-inserted']
 
@@ -76,18 +76,19 @@ Reset User Settings
     Wait And Click Element    ${Reset_All_User_Settings_Button}
     wait until page contains element    ${Reset_Modal_Title}
     click button     Reset
-    wait until page does not contain element    ${Reset_Modal_Title}
     wait until page contains element       ${Reset-Modal_OK_Button}
-    click button    Ok
+    Wait And Click Element    ${Reset-Modal_OK_Button}
     wait until page does not contain element    ${Reset-Modal_OK_Button}
 
 Logging out
-    Click On Settings Button
+    [Arguments]         ${Setting_URL}
+    Click On Settings Button    ${Setting_URL}
     verify "setting" page loaded
     Click On "Logout"
     Verify User Successfully Logged Out
 
 Click On Settings Button
+    [Arguments]    ${Setting_Page_URL}
     ${current_url}      get location
     IF      $current_url == $Setting_Page_URL
             no operation
@@ -112,19 +113,14 @@ Verify User Successfully Logged Out
     wait until page contains     Welcome To Persyst Mobile
 
 Change "Include Spikes In Comment" checkbox
-    [Arguments]      ${STATUS}
-    ${class_attribute}    get element attribute    ${Include_Spike_Checkbox}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
-    IF      '${STATUS}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+    [Arguments]      ${ACTION}
+    ${Toggle_Status}=     Check Toggle Status     ${Include_Spike_Checkbox}
+    IF      '${ACTION}' == 'Enable'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element    ${Include_Spike_Checkbox_Bullet}
             END
-    ELSE IF    '${STATUS}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+    ELSE IF    '${ACTION}' == 'Disable'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element   ${Include_Spike_Checkbox_Bullet}
             ELSE
                 no operation
@@ -151,19 +147,14 @@ Select Comment Sort Order
     END
 
 Change "Add Quick Comments" checkbox
-    [Arguments]      ${STATUS}
-    ${class_attribute}    get element attribute    ${Quick_Comment_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
-    IF      '${STATUS}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+     [Arguments]      ${ACTION}
+    ${Toggle_Status}=     Check Toggle Status     ${Quick_Comment_Switch}
+    IF      '${ACTION}' == 'Enable'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element    ${Quick_Comment_Bullet}
             END
-    ELSE IF    '${STATUS}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+    ELSE IF    '${ACTION}' == 'Disable'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element   ${Quick_Comment_Bullet}
             ELSE
                 no operation
@@ -172,22 +163,17 @@ Change "Add Quick Comments" checkbox
 
 Select Display Options
     [Arguments]    ${TRENDS/EEG/EEGONLY}
-    Wait And Click Element    id=${Display_options}[${TRENDS/EEG/EEGONLY}]
+    Wait And Click Element    xpath=//*[text()="${TRENDS/EEG/EEGONLY}"]/../div
 
 Change "Show Patient Name" setting
-    [Arguments]      ${STATUS}
-    ${class_attribute}    get element attribute    ${Patient_Name_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
-    IF      '${STATUS}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+    [Arguments]      ${ACTION}
+    ${Toggle_Status}=     Check Toggle Status     ${Patient_Name_Switch}
+    IF      '${ACTION}' == 'Enable'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element    ${Patient_NAme_Bullet}
             END
-    ELSE IF    '${STATUS}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+    ELSE IF    '${ACTION}' == 'Disable'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element   ${Patient_NAme_Bullet}
             ELSE
                 no operation
@@ -198,12 +184,13 @@ Enter EEG Background Color
     [Arguments]      ${COLOR-CODE}
     Wait And Click Element    ${EEG_BackgroundColor_Button}
     input text       ${EEG_BackColor_Input}     ${COLOR-CODE}
+    Press Keys       ${EEG_BackColor_Input}     RETURN
 
 Enter Grid Background Color
     [Arguments]      ${COLOR-CODE}
     Wait And Click Element    ${Grid_BackColor_Button}
     input text       ${Grid_BackColor_Input}    ${COLOR-CODE}
-    Press Keys       None        ESC
+    Press Keys       ${EEG_BackColor_Input}     RETURN
 
 Change LFF Type Setting
     [Documentation]             The options are 'Time-Constant' and 'Frequency'
@@ -214,12 +201,13 @@ Change LFF Type Setting
 Change Date Formats for EEG and Trends
     [Documentation]             The Options are 'mm-dd-yyyy', 'D1D2' and 'None'
     [Arguments]                 ${MM-DD-YYY/D1D2/NONE}
-    Wait And Click Element               id=${Date_Format_Options}[${MM-DD-YYY/D1D2/NONE}]
+    ${Date_Format}        set variable    //*[text()="${MM-DD-YYY/D1D2/NONE}"]/../div
+    Wait And Click Element      xpath=${Date_Format}
 
 Change Time Format Setting
     [Documentation]             The options are 'Clock-Time', 'Elapsed-Time', 'Seconds-Recorded'
     [Arguments]                 ${CLOCK/ELAPSED/SECONDS}
-    Wait And Click Element               id=${Time_Formats}[${CLOCK/ELAPSED/SECONDS}]
+    Wait And Click Element       xpath=//*[text()="${CLOCK/ELAPSED/SECONDS}"]/../div
 
 Change Time Decimal Numbers
     [Documentation]             There is no predefined numbers, user can enter any number
@@ -238,18 +226,13 @@ Change Maximum Record Duration
 
 Change Segment By Day Switch Status
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${Segment_Record_Day_switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${Segment_Record_Day_switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element    ${Segment_Record_Day_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element   ${Segment_Record_Day_Bullet}
             ELSE
                 no operation
@@ -258,18 +241,13 @@ Change Segment By Day Switch Status
 
 Change Segment By Specific Time Switch Status
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${Segment_Specific_Time_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${Segment_Specific_Time_Switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element    ${Segment_Specific_Time_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element   ${Segment_Specific_Time_Bullet}
             ELSE
                 no operation
@@ -288,18 +266,13 @@ Enter 'Inactivity Timeout' Into Textbox
 
 Change 'Inactivity Timeout' Status
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${Turnoff_On_Inactivity_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${Turnoff_On_Inactivity_Switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element      ${Turnoff_On_Inactivity_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element    ${Turnoff_On_Inactivity_Bullet}
             ELSE
                   no operation
@@ -308,18 +281,13 @@ Change 'Inactivity Timeout' Status
 
 Change 'Show Connection Speed' Status
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${Show_Connection_Speed_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${Show_Connection_Speed_Switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element      ${Show_Connection_Speed_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element    ${Show_Connection_Speed_Bullet}
             ELSE
                 no operation
@@ -328,18 +296,13 @@ Change 'Show Connection Speed' Status
 
 Change 'EEG High Resolution' Status
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${High_Resolution_EEG_Switch}   class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${High_Resolution_EEG_Switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 Wait And Click Element      ${High_Resolution_EEG_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   Wait And Click Element    ${High_Resolution_EEG_Bullet}
             ELSE
                 no operation
@@ -347,11 +310,12 @@ Change 'EEG High Resolution' Status
     END
 
 Click on 'Reset User Interface'
-    Wait And Click Element                 ${Reset_User_Interface}
-    click button         Reset
-    wait until page contains                User interface settings have been reset.
-    click button         Ok
-    wait until page does not contain        User interface settings have been reset.
+    Wait And Click Element    ${Reset_All_User_Settings_Button}
+    wait until page contains element    ${Reset_Modal_Title}
+    click button     Reset
+    wait until page contains element       ${Reset-Modal_OK_Button}
+    click button    ${Reset-Modal_OK_Button}
+    wait until page does not contain element    ${Reset-Modal_OK_Button}
 
 Click 'User Guide' Link
     click link    User Guide
@@ -391,17 +355,15 @@ Click 'Save' Montage Button
     sleep    1s
 
 Click on Montage List Dropdown
-    click element      ${Select_Montage_Dropdown}
+    Wait And Click Element      ${Select_Montage_Dropdown}
 
 Select First Montage On Dropdown
-    Wait And Click Element      ${First_Montage_In_Dropdown}
+    click element     ${First_Montage_In_Dropdown}
 
 Select Delete Montage
     click button                ${Montage_Editor_More_Actins_Button}
-    wait until page contains element    xpath=//div[@class="mdl-menu__container is-upgraded is-visible"]        #Menu
-    sleep    3s
     click element               ${Delete_Montage_Option}
-    click button                         OK
+    click button                        Confirm Delete
 
 Edit Created Montage
     click button                   Edit
@@ -418,18 +380,13 @@ Click On 'Favorite Montage' Link
 
 Change Show All Favorite Montage Settings
     [Arguments]    ${ON/OFF}
-    ${class_attribute}    get element attribute    ${Show_All_Montage_Switch}    class
-    IF      '${class_attribute}' == 'is-upgraded mdl-switch ng-untouched ng-pristine ng-valid is-checked'
-             ${checkbox_status}    set variable    True
-    ELSE
-             ${checkbox_status}    set variable    False
-    END
+    ${Toggle_Status}=     Check Toggle Status     ${Show_All_Montage_Switch}
     IF      '${ON/OFF}' == 'Enable'
-            IF  '${checkbox_status}' == 'False'
+            IF  '${Toggle_Status}' == 'unchecked'
                 click element    ${Show_All_Montage_Bullet}
             END
     ELSE IF    '${ON/OFF}' == 'Disable'
-            IF    '${checkbox_status}' == 'True'
+            IF    '${Toggle_Status}' == 'checked'
                   click element   ${Show_All_Montage_Bullet}
             ELSE
                 no operation
@@ -438,16 +395,15 @@ Change Show All Favorite Montage Settings
 
 Select Montage From List Of Favorite Montages
     [Arguments]      ${MONTAGE_NAME}
-    ${Favorite_Montage_Options}    set variable     xpath=//div[text()=' ${MONTAGE_NAME} ']/../div/mdl-switch
-    wait until page contains element     ${Favorite_Montage_Options}
-    Wait And Click Element               ${Favorite_Montage_Options}
+    wait until page contains element     xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
+    Wait And Click Element               xpath=${Favorite_Montage_Options}[${MONTAGE_NAME}]
 
 Click On User Settings From Inside Settings Pages
     Wait And Click Element       ${User_Settings_Link}
 
 Click On 'Comment Filter' Button
     click link                   Comment Filters
-    wait until page contains     User Comment Filters
+    wait until page contains     Comment Filters
 
 click on 'Add' New Comment Filter
     Wait And Click Element               ${Add_Comment_Record_Filter}
@@ -464,7 +420,7 @@ Create New Comment Filter
     page should contain    Moji Filter
 
 Delete Comment Filter
-    Wait And Click Element                     xpath=//button[text()="- "]
+    Wait And Click Element                      xpath=//button[text()="- "]
 
 Click on Keyboard Shortcut Settings
     click link                  Keyboard Settings
@@ -482,6 +438,7 @@ Click On Reset Keyboard Shortcut Button
     ${Reset_Modal_Text}         set variable    xpath=//div[text()='Are you sure you want to reset to the default values?']
     wait until page contains element            ${Reset_Modal_Text}
     click button     Reset
+    sleep    3s
     wait until page does not contain element    ${Reset_Modal_RESET_Button}
 
 Click Change Password On Settings
@@ -490,7 +447,7 @@ Click Change Password On Settings
 
 
 Enter Old and New Password
-    [Arguments]    ${OLD_PASSWORD}          ${NEW_PASSWORD}
+    [Arguments]    ${OLD_PASSWORD}       ${NEW_PASSWORD}      ${Setting_URL}
     wait until page contains element        id=Old Password
     wait until page contains element        id=New Password
     wait until page contains element        id=Retype New Password
@@ -501,8 +458,10 @@ Enter Old and New Password
     ${Update_Password}    set variable      id=Update-Password-Button
     click element    ${Update_Password}
     wait until page contains              Your password has been successfully changed
-    wait until page contains              Ok
-    click button                          Ok
+    Wait And Click Element                id=Password Changed.-OK
+    wait until element is visible    ${Logout_Button_Locator}
+    wait until element is enabled    ${Logout_Button_Locator}
+    Wait Until Keyword Succeeds    30s    1s    Check If URLs Match      ${Setting_URL}
 
 Delete Filter If Exist
     ${Delete_Button_Exist}          get element count    ${Delete_Button}
@@ -512,10 +471,9 @@ Delete Filter If Exist
 
 Delete Previouly Create Montage If Exist
     ${First_Montage}    set variable    xpath=//app-montage-editor//mat-select[@placeholder="Click New to create a Montage."]/div/div/span/span
-    Click on Montage List Dropdown
+#    Click on Montage List Dropdown
     ${First_Montage_Name}       get text    ${First_Montage}
     IF    '${First_Montage_Name}' == 'Moji Montage (User)'
-            Settings.Select First Montage On Dropdown
             Settings.Select Delete Montage
             sleep   5s
     END
@@ -534,7 +492,7 @@ Click on Shared Setting Link
     ${Shared_Settings}      set variable    xpath=//span[text()="Shared Settings"]
     Wait And Click Element      ${Shared_Settings}
     wait until page contains    Standard Comments
-
+    sleep     3s
 Click on Unit Definition
     click link    Unit Definitions
     wait until page contains    Edit Unit Definitions
@@ -579,13 +537,13 @@ Click on Standard Comments Link
     wait until page contains                        Rhythmic Delta
 
 Add a New Standard Comment
-    ${Add_Button}                   set variable    xpath=//mat-icon[@label="Add-Button"]/following-sibling::span[2]
+    ${Add_Button}                   set variable    xpath=//mat-icon[@label="Add-Button"]
     wait until page contains element                                       ${Add_Button}
     Wait And Click Element                                                 ${Add_Button}
     ${Save_Button}                  set variable    xpath=//button[@id="Save-Button"]
     wait until page contains element                              ${Save_Button}
     ${Comment_Text_Input}           set variable    xpath=//input[@label="Comment-Text-Input"]
-    input text                      ${Comment_Text_Input}         New Moji Comment
+    input text                      ${Comment_Text_Input}         NewMojiComment
     Wait And Click Element                   ${Save_Button}
 
 Click on Shared Comment Filters on Shared Settings
@@ -609,8 +567,9 @@ Click on EEG Default Settings
 
 Select a Panel From Trends Default Panel Dropdown
     [Arguments]    ${DEFAULT_PANEL}
-    ${Panel_Dropdown}               set variable    xpath=//mat-select[@id="Default Panel"]/div
-    Wait And Click Element                          ${Panel_Dropdown}
+    ${Default_Panel_Dropdown}       set variable    Default Panel
+    set focus to element    id=${Default_Panel_Dropdown}
+    Wait And Click Element      id=${Default_Panel_Dropdown}
     ${Panel_Menu}                   set variable    xpath=//div[@id="Default Panel-panel"]
     wait until element is visible                   ${Panel_Menu}       40s
     ${Panel_Option}                 set variable    xpath=//mat-option/span[text()='${DEFAULT_PANEL}']
@@ -641,9 +600,9 @@ Select Patient Record For Default Settings
     Wait And Click Element      ${Patient_Dropdown}
     wait until page contains    Select Record
     wait until page contains element            id=Cancel_Button      # Cancel Button on the modal
-    ${Patient_Record_Textfield}         set variable        xpath=//input[@label="Modal Patient Name Filter"]
-    input text          ${Patient_Record_Textfield}         ${PATIENT_NAME}
-    ${Patient_Item}     set variable        xpath=//mat-list-item/span/span[text()=' ${PATIENT_NAME} ']
+    ${Patient_Record_Textfield}         set variable        xpath=//mat-form-field//*[text()="Patient Name Filter"]
+#    input text          ${Patient_Record_Textfield}         p
+    ${Patient_Item}     set variable        xpath=//mat-list-item/*/*[text()=' ${PATIENT_NAME} ']
     Wait And Click Element          ${Patient_Item}
 
 Navigate To Shared Record Filters
@@ -656,7 +615,7 @@ Click on ADD Record Filter Button
 
 Create a New Record Filter
     [Arguments]    ${RECORD_FILTER_NAME}        ${FILTER_STRING}
-    ${Filter_Name_Input}    set variable        xpath=//input[@label="Filter-Input"]
+    ${Filter_Name_Input}    set variable        xpath=//input[@label="Filter-Name"]
     input text          ${Filter_Name_Input}        ${RECORD_FILTER_NAME}       clear=True
     ${Search_String_Input}  set variable        xpath=//input[@label="Filter-String"]
     input text          ${Search_String_Input}      ${FILTER_STRING}            clear=True

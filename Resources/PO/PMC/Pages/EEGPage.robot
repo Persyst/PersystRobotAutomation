@@ -7,11 +7,15 @@ Resource         Base.robot
 ${Circle_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__left > div
 ${Second_Spinner}           css=body > app-root > div:nth-child(1) > app-patient-views > app-trends-view > div > div > div:nth-child(1) > div.scroll-view > div > div:nth-child(1) > div.unselectable > div > div > app-trends-page:nth-child(1) > mdl-spinner > div.mdl-spinner__layer.mdl-spinner__layer-4 > div.mdl-spinner__circle-clipper.mdl-spinner__right > div
 ${EEG_Image}                id=image
+${Comment_Button}           css=button[title="Comment Editor"]
+${Comment_editor}           id=comment-editor
+${Comment_Box_On_EEG}       css=#comment-selection-list > div
+${Comment_+_Button}         xpath=//*[@id="comment-editor"]/div[2]/button[3]/mat-icon
 ${Comment_List_box}         css=app-patient-views app-eeg-view app-comment-list
 ${Comment_List_Button}      css=body > app-root button[title="Comment List"]
 ${Comment_Name_Textfield}   id=comment-filter-input
 ${First_Comment_Row}        css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(2) > span > span > div
-${First_Row_In_Comments}    css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(2) > span > span > div
+${First_Row_In_Comments}    css=body > app-root > div > app-patient-views > app-eeg-view > div > div > div:nth-child(2) > app-comment-list > div > mat-list > mat-list-item:nth-child(1) > span > span > div
 ${Trends_Link}              xpath=//span[text()='Trends']
 ${Play_Button}              css=body button[title='Start Playing']
 ${Pause_Button}             css=body button[title='Pause Playing']
@@ -19,6 +23,7 @@ ${Quick_Comment_modal}      css=div[mapname="QuickComment"]
 ${Patient_Name_Header}      css=body > app-root > div > app-patient-views > app-eeg-view div.view-header-title > div > div > div
 ${Comment_Filter_Button}    id=comment-filter-button
 ${Video_Modal}              xpath=//app-video
+${EEG_Page_Progress_Bar}    css=app-patient-views > app-eeg-view app-eeg-page:nth-child(1) mat-progress-bar
 #==================================================EEG Setting===============================================================
 ${EEG_Setting_Button}       id=eeg-settings-button
 ${Back_Arrow}               css=body div.back-arrow-item.back-arrow mdl-icon
@@ -38,20 +43,25 @@ ${EEG_Show_Comment_Off}     name=ShowComments Off
 ${EEG_Restrict_Pen_On}      name=RestrictPenDeflection On
 ${EEG_Restrict_Pen_Off}     name=RestrictPenDeflection Off
 ${EEG_Montage_Setting}      css=div[title='Select Montage']
-${EEG_Duration_Setting}     css=div [title="Select Duration"]
+${EEG_Duration_Setting}     css=div [title="Select Duration"] div.settingsText
 ${EEG_Duration_Menu}        id=eeg-duration-setting
-${EEG_Sensitivity_Setting}  css=div [title="Select Sensitivity"]
+${EEG_Sensitivity_Setting}  css=div [title="Select Sensitivity"] div.settingsText
 ${EEG_Sensitivity_Menu}     xpath=//div[@id="eeg-sensitivity-menu"]/div[2]
 ${Artifacts_Reduction_On}   name=AR On
 ${Artifacts_Reduction_Off}  name=AR Off
-${LFF_Setting}              css=div [title="Select LFF"]
-${HFF_Setting}              css=div [title="Select HFF"]
+${LFF_Setting}              css=div [title="Select LFF"] div.settingsText
+${HFF_Setting}              css=div [title="Select HFF"] div.settingsText
 &{Notch_Filter_Options}     60Hz=60       50Hz=50       OFF=Off
+${Montage_Editor_Elipses}   CSS=#mat-mdc-dialog-7 mat-dialog-actions > button.mat-mdc-menu-trigger.mdc-icon-button.mat-mdc-icon-button.mat-unthemed.mat-mdc-button-base
+${Delete_Montage}           CSS=#mat-menu-panel-17 > div > button:nth-child(3)
+${Waveforms_Dropdown}       name=Waveforms-Select
+${Display_Tab}              name=Display-Tab
 *** Keywords ***
 Verify EEG Page Loaded Successfully
     wait until page does not contain element    ${Circle_Spinner}
     wait until page does not contain element    ${second_spinner}
     wait until page contains element            ${EEG_Image}                    1m
+    wait until page does not contain element    ${EEG_Page_Progress_Bar}
 
 Launch Comment List If Not Launched Already
     ${comment_list_visibility}  get element count    ${Comment_List_box}
@@ -73,6 +83,10 @@ Click on Comment List Button
 Fill in the "Comment/Spike/Seizure Name" in Comment Box Filter
     [Arguments]   ${NAME}
     input text    ${Comment_Name_Textfield}     ${NAME}
+
+Click on Comment/Spike/Seizzure On Comment Box
+    [Arguments]    ${COMMENT_NAME}
+    Wait And Click Element    xpath=(//*[@id="${COMMENT_NAME}"])[2]
 
 Get First Row's Text When Searched For Comment
     wait until page contains element            ${First_Comment_Row}
@@ -129,9 +143,8 @@ Click the EEG Page Setting Button
     ${eeg_setting_box_visibility}    get element count     ${EEG_Setting_Box}
     IF      ${eeg_setting_box_visibility} == 0
             Click Element Until Visible         ${EEG_Setting_Button}            ${EEG_Setting_Box}
-#            Wait And Click Element                              ${EEG_Setting_Button}
-#            wait until page contains element                    ${EEG_Setting_Box}          40s
     END
+
 Navigate Back to Main Setting Menu
     ${Back_Arrow_visibility}   get element count                ${Back_Arrow}
     IF  ${Back_Arrow_visibility} != 0
@@ -149,7 +162,6 @@ Change the EEG Page Font Size
 Change Channel Per Page Setting
     [Arguments]    ${NUMBER_OF_CHANNELS}
     SELECT FROM LIST BY VALUE    ${EEG_Channel_Per_Page_Select}     ${NUMBER_OF_CHANNELS}
-    wait until page contains element    ${EEG_Setting_Box}
 
 Change Calibrartion Status
     [Arguments]    ${ON/OFF}
@@ -211,26 +223,28 @@ Click on Waveforms Setting Link
     Wait And Click Element    ${Waveforms_Settings_Tab}
 
 Click on Montage Setting
-    click element    ${EEG_Montage_Setting}
+    Wait And Click Element    ${EEG_Montage_Setting}
 
 Select Montage Option
     [Arguments]         ${MONTAGE_NAME}
-    click element       id=${MONTAGE_NAME}
+    Wait And Click Element       id=${MONTAGE_NAME}
 
 Click on EEG Page Duration Setting
     Navigate back to main setting menu
-    click element  ${EEG_Duration_Setting}
+    wait until element is enabled    ${EEG_Duration_Setting}        30s
+    Wait And Click Element           ${EEG_Duration_Setting}
     wait until page contains element    ${EEG_Duration_Menu}
 
 Select EEG Page Duration
     [Documentation]    The options are just numbers which are all in seconds like 10 or 20
     [Arguments]    ${DURATION}
     ${EEG_Duration_Options}     set variable    eeg-duration-${DURATION}
-    click element       id=${EEG_Duration_Options}
+    Wait And Click Element       id=${EEG_Duration_Options}
 
 Click on EEG Sensitivity Menu
     Navigate Back to Main Setting Menu
-    click element    ${EEG_Sensitivity_Setting}
+    wait until element is enabled    ${EEG_Sensitivity_Setting}         30s
+    Wait And Click Element           ${EEG_Sensitivity_Setting}
     wait until page contains element    ${EEG_Sensitivity_Menu}
 
 Select EEG Page Sensitivity
@@ -243,15 +257,17 @@ Select EEG Page Sensitivity
 Change Artifact Reduction Status
     [Arguments]    ${ON/OFF}
     Navigate Back to Main Setting Menu
+    wait until element is enabled    ${Artifacts_Reduction_On}      30s
     IF    '${ON/OFF}' == 'ON'
-        click element       ${Artifacts_Reduction_On}
+        Wait And Click Element       ${Artifacts_Reduction_On}
     ELSE
-        click element       ${Artifacts_Reduction_Off}
+        Wait And Click Element      ${Artifacts_Reduction_Off}
     END
 
 Click on LFF Setting Menu
     navigate back to main setting menu
-    click element    ${LFF_Setting}
+    wait until element is enabled    ${LFF_Setting}         30s
+    Wait And Click Element           ${LFF_Setting}
 
 Select LFF Setting
     [Documentation]    The LFF options arguments sent should be only the numbers like 0.16
@@ -261,6 +277,7 @@ Select LFF Setting
 
 Click on HFF Setting Menu
     navigate back to main setting menu
+    wait until element is enabled     ${HFF_Setting}            30s
     Wait And Click Element    ${HFF_Setting}
 
 Select HFF Setting
@@ -297,7 +314,7 @@ Click On Comment Filter Button
 
 Select a Comment Filter
     [Arguments]    ${FILTER_NAME}
-    click element    xpath=//div[text()=" ${FILTER_NAME} "]
+    Wait And Click Element    xpath=//div[text()=" ${FILTER_NAME} "]
 
 Get EEG Waveforms Settings
     @{List_of_Waveform_Settings}    create list    ${EEG_Montage_Setting}    ${EEG_Duration_Setting}      ${EEG_Sensitivity_Setting}   ${Artifacts_Reduction_On}     ${Artifacts_Reduction_Off}     ${LFF_Setting}   ${HFF_Setting}
@@ -319,3 +336,46 @@ Close Video Modal
     Run Keyword If  ${Is_Video_Modal_Present}  Click on Video Button
     Wait Until Page Does Not Contain Element  ${Video_Modal}
 
+click on Edit Montage
+    Click on Waveforms Setting Link
+    ${Edit_Montage_Button}      set variable    xpath=//button[contains(., 'Edit Montage')]/span[2]
+    wait until element is enabled    ${Edit_Montage_Button}     30s
+    click element    ${Edit_Montage_Button}
+
+Delete one of the Montage Channels
+    ${Channel_Name}             set variable    xpath=//span[text()='FP1-F3']
+    Wait And Click Element      ${Channel_Name}
+    ${Delete_Channel_Button}    set variable    xpath=//button/span[text()='Delete']
+    Wait And Click Element      ${Delete_Channel_Button}
+    ${Save_Button}              set variable    css=mat-dialog-actions:nth-child(2) > button:nth-child(1)
+    sleep   2s
+    Wait And Click Element      ${Save_button}
+
+Get EEG Selected Montage
+    ${Selected_Montage}   get text    ${EEG_Montage_Setting}
+    [Return]    ${Selected_Montage}
+
+Delete Patient Montage
+    Wait And Click Element    ${Montage_Editor_Elipses}
+    Wait And Click Element    ${Delete_Montage}
+    ${Confirm_Delete}         set variable    xpath=//button[text()=' Delete ']
+    Wait And Click Element    ${Confirm_Delete}
+
+Click On Comment Button
+    click element at coordinates       ${EEG_Image}    xoffset=-165   yoffset=100
+    click button    ${Comment_Button}
+    wait until page contains element    ${Comment_editor}
+
+Click on "+" button To Add The Comment
+    Wait And Click Element    ${Comment_+_Button}
+    sleep    3s
+    click element at coordinates       ${EEG_Image}    xoffset=-50   yoffset=250
+
+Click On Created Comment On EEG
+     click element at coordinates      ${EEG_Image}    xoffset=-160     yoffset=281
+     sleep    1s
+     wait until page contains element   ${Comment_Box_On_EEG}
+
+Click on Delete Comment Button
+    ${Delete_Button}        set variable    id=deleteMoji Comment
+    Wait And Click Element    ${Delete_Button}

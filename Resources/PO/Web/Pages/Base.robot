@@ -32,6 +32,18 @@ Wait And Click Element
           Log    Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}
     END
 
+Wait and Get Element Text
+    [Arguments]    ${LOCATOR}
+    Wait Until Element Is Visible    ${LOCATOR}    timeout=${Wait_Time}   error=${Timeout_Message}
+    ${element_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${LOCATOR}
+    IF      $element_enabled
+            ${Spike_Title}      get text    ${LOCATOR}
+    ELSE
+          Log    Element is not enabled, ${LOCATOR}, ${Wait_Time}, ${Timeout_Message}
+    END
+    [Return]    ${Spike_Title}
+
+
 Delete Items Until None Exist
     [Arguments]    ${LOCATOR}
     FOR    ${index}    IN RANGE    10    # a limit to avoid an infinite loop
@@ -113,3 +125,54 @@ Read expected JSON Directly
     ${expected_dict}=    load json from file    ${file_path}
     log    ${expected_dict}
     [Return]    ${expected_dict}
+
+Check if URLS match
+    [Arguments]    ${URL}
+    ${current_url}=    Get Location
+    Should Be Equal    ${current_url}    ${URL}
+
+Wait Until Page Is Fully Loaded
+    [Documentation]    Wait until the web page's ready state is 'complete'.
+    Wait Until Keyword Succeeds    30s    1s    Execute JavaScript    return document.readyState == 'complete';
+
+Check Toggle Status
+    [Documentation]    Check if the "toggle-checked" class is present in the mat-slide-toggle element's class attribute.
+    [Arguments]    ${TOGGLE_ID}
+    ${EXPECTED_CLASS}   set variable    toggle-checked
+    Wait Until Element Is Visible    ${TOGGLE_ID}    10s
+    # Get the class attribute of the mat-slide-toggle element
+    ${class_attr}=    Get Element Attribute    ${TOGGLE_ID}    class
+
+    # Check if the expected class "toggle-checked" is present
+    ${Toggle_Status}        set variable    unknown
+    IF     '${EXPECTED_CLASS}' in '${class_attr}'
+            ${Toggle_Status}    Set Variable        checked
+    ELSE
+            ${Toggle_Status}    Set Variable        unchecked
+    END
+    [Return]    ${Toggle_Status}
+    
+[Sample] Assign Patient to a Unit For Monitoring(4Backspace)
+    [Arguments]                     ${UNIT_NAME}                ${PATIENT_NAME}
+    ${Search_Input}                 set variable    xpath=//input[@label="String-Text-Input"]
+    input text                      ${Search_Input}             ${PATIENT_NAME}
+    Press Keys    ${Search_Input}    CTRL+END   BACKSPACE   BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE    BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE   BACKSPACE
+    ${Unit_Dropdown}                set variable    xpath=//mat-select[@placeholder='Unit']/div
+    ${Units_Dropdowns}=      get webelements    ${Unit_Dropdown}
+    ${Dropdowns_Count}=    get length    ${Units_Dropdowns}
+    FOR     ${Each}  IN RANGE    ${Dropdowns_Count}
+            ${Index}=                Evaluate          ${Each} + 1
+            ${Unit_Dropdown}            set variable        css=app-user-settings div:nth-child(3) div:nth-child(${Index}) mat-select
+            wait until page contains element                            ${Unit_Dropdown}       40s
+            Wait And Click Element                                      ${Unit_Dropdown}
+            ${Unit_Option}                  set variable    xpath=//mat-option/span[text()='${UNIT_NAME}']
+            wait until element is visible                   ${Unit_Option}
+            Wait And Click Element                           ${Unit_Option}
+            sleep    2s
+    END
+
+Select Option from Mat-Select
+    [Arguments]         ${SELECT_LOCATOR}       ${OPTION_LOCATOR}
+    Wait And Click Element              ${SELECT_LOCATOR}
+    wait until page contains element    ${OPTION_LOCATOR}
+    Wait And Click Element              ${OPTION_LOCATOR}

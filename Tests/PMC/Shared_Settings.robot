@@ -12,8 +12,6 @@ ${Patient_Record_Name}          xpath=//div[text()=' Moji Unit ']/../../followin
 
 *** Test Cases ***
 Test Shared Comment Filters
-    PMCApp.Go To Settings Page
-    PMCApp.Navigate to Shared Settings
     PMCApp.Navigate to 'Shared Comment Filters' Settings Under Shared Setting
     PMCApp.Create a New Comment Filter In Settings
     PMCApp.Navigate to EEG Page From Setting         ${Patient_Name}
@@ -34,11 +32,11 @@ Test Record Filter
     PMCApp.Delete a Record Filter
 
 Test Standard Comment
-    PMCApp.Go To Settings Page
     PMCApp.Add a New Standard Comment From Shared Setting
     PMCApp.Navigate to EEG Page From Setting         ${Patient_Name}
     PMCApp.Reset Quick Comment Modal
-    ${New_Comment}      set variable    xpath=//span[text()='New Moji Comment']
+    ${New_Comment}      set variable    xpath=//span[text()='NewMojiComment']
+    sleep    2s
     page should contain element   ${New_Comment}
     PMCApp.Quit Quick Comment Modal
     # This last step is to

@@ -60,15 +60,12 @@ Test Creating Favorite Montage List
     Settings.Select Montage From List Of Favorite Montages                 Laplacian
     Navigate Back to Main Setting Menu From Setting Pages
     PMCApp.Navigate to EEG Page From Setting                     ${Patient_Name}
-    sleep    6s
     PMCApp.Change EEG Montage Setting                            Laplacian
-    sleep    5s
     PMCApp.Change List of Favorite Montages From Settings        Laplacian
     PMCApp.Change 'Show All' Montage Status In Favorite Montage Setting    Enable
     Navigate Back to Main Setting Menu From Setting Pages
     PMCApp.Navigate to EEG Page From Setting                     ${Patient_Name}
     PMCApp.Change EEG Montage Setting                            Neonatal Bipolar
-    sleep   10s
 
 Test Creating a New Comment Filter
     PMCApp.Create a New Comment Filter In Settings

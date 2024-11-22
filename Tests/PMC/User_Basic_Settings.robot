@@ -34,7 +34,6 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color
     PMCApp.Set Grid Background Color From User Settings              ${fcolor}[white]
     PMCApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${Patient_Name}
     PMCApp.Verify EEG Page Loaded Successfully
-    sleep     2s
     Common.Compare the Images      user-setting-second-test.png
     ${Returned_Patient_Name}    PMCApp.Get Patient Name on EEG Page
     should contain    ${Returned_Patient_Name}     A2_24
@@ -48,19 +47,17 @@ Test Display Options-Quick Commands-Patient Name-Background and Grid Color(other
     PMCApp.Set EEG Background Color From User Settings               ${fcolor}[white]
     PMCApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${Patient_Name}
     PMCApp.Verify Trends Page Loaded Successfully
-    sleep     2s
     Common.Compare the Images      user-setting-third-test.png
     page should not contain element       ${Trends_Patient_Name}
     run keyword and expect error    STARTS: Element 'css=div[mapname="QuickComment"]' did not appear       PMCApp.Open Quick Comment Modal on EEG
 
 Test Date Format-Time Format
-    PMCApp.Change 'Date Formats' for EEG and Trends                  mm-dd-yyyy
-    PMCApp.Change 'Time Format' From User Setting                    Clock-Time
+    PMCApp.Change 'Date Formats' for EEG and Trends                  YYYYMMDD
+    PMCApp.Change 'Time Format' From User Setting                    Clock Time
     PMCApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${Patient_Name}
-    sleep     2s
     Common.Compare the Images             user-setting-forth-test.png
-    PMCApp.Change 'Date Formats' for EEG and Trends                  D1D2
-    PMCApp.Change 'Time Format' From User Setting                    Elapsed-Time
+    PMCApp.Change 'Date Formats' for EEG and Trends                  D1D2...
+    PMCApp.Change 'Time Format' From User Setting                    Elapsed Time
     PMCApp.Navigate From Setting to Trends/EEG(Either trends or EEG depend on Setting)   ${Patient_Name}
     Common.Compare the Images             user-setting-fifth-test.png
 

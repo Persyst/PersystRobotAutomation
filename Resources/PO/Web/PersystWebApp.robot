@@ -5,6 +5,8 @@ Resource         Pages/PatientView.robot
 Resource         Pages/TrendsPage.robot
 Resource         Pages/EEGPage.robot
 Resource         Common.robot
+Resource         Pages/MPMPage.robot
+Resource         Pages/SpikeReviewPage.robot
 
 *** Keywords ***
 #==================================================NAVIGATIONS=========================================================
@@ -129,6 +131,7 @@ Select Patient Record By Patient ID
     sleep    2s
 
 Create A Comment On Trends
+    TrendsPage.Verify Trends Page Loads Successfully
     TrendsPage.Click On Comment Button
     TrendsPage.Fill In "Comment Name" Input
     TrendsPage.Click on "+" button To Add The Comment
@@ -155,7 +158,7 @@ Create A Comment On EEG
 
 Click on Created Comment On EEG and Get Comment Name
     EEGPage.Click On Created Comment On EEG
-    ${Comment_name}    TrendsPage.Get Created Comment Text
+    ${Comment_name}    EEGPage.Get Created Comment Text
     [Return]    ${Comment_name}
 
 Search For The Comment/Spike/Seizure In The EEG Comment Box
@@ -593,6 +596,48 @@ Assign First Patient Name to A Unit In Shared Settings
     Settings.Click on Patient Unit Assignments Link
     Settings.Assign Patient to a Unit For Monitoring(4Backspace)      ${UNIT_NAME}         ${Patient_Name}
     Navigate Back to Main Setting Menu From Setting Pages
+
+Turn on MPM From User Settings
+    go to settings page
+    Settings.Navigate to MPM Settings
+    Settings.Turn on/off MPM Setting        Enable
+    Settings.Click On User Settings From Inside Settings Pages
+
+Select a Manual Patient for MPM
+    MPMPage.Open Cell Setting Modal    1      1
+    MPMPage.Select Patient on MPM Setting Modal
+
+Select a Automatic Patient for MPM
+    MPMPage.Open Cell Setting Modal    1      2
+    MPMPage.Select Type Of Manual Selection    Automatic
+    click button    OK
+
+Close One Of MPM Stations
+    MPMPage.Open Cell Setting Modal    1      2
+    MPMPage.Select Type Of Manual Selection    Closed
+    click button    OK
+
+Select Station For MPM Station
+    MPMPage.Open Cell Setting Modal    1      2
+    MPMPage.Select Type Of Manual Selection    Station
+    MPMPage.Select Station For Cell         3
+    click button    OK
+
+Set Spike Review Preview Filter
+    [Arguments]    ${PREVIEW_OPTION}
+    SpikeReviewPage.Select Option From View Filter      ${PREVIEW_OPTION}
+
+Set Spike Review Sort Filter
+    [Arguments]    ${SORT_OPTION}
+    SpikeReviewPage.Select Option From Sorting Filter    ${SORT_OPTION}
+
+Set Spike Detection Sensitivity Filter
+    [Arguments]    ${DETECTION_SENSITIVITY}
+    SpikeReviewPage.Select Detection Sensitivity         ${DETECTION_SENSITIVITY}
+
+Set Spike Intercrenial Preview Filter
+    [Arguments]    ${INTERCRENIAL_OPTION}
+    SpikeReviewPage.Select Option From Intercrenial Filter    ${INTERCRENIAL_OPTION}
 
 
 

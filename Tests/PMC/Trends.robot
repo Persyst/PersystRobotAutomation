@@ -14,7 +14,6 @@ ${PATIENT_NAME}            A2_24
 
 *** Test Cases ***
 Add Comment On Trends and Verify the comment on Trends Page and List of Comments in EEG Page(record)
-    [Documentation]    This test is going to add a comment on trends and then delete it after verifying it
     PMCApp.Create A Comment On Trends
     ${Comment_text}    PMCApp.Click on Created Comment On Trends and Get Comment Name
     should contain     ${Comment_text}      ${COMMENT_NAME}

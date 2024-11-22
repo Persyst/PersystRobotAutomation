@@ -2,7 +2,7 @@
 Documentation    This test is going to test Persyst Trends Setting
 Resource        ../../Resources/PO/Web/PersystWebApp.robot
 Resource        ../../Resources/PO/Web/Common.robot
-Suite Setup      Run Keywords   Begin Web Suit    AND       Reset the Trends Setting        ${PATIENT_ID}
+Suite Setup      Run Keywords   Begin Web Suit    AND       Reset the User Basic Settings     AND     Reset the Trends Setting        ${PATIENT_ID}
 Suite Teardown   Run Keywords   Reset the Trends Setting        ${PATIENT_ID}   AND      End Web Suit
 
 # Command line to run this test: robot -d results Tests/Web/Trends.robot

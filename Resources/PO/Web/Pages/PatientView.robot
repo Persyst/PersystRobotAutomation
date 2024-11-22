@@ -61,6 +61,7 @@ Click on 'Patient List' tab
     ${Patient_List}         set variable    xpath=//span[text()="Patient List"]
     Wait And Click Element    ${Patient_List}
     wait until page contains element        ${Patient_Filter_Textfield}
+    sleep    2s
 
 Check If Patient Record Exist
     [Arguments]    ${PATIENT_ID}
@@ -123,20 +124,14 @@ Get Patient Info From Info Button
     [Return]            ${Info}
 
 Get 'First Patient' Name in Monitoring Page
-    ${Fisrt_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/div[1]/div/div[2]/div[1]/div/div[1]/div[2]
-    wait until page contains element        ${Fisrt_Patient_Name}
-    ${Name}         get text    ${Fisrt_Patient_Name}
+    ${First_Patient_Name}       set variable    xpath=//app-patient-monitoring/div/div/div[1]/div/div/div[1]/div/div[1]/div[2]
+    wait until page contains element        ${First_Patient_Name}
+    ${Name}         get text    ${First_Patient_Name}
     [Return]    ${Name}
 
 Navigate to Slide Show Tab
     ${Slide_Show}         set variable    xpath=//span[text()="Slide Show"]
     Wait And Click Element    ${Slide_Show}
     wait until page contains    Speed:
-
-Navigate to MPM tab
-    Wait And Click Element            xpath=//span[text()='MPM']
-    ${Stations_Grid}            set variable    xpath=/html/body/app-root/div/app-patient-views/div/div[2]/div/mat-tab-group/div
-    wait until element is visible     ${Stations_Grid}
-
 
 

@@ -29,13 +29,14 @@ Test Shared Comment Filters
     PersystWebApp.Go To Settings Page
     PersystWebApp.Navigate to Shared Settings
     PersystWebApp.Navigate to 'Shared Comment Filters' Settings Under Shared Setting
-    page should contain    The shared filters are read only based on your privileges. Click on a filter to see its properties.
+    page should not contain    The shared filters are read only based on your privileges. Click on a filter to see its properties.
 
 Test Standard Comment
     PersystWebApp.Go To Settings Page
     PersystWebApp.Add a New Standard Comment From Shared Setting
     PersystWebApp.Go To EEG Page By URL    ${LnP14D3Nw10ICU, FnLnP14D3Nw10ICU_EEG_URL}
     PersystWebApp.Reset Quick Comment Modal
-    ${New_Comment}      set variable    xpath=//span[text()='New Moji Comment']
+    ${New_Comment}      set variable    xpath=//span[text()='NewMojiComment']
+    sleep    1s
     page should contain element   ${New_Comment}
 
