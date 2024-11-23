@@ -38,7 +38,7 @@ Set the Settings URL
     [Return]    ${Setting_URL}
 
 Begin Web Suit With No Login
-    set selenium timeout    50s
+    set selenium timeout    30s
     imagehorizonlibrary.set reference folder            ${COMPARISON_IMAGES_PATH}
     open browser           sbout:blank  ${Browser}[0]
     set window size    1552  928
